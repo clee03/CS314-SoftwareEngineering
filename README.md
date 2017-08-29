@@ -4,8 +4,9 @@
 
 * Jennifer Lynn Dorcey, jdorcey, jdorcey, Jenn
 
-* Ian Daniel Kirkpatrick, idkirk, humoroushorse, Toast
+* Thomas Shaw, shawtm, shawtm, Tom
 
+* Ian Daniel Kirkpatrick, idkirk, humoroushorse, Toast
 
 |Sprint| Model-Data | Model-Itinerary | View-Server | View-Client |
 |------|------------|-----------------|-------------|-------------|
