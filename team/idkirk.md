@@ -1,4 +1,6 @@
 Ian Kirkpatrick
+
+
 ENJF
 
 1. Is it generally easier to reach you by text, email, vmail or something else?  What hours?

@@ -1,6 +1,11 @@
 # t17 - TBD
-* Christopher William Westerman, cwesterm, Livingwind, Chris
+
+* Christopher William westerman, cwesterm, Livingwind, Chris
+
+* Jennifer Lynn Dorcey, jdorcey, jdorcey, Jenn
+
 * Ian Daniel Kirkpatrick, idkirk, humoroushorse, Toast
+
 
 |Sprint| Model-Data | Model-Itinerary | View-Server | View-Client |
 |------|------------|-----------------|-------------|-------------|
