@@ -1,5 +1,6 @@
 # t17 - TBD
-* Christopher William westerman, cwesterm, Livingwind, Chris
+* Christopher William Westerman, cwesterm, Livingwind, Chris
+* Ian Daniel Kirkpatrick, idkirk, humoroushorse, Toast
 
 |Sprint| Model-Data | Model-Itinerary | View-Server | View-Client |
 |------|------------|-----------------|-------------|-------------|
