@@ -1,4 +1,4 @@
-package edu.csu2017fa314.DTR17;
+package edu.csu2017fa314.T17;
 public class TripCo
 {
 

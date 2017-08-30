@@ -9,12 +9,12 @@
          </properties>
 
          <modelVersion>4.0.0</modelVersion>
-         <groupId>edu.csu2017fa314.DTR17</groupId>
-         <artifactId>DTR17</artifactId>
+         <groupId>edu.csu2017fa314.T17</groupId>
+         <artifactId>T17</artifactId>
          <packaging>jar</packaging>
          <version>0.0.1-SNAPSHOT</version>
-         <name>DTR17</name>
-         <url>https://github.com/csu2017fa314/DTR-17/</url>
+         <name>T17</name>
+         <url>https://github.com/csu2017fa314/T17/</url>
          <build>
                   <plugins>
                            <plugin>
@@ -25,7 +25,7 @@
                                              <archive>
                                                       <manifest>
                                                                <addClasspath>true</addClasspath>
-                                                               <mainClass>edu.csu2017fa314.DTR17</mainClass>
+                                                               <mainClass>edu.csu2017fa314.T17</mainClass>
                                                       </manifest>
                                              </archive>
                                     </configuration>
