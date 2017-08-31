@@ -10,7 +10,7 @@
 
 |Sprint| Model-Data | Model-Itinerary | View-Server | View-Client |
 |------|------------|-----------------|-------------|-------------|
-|1| Chris | Tom || Ian
+|1| Chris | Tom | Jenn | Ian
 |2|
 |3|
 |4|
