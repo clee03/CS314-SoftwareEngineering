@@ -26,6 +26,6 @@ public class TestDistance {
         50.06639, -5.714722, 5000);
     Brewery beta = new Brewery("b1", "beta", "beta city",
         58.64389, -3.07, 5000);
-    assertEquals(d.greatCircleDistance(alpha, beta), 968.9, 1);
+    assertEquals(d.greatCircleDistance(alpha, beta), 968.9, 0.1);
   }
 }

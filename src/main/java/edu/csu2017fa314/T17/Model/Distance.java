@@ -22,6 +22,6 @@ public class Distance {
     double subUpper = Math.pow((Math.cos(theta2) * Math.sin(delta)), 2) +
         Math.pow(((Math.cos(theta1) * Math.sin(theta2)) - (Math.sin(theta1) * Math.cos(theta2) * Math.cos(delta))), 2);
     double angle = Math.atan2(Math.sqrt(subUpper), subLower);
-    return Math.round(angle * this.radius);
+    return (angle * this.radius);
   }
 }
