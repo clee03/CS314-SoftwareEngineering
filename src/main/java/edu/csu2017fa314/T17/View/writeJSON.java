@@ -15,13 +15,14 @@ public class writeJSON {
 
   public void formatJSON(Brewery a, Brewery b) {
 
-    JSONArray jsonArr = new JSONArray();
+    JSONArray jsonArray = new JSONArray();
     JSONObject jsonObj = new JSONObject();
     jsonObj.put("start", a.getID());
     jsonObj.put("end", b.getID());
     Distance dist = new Distance();
     jsonObj.put("distance", dist.greatCircleDistance(a, b));
-    jsonArr.put(jsonObj);
+    jsonArray.put(jsonObj);
+
     try {
       FileWriter file = new FileWriter("/Users/Documents/BreweryJsonFile.json");
       file.write(jsonArray.toString());

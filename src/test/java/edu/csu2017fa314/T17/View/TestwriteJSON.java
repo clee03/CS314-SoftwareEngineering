@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TeswriteJSON {
+public class TestwriteJSON {
   private writeJSON wj;
 
   @Before
@@ -19,7 +19,7 @@ public class TeswriteJSON {
         50.06639, -5.714722, 5000);
     Brewery b = new Brewery("b1", "beta", "beta city",
         58.64389, -3.07, 5000);
-    assertEquals(wj.formatJSON(a, b);
+    wj.formatJSON(a, b);
   }
 
 
