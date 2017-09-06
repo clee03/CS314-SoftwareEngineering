@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -14,18 +15,22 @@ public class writeJSON {
   public writeJSON() {
   }
 
-  public void formatJSON(Brewery a, Brewery b) {
+  public void formatJSON(ArrayList<Brewery> brews) {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     JSONArray jsonArray = new JSONArray();
     Distance dist = new Distance();
-    LinkedHashMap<String, String> jsonMap = new LinkedHashMap<String, String>();
+    //LinkedHashMap<String, String> jsonMap = new LinkedHashMap<String, String>();
 
-    jsonMap.put("start", a.getID());
-    jsonMap.put("end", b.getID());
-    jsonMap.put("distance", Double.toString(dist.greatCircleDistance(a, b)));
-
-    JSONObject orderedJson = new JSONObject(jsonMap);
-    jsonArray.add(orderedJson);
+    int j = 1;
+    for(int i = 0; i < brews.size();  i++){
+      LinkedHashMap<String, String> jsonMap = new LinkedHashMap<String, String>();
+      jsonMap.put("start", brews.get(i).getID());
+      jsonMap.put("end", brews.get(++j).getID());
+      jsonMap.put("distance", Double.toString(dist.greatCircleDistance(brews.get(i), brews.get(j))));
+      JSONObject orderedJson = new JSONObject(jsonMap);
+      jsonArray.add(orderedJson);
+      ++j;
+      }
     String jsonString = gson.toJson(jsonArray);
 
     try {
