@@ -42,6 +42,7 @@ export default class App extends React.Component {
             };
             pairs.push(p); //add object to pairs array
             console.log("Pushing pair: ", p); //log to console
+            //total+=dist;
         }
 
         //Here we will update the state of app.
