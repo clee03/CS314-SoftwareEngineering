@@ -25,11 +25,10 @@ public class writeJSON {
     for(int i = 0; i < brews.size();  i++){
       LinkedHashMap<String, String> jsonMap = new LinkedHashMap<String, String>();
       jsonMap.put("start", brews.get(i).getID());
-      jsonMap.put("end", brews.get(++j).getID());
-      jsonMap.put("distance", Double.toString(dist.greatCircleDistance(brews.get(i), brews.get(j))));
+      jsonMap.put("end", brews.get(j).getID());
+      jsonMap.put("distance", Double.toString(dist.greatCircleDistance(brews.get(i), brews.get(j++))));
       JSONObject orderedJson = new JSONObject(jsonMap);
       jsonArray.add(orderedJson);
-      ++j;
       }
     String jsonString = gson.toJson(jsonArray);
 
