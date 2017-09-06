@@ -1,11 +1,11 @@
 package edu.csu2017fa314.T17.View;
+
 import edu.csu2017fa314.T17.Model.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.LinkedHashMap;
-import java.util.Arrays;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
