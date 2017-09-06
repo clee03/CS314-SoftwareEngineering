@@ -4,14 +4,15 @@ import java.util.HashMap;
 public class Brewery{
   private HashMap info = new HashMap();
 
+  public Brewery(){}
   public Brewery( String id, String name, String city,
                   double lat, double lon, double elv ){
-    info.put( "ID",  id );
-    info.put( "Name", name );
-    info.put( "City", city );
-    info.put( "Latitude", lat );
-    info.put( "Longitude", lon );
-    info.put( "Elevation", elv );
+    setID( id );
+    setName( name );
+    setCity( city );
+    setLat( lat );
+    setLon( lon );
+    setElv( elv );
   }
 
   public String getID(){
@@ -31,5 +32,24 @@ public class Brewery{
   }
   public double getElv(){
     return (double)info.get( "Elevation" );
+  }
+
+  public void setID( String id ){
+    info.put( "ID", id );
+  }
+  public void setName( String name ){
+    info.put( "Name", name );
+  }
+  public void setCity( String city ){
+    info.put( "City", city );
+  }
+  public void setLat( double lat ){
+    info.put( "Latitude", lat );
+  }
+  public void setLon( double lon ){
+    info.put( "Longitude", lon );
+  }
+  public void setElv( double elv ){
+    info.put( "Elevation", elv );
   }
 }
