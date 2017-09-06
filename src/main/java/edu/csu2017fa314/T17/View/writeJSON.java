@@ -35,7 +35,7 @@ public class writeJSON {
     String jsonString = gson.toJson(jsonArray);
     try {
       //write to .json file
-      FileWriter file = new FileWriter("Documents\\BreweryJsonFile.json");
+      FileWriter file = new FileWriter("data/trips.json");
       file.write(jsonString.toString());
       file.flush();
       file.close();
