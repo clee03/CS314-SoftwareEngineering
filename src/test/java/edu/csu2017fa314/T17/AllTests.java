@@ -7,10 +7,10 @@ import junit.framework.JUnit4TestAdapter;
 
 // This section declares all of the test classes in your program.
 @RunWith(Suite.class)
-@Suite.SuiteClasses({  // Add test classes here.
+@Suite.SuiteClasses({
   TestBrewery.class,
-  TestDistance.class,
   TestParseCSV.class,
+  TestDistance.class,
   TestTripCo.class,
   TestModel.class,
   TestView.class
