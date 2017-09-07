@@ -25,10 +25,23 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>edu.csu2017fa314.T17</mainClass>
+              <mainClass>edu.csu2017fa314.T17.TripCo</mainClass>
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
