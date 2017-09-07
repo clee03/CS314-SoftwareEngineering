@@ -9,20 +9,19 @@ public class ParseCSV{
   ArrayList<Brewery> brewList;
 
   public ParseCSV( String filename ) throws Exception{
-    // This loads from the resources folder ( src/main/resources or src/test/resources )
-    ClassLoader classLoader = this.getClass().getClassLoader();
-    File loadFile = new File( classLoader.getResource( filename ).getFile() );
-    BufferedReader in = new BufferedReader(
-        new InputStreamReader( new FileInputStream( loadFile ) )
-      );
+    brewList = new ArrayList<Brewery>();
 
     String line;
-    if( ( line = in.readLine() ) != null ){
+    BufferedReader br = new BufferedReader( new FileReader( filename ) );
+
+    if( ( line = br.readLine() ) != null ){
       parseHeader( line.toLowerCase() );
-      while( ( line = in.readLine() ) != null ){
+      while( ( line = br.readLine() ) != null ){
         parseLine( line );
       }
     }
+   
+    br.close();
   }
   
   /**
@@ -40,6 +39,38 @@ public class ParseCSV{
    *  @return void      added to internal brew list
    */
   private void parseLine( String line ){
+    Brewery tmpBrew = new Brewery();
+    String[] splitLine = line.split( "," );
+    ArrayList<String> values = new ArrayList<String>();
+    for( int i = 0; i < splitLine.length; i++ ){
+      values.add( splitLine[i].trim() );
+    }
+
+    // Loop through the header list and assign the values acording to the split line
+    for( int i = 0; i < header.size(); i++ ){
+      switch( header.get( i ) ){
+        case "id":
+          tmpBrew.setID( values.get( i ) );
+          break;
+        case "name":
+          tmpBrew.setName( values.get( i ));
+          break;
+        case "city":
+          tmpBrew.setCity( values.get( i ) );
+          break;
+        case "latitude":
+          tmpBrew.setLat( degToDecimal( values.get( i ) ) );
+          break;
+        case "longitude":
+          tmpBrew.setLon( degToDecimal( values.get( i ) ) );
+          break;
+        case "elevationft":
+          tmpBrew.setElv( Double.parseDouble( values.get( i ) ) );
+          break;
+      }
+    }
+
+    brewList.add( tmpBrew );
   }
 
   /**
@@ -70,5 +101,8 @@ public class ParseCSV{
 
   public ArrayList<String> getHeader(){
     return header;
+  }
+  public ArrayList<Brewery> getBrewerys(){
+    return brewList;
   }
 }

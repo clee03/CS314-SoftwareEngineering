@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 let Pair = ({start, end, dist}) => <tbody
     className="pair">
-    <tr>
+      <tr>
         <td>
             <h5>{start}</h5>
         </td>
@@ -12,7 +12,7 @@ let Pair = ({start, end, dist}) => <tbody
         <td>
             <h5>{dist}</h5>
         </td>
-    </tr>
+      </tr>
 </tbody>;
 
 export default Pair;
