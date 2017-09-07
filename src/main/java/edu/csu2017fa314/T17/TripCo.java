@@ -32,7 +32,7 @@ public class TripCo {
       System.out.println("sorry this feature isn't implemented yet." +
           "please use only a single file for now");
     }
-    Arraylist<Brewery> brewList = new ArrayList<Brewery>();
+    ArrayList<Brewery> brewList = new ArrayList<Brewery>();
     //brewList = ParseCSV(args[0]);
     //JsonWriter jWrite = new JsonWriter(brewList);
     //JsonWriter.write();
