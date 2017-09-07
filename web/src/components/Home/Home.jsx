@@ -16,11 +16,12 @@ class Home extends React.Component {
                   <td>Start Brewery</td>
                   <td>End Brewery</td>
                   <td>Distance</td>
+                  <td>Total Distance</td>
                 </tr>
                 {this.props.pairs}
                   <tbody>
                     <tr>
-                      <td colSpan="2">Total:</td>
+                      <td colSpan="3">Trip Total:</td>
                       <td>{total}</td>
                     </tr>
                   </tbody>
@@ -34,7 +35,6 @@ class Home extends React.Component {
       let totalDistance = 0;
       for (let i = 0; i < this.props.pairs.length; ++i){
         totalDistance += this.props.pairs[i].props.dist;
-        //++totalDistance;
       }
       return totalDistance;
     }
