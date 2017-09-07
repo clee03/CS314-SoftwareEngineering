@@ -33,9 +33,16 @@ public class TripCo {
           "please use only a single file for now");
     }
     ArrayList<Brewery> brewList = new ArrayList<Brewery>();
-    //brewList = ParseCSV(args[0]);
-    //JsonWriter jWrite = new JsonWriter(brewList);
-    //JsonWriter.write();
+    ParseCSV parse = null;
+    try {
+      parse = new ParseCSV(args[0]);
+    } catch (Exception e) {
+      System.out.println("Error parsing the .csv file! Please input better data");
+      e.printStackTrace();
+    }
+    brewList = parse.getBrewerys();
+    writeJSON jWrite = new writeJSON();
+    jWrite.formatJSON(brewList);
     System.out.println("Json file successfully created!");
 
   }
