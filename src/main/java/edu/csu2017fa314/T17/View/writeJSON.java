@@ -27,7 +27,7 @@ public class writeJSON {
       //Create the map
       jsonMap.put("start", brews.get(i).getID());
       jsonMap.put("end", brews.get(j).getID());
-      jsonMap.put("distance", Double.toString(dist.greatCircleDistance(brews.get(i), brews.get(j))));
+      jsonMap.put("distance", Integer.toString(dist.greatCircleDistance(brews.get(i), brews.get(j))));
       //Create new JSONObject from map to add to JSONArray
       JSONObject orderedJson = new JSONObject(jsonMap);
       jsonArray.add(orderedJson);
