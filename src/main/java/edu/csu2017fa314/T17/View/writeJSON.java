@@ -22,14 +22,11 @@ public class writeJSON {
     for(int i = 0; i < brews.size()-1;  i++){
       //j gets the next brewery in brews
       int j = i +1;
-      //Create new LinkedHashMap for each iteration
-      LinkedHashMap<String, String> jsonMap = new LinkedHashMap<String, String>();
-      //Create the map
-      jsonMap.put("start", brews.get(i).getID());
-      jsonMap.put("end", brews.get(j).getID());
-      jsonMap.put("distance", Integer.toString(dist.greatCircleDistance(brews.get(i), brews.get(j))));
-      //Create new JSONObject from map to add to JSONArray
-      JSONObject orderedJson = new JSONObject(jsonMap);
+      //Create new JSONObject from maps to add to JSONArray
+      JSONObject orderedJson = new JSONObject();
+      orderedJson.put("start", brews.get(i).getID());
+      orderedJson.put("end", brews.get(j).getID());
+      orderedJson.put("distance",  dist.greatCircleDistance(brews.get(i), brews.get(j)));
       jsonArray.add(orderedJson);
       }
     String jsonString = gson.toJson(jsonArray);
