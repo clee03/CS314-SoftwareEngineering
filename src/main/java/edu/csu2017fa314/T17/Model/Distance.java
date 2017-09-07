@@ -3,8 +3,15 @@ package edu.csu2017fa314.T17.Model;
 public class Distance {
   double radius;
 
-  public Distance() {
-    radius = 6371.0088;
+  public Distance(){
+    radius = 3958.7613; //default set to miles
+  }
+  public Distance(boolean toggle) {
+    if (toggle) {
+      radius = 6371.0088; // if toggle is true then use Kilometers
+    }else{
+      radius = 3958.7613; //if toggle is not set then use Miles
+    }
     return;
   }
 
