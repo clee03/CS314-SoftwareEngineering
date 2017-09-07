@@ -14,7 +14,7 @@ public class writeJSON {
   public writeJSON() {
   }
   //Method that takes Brewery ArrayList and formats data then writes to a JSON file
-  public void formatJSON(ArrayList<Brewery> brews) {
+  public void formatJSON(ArrayList<Brewery> brews, String fileName) {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     JSONArray jsonArray = new JSONArray();
     Distance dist = new Distance();
@@ -22,20 +22,18 @@ public class writeJSON {
     for(int i = 0; i < brews.size()-1;  i++){
       //j gets the next brewery in brews
       int j = i +1;
-      //Create new LinkedHashMap for each iteration
-      LinkedHashMap<String, String> jsonMap = new LinkedHashMap<String, String>();
-      //Create the map
-      jsonMap.put("start", brews.get(i).getID());
-      jsonMap.put("end", brews.get(j).getID());
-      jsonMap.put("distance", Integer.toString(dist.greatCircleDistance(brews.get(i), brews.get(j))));
-      //Create new JSONObject from map to add to JSONArray
-      JSONObject orderedJson = new JSONObject(jsonMap);
+      //Create new JSONObject from maps to add to JSONArray
+      JSONObject orderedJson = new JSONObject();
+      orderedJson.put("start", brews.get(i).getID());
+      orderedJson.put("end", brews.get(j).getID());
+      orderedJson.put("distance",  dist.greatCircleDistance(brews.get(i), brews.get(j)));
       jsonArray.add(orderedJson);
       }
     String jsonString = gson.toJson(jsonArray);
     try {
+      String name = fileName.substring(0, fileName.length() - 3) + "json"; 
       //write to .json file
-      FileWriter file = new FileWriter("data/trips.json");
+      FileWriter file = new FileWriter(name);
       file.write(jsonString.toString());
       file.flush();
       file.close();
