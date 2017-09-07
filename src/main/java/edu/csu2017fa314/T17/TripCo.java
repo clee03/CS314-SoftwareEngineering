@@ -42,7 +42,7 @@ public class TripCo {
     }
     brewList = parse.getBrewerys();
     writeJSON jWrite = new writeJSON();
-    jWrite.formatJSON(brewList);
+    jWrite.formatJSON(brewList, args[0]);
     System.out.println("Json file successfully created!");
 
   }

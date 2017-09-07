@@ -14,7 +14,7 @@ public class writeJSON {
   public writeJSON() {
   }
   //Method that takes Brewery ArrayList and formats data then writes to a JSON file
-  public void formatJSON(ArrayList<Brewery> brews) {
+  public void formatJSON(ArrayList<Brewery> brews, String fileName) {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     JSONArray jsonArray = new JSONArray();
     Distance dist = new Distance();
@@ -34,8 +34,9 @@ public class writeJSON {
       }
     String jsonString = gson.toJson(jsonArray);
     try {
+      String name = fileName.substring(0, fileName.length() - 3) + "json"; 
       //write to .json file
-      FileWriter file = new FileWriter("data/trips.json");
+      FileWriter file = new FileWriter(name);
       file.write(jsonString.toString());
       file.flush();
       file.close();
