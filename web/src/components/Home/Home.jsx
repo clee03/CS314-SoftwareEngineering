@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone'
 
 class Home extends React.Component {
   render() {
-    let total = this.calculateTotalDistance(); //update the total here
+    let total = this.getTotalDistance(); //update the total here
       return <div className="home-container">
         <div className="inner">
           <div id="header">t17 - TBD</div>
@@ -30,13 +30,10 @@ class Home extends React.Component {
       </div>
     }
 
-    // calculate the total distance for the trip
-    calculateTotalDistance(){
-      let totalDistance = 0;
-      for (let i = 0; i < this.props.pairs.length; ++i){
-        totalDistance += this.props.pairs[i].props.dist;
-      }
-      return totalDistance;
+    // grab the total distance stored in the last element if pairs isn't empty
+    getTotalDistance(){
+      if(this.props.pairs.length == 0) return 0;
+      return this.props.pairs[this.props.pairs.length - 1].props.totalDist;
     }
 
     drop(acceptedFiles) {
