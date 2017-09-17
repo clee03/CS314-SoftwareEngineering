@@ -30,7 +30,19 @@
           </archive>
         </configuration>
       </plugin>
-			<plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>1.6</version>
