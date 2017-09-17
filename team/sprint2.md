@@ -1,4 +1,4 @@
-# Sprint 2 - *T99* - *teamname*
+# Sprint 2 - *T17* - *TBD*
 
 ## Goal
 
