@@ -5,21 +5,18 @@ public class Brewery{
   private HashMap info = new HashMap();
 
   public Brewery(){
-    setID( "None" );
-    setName( "None" );
-    setCity( "None" );
-    setLat( 0 );
-    setLon( 0 );
-    setElv( 0 );
+    set( "id", "None" );
+    set( "latitude", 0 );
+    set( "longitude", 0 );
   }
   public Brewery( String id, String name, String city,
                   double lat, double lon, double elv ){
-    setID( id );
-    setName( name );
-    setCity( city );
-    setLat( lat );
-    setLon( lon );
-    setElv( elv );
+    set( "id", id );
+    set( "name", name );
+    set( "city", city );
+    set( "latitude", lat );
+    set( "longitude", lon );
+    set( "elevation", elv );
   }
 
   @Override
@@ -54,24 +51,5 @@ public class Brewery{
 
   public void set ( String key, Object value ) {
     info.put(key, value);
-  }
-
-  public void setID( String id ){
-    info.put( "id", id );
-  }
-  public void setName( String name ){
-    info.put( "name", name );
-  }
-  public void setCity( String city ){
-    info.put( "city", city );
-  }
-  public void setLat( double lat ){
-    info.put( "latitude", lat );
-  }
-  public void setLon( double lon ){
-    info.put( "longitude", lon );
-  }
-  public void setElv( double elv ){
-    info.put( "elevation", elv );
   }
 }

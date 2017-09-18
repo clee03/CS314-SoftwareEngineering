@@ -48,14 +48,14 @@ public class ParseCSV {
       String h = header.get(i);
       switch (h) {
         case "latitude":
-          tmpBrew.setLat(degToDecimal(values.get(i)));
+          tmpBrew.set("latitude", degToDecimal(values.get(i)));
           break;
         case "longitude":
-          tmpBrew.setLon(degToDecimal(values.get(i)));
+          tmpBrew.set("longitude", degToDecimal(values.get(i)));
           break;
         case "elevation": // fall through
         case "elevationft":
-          tmpBrew.setElv(Double.parseDouble(values.get(i)));
+          tmpBrew.set(h, Double.parseDouble(values.get(i)));
           break;
         default:
           tmpBrew.set(h,values.get(i));
