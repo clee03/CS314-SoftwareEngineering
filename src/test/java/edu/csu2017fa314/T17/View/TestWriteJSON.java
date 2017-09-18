@@ -1,18 +1,17 @@
 package edu.csu2017fa314.T17.View;
 
 import edu.csu2017fa314.T17.Model.*;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class TestwriteJSON {
-  private writeJSON wj;
+public class TestWriteJSON {
+  private WriteJSON wj;
 
   @Before
   public void setUp() throws Exception {
-    wj = new writeJSON();
+    wj = new WriteJSON();
   }
 
   @Test

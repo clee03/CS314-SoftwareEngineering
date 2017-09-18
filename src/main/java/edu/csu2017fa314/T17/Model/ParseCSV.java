@@ -5,11 +5,10 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class ParseCSV {
-  private ArrayList<String> header;
-  private ArrayList<Brewery> brewList;
+  private ArrayList<String> header = new ArrayList<> ();
+  private ArrayList<Brewery> brewList = new ArrayList<> ();
 
   public ParseCSV (String filename) throws Exception {
-    brewList = new ArrayList<> ();
 
     String line;
     BufferedReader br = new BufferedReader (new FileReader(filename));
@@ -46,25 +45,20 @@ public class ParseCSV {
 
     // Loop through the header list and assign the values acording to the split line
     for (int i = 0; i < header.size(); i++) {
-      switch (header.get(i)) {
-        case "id":
-          tmpBrew.setID(values.get(i));
-          break;
-        case "name":
-          tmpBrew.setName(values.get(i));
-          break;
-        case "city":
-          tmpBrew.setCity(values.get(i));
-          break;
+      String h = header.get(i);
+      switch (h) {
         case "latitude":
           tmpBrew.setLat(degToDecimal(values.get(i)));
           break;
         case "longitude":
           tmpBrew.setLon(degToDecimal(values.get(i)));
           break;
+        case "elevation": // fall through
         case "elevationft":
           tmpBrew.setElv(Double.parseDouble(values.get(i)));
           break;
+        default:
+          tmpBrew.set(h,values.get(i));
       }
     }
 

@@ -16,7 +16,7 @@ public class TestParseCSV{
   @Test
   public void testHeaders(){
     ArrayList<String> tmp =
-      new ArrayList<String>( Arrays.asList( "id","name","city","latitude","longitude","elevationft" ) );
+      new ArrayList<>( Arrays.asList( "id","name","city","latitude","longitude","elevationft" ) );
     assertEquals( parseObj.getHeader(), tmp );
   }
   @Test
