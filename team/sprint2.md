@@ -33,7 +33,7 @@ Total planned tasks / issues in the Sprint Backlog: *16*
 
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
- | 9/18 | | #61,#62,#76|
+ | 9/18 | | Chris #61,#62,#76 |
  | | | |
 
 ## Review
