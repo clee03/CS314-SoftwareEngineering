@@ -5,30 +5,27 @@ public class Brewery{
   private HashMap info = new HashMap();
 
   public Brewery(){
-    setID( "None" );
-    setName( "None" );
-    setCity( "None" );
-    setLat( 0 );
-    setLon( 0 );
-    setElv( 0 );
+    set( "id", "None" );
+    set( "latitude", 0 );
+    set( "longitude", 0 );
   }
   public Brewery( String id, String name, String city,
                   double lat, double lon, double elv ){
-    setID( id );
-    setName( name );
-    setCity( city );
-    setLat( lat );
-    setLon( lon );
-    setElv( elv );
+    set( "id", id );
+    set( "name", name );
+    set( "city", city );
+    set( "latitude", lat );
+    set( "longitude", lon );
+    set( "elevation", elv );
   }
 
   @Override
   public String toString(){
-    return getID() + " " + getName() + " " + getCity() + " " +
-           getLat() + " " + getLon() + " " + getElv();
+    return info.toString();
   }
+
   @Override
-  public boolean equals( Object o ){
+  public boolean equals (Object o) {
     if (o == this) {
       return true;
     }
@@ -37,53 +34,22 @@ public class Brewery{
     }
     Brewery b = (Brewery)o;
     
-    if (getID().equals(b.getID())&&
-        getName().equals(b.getName())&&
-        getCity().equals(b.getCity())&&
-        (Math.abs( getLat() - b.getLat() ) <= 0.01)&&
-        (Math.abs( getLon() - b.getLon() ) <= 0.01)&&
-        (Math.abs( getElv() - b.getElv() ) <= 0.01)
-        ){
+    if (get("id").equals(b.get("id"))
+        && (Math.abs((double) get("latitude") - (double) b.get("latitude")) <= 0.01)
+        && (Math.abs((double) get("longitude") - (double) b.get("longitude")) <= 0.01)) {
       return true;
     }
     return false;
   }
 
-  public String getID(){
-    return (String)info.get( "ID" );
+  public Object get (String id) {
+    return info.get(id);
   }
-  public String getName(){
-    return (String)info.get( "Name" );
-  }
-  public String getCity(){
-    return (String)info.get( "City" );
-  }
-  public double getLat(){
-    return (double)info.get( "Latitude" );
-  }
-  public double getLon(){
-    return (double)info.get( "Longitude" );
-  }
-  public double getElv(){
-    return (double)info.get( "Elevation" );
+  public HashMap getAll () {
+    return info;
   }
 
-  public void setID( String id ){
-    info.put( "ID", id );
-  }
-  public void setName( String name ){
-    info.put( "Name", name );
-  }
-  public void setCity( String city ){
-    info.put( "City", city );
-  }
-  public void setLat( double lat ){
-    info.put( "Latitude", lat );
-  }
-  public void setLon( double lon ){
-    info.put( "Longitude", lon );
-  }
-  public void setElv( double elv ){
-    info.put( "Elevation", elv );
+  public void set ( String key, Object value ) {
+    info.put(key, value);
   }
 }

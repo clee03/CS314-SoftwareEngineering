@@ -16,17 +16,17 @@ public class TestBrewery{
   }
   @Test
   public void testAccessors(){
-    b2.setID( "b99" );
-    b2.setName( "TestBrew" );
-    b2.setCity( "TestCity" );
-    b2.setLat( 99.99 );
-    b2.setLon( 99.99 );
-    b2.setElv( 5000 );
-    assertEquals( b1.getID(), "b99" );
-    assertEquals( b1.getName(), "TestBrew" );
-    assertEquals( b1.getCity(), "TestCity" );
-    assertEquals( b1.getLat(), 99.99, .01 );
-    assertEquals( b1.getLon(), 99.99, .01 );
-    assertEquals( b1.getElv(), 5000, .01 );
+    b2.set( "id", "b99" );
+    b2.set( "name", "TestBrew" );
+    b2.set( "city", "TestCity" );
+    b2.set( "latitude", 99.99 );
+    b2.set( "longitude", 99.99 );
+    b2.set( "elevation", 5000 );
+    assertEquals( b1.get("id"), "b99" );
+    assertEquals( b1.get("name"), "TestBrew" );
+    assertEquals( b1.get("city"), "TestCity" );
+    assertEquals( (double) b1.get("latitude"), 99.99, .01 );
+    assertEquals( (double) b1.get("longitude"), 99.99, .01 );
+    assertEquals( (double) b1.get("elevation"), 5000, .01 );
   }
 }

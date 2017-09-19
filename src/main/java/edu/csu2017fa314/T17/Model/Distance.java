@@ -1,18 +1,18 @@
 package edu.csu2017fa314.T17.Model;
 
 public class Distance {
-  double radius;
+  private double radius;
 
   public Distance(){
-    radius = 3958.7613; //default set to miles
+    this(false);
   }
-  public Distance(boolean toggle) {
+  public Distance (boolean toggle) {
     if (toggle) {
       radius = 6371.0088; // if toggle is true then use Kilometers
-    }else{
+    }
+    else {
       radius = 3958.7613; //if toggle is not set then use Miles
     }
-    return;
   }
 
   public double convertToRadians(double degrees) {
@@ -20,10 +20,10 @@ public class Distance {
   }
 
   public int greatCircleDistance(Brewery alpha, Brewery beta) {
-    double theta1 = convertToRadians(alpha.getLat());
-    double theta2 = convertToRadians(beta.getLat());
-    double delta = convertToRadians(alpha.getLon()) -
-        convertToRadians(beta.getLon());
+    double theta1 = convertToRadians((double) alpha.get("latitude"));
+    double theta2 = convertToRadians((double) beta.get("latitude"));
+    double delta = convertToRadians((double) alpha.get("longitude")) -
+        convertToRadians((double) beta.get("longitude"));
     double subLower = (Math.sin(theta1) * Math.sin(theta2)) +
         (Math.cos(theta1) * Math.cos(theta2) * Math.cos(delta));
     double subUpper = Math.pow((Math.cos(theta2) * Math.sin(delta)), 2) +

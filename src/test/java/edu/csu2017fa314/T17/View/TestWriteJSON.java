@@ -1,22 +1,21 @@
 package edu.csu2017fa314.T17.View;
 
 import edu.csu2017fa314.T17.Model.*;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class TestwriteJSON {
-  private writeJSON wj;
+public class TestWriteJSON {
+  private WriteJSON wj;
 
   @Before
   public void setUp() throws Exception {
-    wj = new writeJSON();
+    wj = new WriteJSON();
   }
 
   @Test
-  public void testwriteJson() {
+  public void testWriteJson() {
 
     Brewery a = new Brewery("a1", "alpha", "alpha city",
         50.06639, -5.714722, 5000);
@@ -32,6 +31,6 @@ public class TestwriteJSON {
     brews.add(b);
     brews.add(c);
     brews.add(d);
-    wj.formatJSON(brews, "test.csv");
+    wj.formatJSON(brews, "data/test.csv");
   }
 }
