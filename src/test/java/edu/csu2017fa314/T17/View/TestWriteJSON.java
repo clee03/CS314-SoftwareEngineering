@@ -31,6 +31,6 @@ public class TestWriteJSON {
     brews.add(b);
     brews.add(c);
     brews.add(d);
-    wj.formatJSON(brews, "test.csv");
+    wj.formatJSON(brews, "data\\test.csv");
   }
 }
