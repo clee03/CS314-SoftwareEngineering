@@ -44,12 +44,13 @@ public class TestParseCSV{
     assertEquals( brews.get(2), b2 );
   }
   @Test
-  public void testHeaderOrder(){
-    Brewery b0 = new Brewery("abee", "Two22 Brew", "Centennial",
+  public void testHeaderOrder() throws Exception {
+    parseObj = new ParseCSV("data/test2.csv");
+    Brewery b0 = new Brewery( "Two22 Brew","abee", "Centennial",
                               39.63527777777778, -104.75888888888889, 5872.0 );
-    Brewery b1 = new Brewery("abellend", "Mad Jacks Mountain Brewery", "Bailey",
+    Brewery b1 = new Brewery( "Mad Jacks Mountain Brewery","abellend", "Bailey",
                               39.40138888888889, -105.47694444444444, 9580.0 );
-    Brewery b2 = new Brewery("acwatson", "Equinox Brewing", "Fort Collins",
+    Brewery b2 = new Brewery( "Equinox Brewing","acwatson", "Fort Collins",
                               40.588055555555556, -105.07388888888889, 4988.0 );
     ArrayList<Brewery> brews = parseObj.getBrewerys();
     assertEquals( brews.get(0), b0 );

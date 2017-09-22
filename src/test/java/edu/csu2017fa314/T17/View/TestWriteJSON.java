@@ -15,7 +15,7 @@ public class TestWriteJSON {
   }
 
   @Test
-  public void testwriteJson() {
+  public void testWriteJson() {
 
     Brewery a = new Brewery("a1", "alpha", "alpha city",
         50.06639, -5.714722, 5000);
@@ -31,6 +31,6 @@ public class TestWriteJSON {
     brews.add(b);
     brews.add(c);
     brews.add(d);
-    wj.formatJSON(brews, "data\\test.csv");
+    wj.formatJSON(brews, "data/test.csv");
   }
 }
