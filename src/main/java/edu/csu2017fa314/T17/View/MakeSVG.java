@@ -5,7 +5,6 @@ import edu.csu2017fa314.T17.Model.Brewery;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MakeSVG {
   private double width;
