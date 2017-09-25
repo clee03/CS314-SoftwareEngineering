@@ -15,6 +15,7 @@ public class TestMakeSVG {
   }
   @Test
   public void outputMap () {
-    svgObj.saveMap(parseObj.getBrewerys(),"data/brews.csv");
+    svgObj.saveMap(parseObj.getBrewerys(),"data/brews.csv",
+                    true, true);
   }
 }

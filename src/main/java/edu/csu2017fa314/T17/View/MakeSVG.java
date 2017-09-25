@@ -26,10 +26,18 @@ public class MakeSVG {
     ratioy = (747-40)/(37-41);
   }
 
-  public void saveMap(ArrayList<Brewery> brews, String filename){
+  /**
+   * Outputs the completed map to file.svg
+   * @param brews     List of brewery's to draw
+   * @param filename  File path to output to
+   * @param lines     Turns on and off lines
+   * @param dots      Turns on and off dots
+   */
+  public void saveMap(ArrayList<Brewery> brews, String filename,
+                      boolean lines, boolean dots){
     try {
       PrintWriter out = new PrintWriter(filename.substring(0, filename.length() - 3) + "svg");
-      out.print(buildColoradoMap(brews));
+      out.print(buildColoradoMap(brews, lines, dots));
       out.close();
     }
     catch (FileNotFoundException e) {
@@ -40,8 +48,10 @@ public class MakeSVG {
   /**
    * Constructs a '.svg' file that contains the connection between breweries
    * @param brews     The locations to place on the map
+   * @param lines     Turns on and off lines
+   * @param dots      Turns on and off dots
    */
-  private String buildColoradoMap (ArrayList<Brewery> brews){
+  private String buildColoradoMap (ArrayList<Brewery> brews, boolean lines, boolean dots){
     StringBuilder map = new StringBuilder(String.format("%s %s %s %s\n\t%s %s\n",
       "<svg",
       "version='1.0'",
@@ -49,9 +59,23 @@ public class MakeSVG {
       String.format("height='%f'", height),
       "xmlns='http://www.w3.org/2000/svg'",
       ">").replace('\'', '\"'));
+    if (lines) {
+      for (Brewery brew : brews) {
+        map.append(String.format("  %s\n", createCircle(brew)));
+      }
+    }
+    if (dots) {
+      int i = 0;
+      int j = i + 1;
+      while (j < brews.size()) {
+        map.append(String.format("  %s\n",
+            createLine(brews.get(i), brews.get(j))
+            )
+        );
 
-    for (Brewery brew: brews) {
-       map.append(String.format("  %s\n", createCircle(brew)));
+        i++;
+        j++;
+      }
     }
 
     map.append("</svg>");
@@ -65,11 +89,10 @@ public class MakeSVG {
    */
   private String createCircle (Brewery brew) {
     return String.format(
-        "<ellipse ry='7' rx='7' cy='%d' cx='%d' stroke-width='5' fill='#FF0000' stroke='#000000'/>"
-        .replace('\'', '\"'),
+        "<ellipse ry='7' rx='7' cy='%d' cx='%d' stroke-width='5' fill='#FF0000' stroke='#000000'/>",
         Math.round(degreesToCartY(brew)),
         Math.round(degreesToCartX(brew))
-      );
+      ).replace('\'', '\"');
   }
 
   /**
@@ -79,7 +102,11 @@ public class MakeSVG {
    * @param brew2 Second Brewery
    */
   private String createLine (Brewery brew1, Brewery brew2) {
-    return "";
+    return String.format(
+        "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#000000' fill='none'/>",
+        Math.round(degreesToCartY(brew1)), Math.round(degreesToCartX(brew1)),
+        Math.round(degreesToCartY(brew2)), Math.round(degreesToCartX(brew2))
+    ).replace('\'','\"');
   }
 
   /**
