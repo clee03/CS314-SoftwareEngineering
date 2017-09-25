@@ -33,8 +33,8 @@ export default class App extends React.Component {
     let pairs = [];
     let totalDist = 0;
     for (let i = 0; i < Object.values(file).length; i++) {
-      let start = file[i].start; //get start from file i
-      let end = file[i].end; //get end from file i
+      let start = file[i].start.id; //get start from file i
+      let end = file[i].end.id; //get end from file i
       let dist = file[i].distance;
       totalDist += dist;
       let p = { //create object with start, end, and dist variable
