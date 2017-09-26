@@ -22,6 +22,8 @@
 * Always check for new changes in master to resolve merge conflicts locally before committing them.
 * All commits with more than 1 line of change include a task/issue number.
 * All pull requests include tests for the affected code.
+* Pull requests affecting .md files must be approved by one team member
+* All other pull requests must be approved by two members
 
 ## Plan
 
@@ -33,8 +35,8 @@ Total planned tasks / issues in the Sprint Backlog: *16*
 
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
- | 9/18 | | Chris #61,#62,#76 |
- | | | |
+ | 9/18 | | Chris: #61,#62,#76 |
+ | 9/25 | Toast: (temp) #72, #73 | Toast: #92, or #88 | Toast: Midterm on 9/26 | Toast: medium
 
 ## Review
 
