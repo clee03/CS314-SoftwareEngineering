@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
+import ReactDOM from 'react-dom';
+import ReactSVG from 'react-svg';
 
 class Home extends React.Component {
   render() {
@@ -11,12 +13,17 @@ class Home extends React.Component {
               <b id="title">Itenerary:</b>
               <button>Open JSON File</button>
             </Dropzone>
+            <Dropzone className="dropzone-style" onDrop={this.displayVector.bind(this)}>
+              <b id="title">Map SVG:</b>
+              <button>Open SVG File</button>
+            </Dropzone>
               <table className="pair-table">
                 <tr>
                   <td>Start Brewery</td>
                   <td>End Brewery</td>
                   <td>Distance</td>
                   <td>Total Distance</td>
+
                 </tr>
                 {this.props.pairs}
                   <tbody>
@@ -26,16 +33,24 @@ class Home extends React.Component {
                     </tr>
                   </tbody>
               </table>
+              
+             {this.props.pairs}
           </div>
       </div>
     }
 
-    // grab the total distance stored in the last element if pairs isn't empty
+    // grab the total distance stored in the last element if pairs isn't empty /
     getTotalDistance(){
       if(this.props.pairs.length == 0) return 0;
       return this.props.pairs[this.props.pairs.length - 1].props.totalDist;
     }
-
+    displayVector(acceptedFiles){
+        console.log("Accepting drop");
+      acceptedFiles.forEach(file => {
+        console.log("Filename:", file.name, "File:", file);
+            ReactDOM.render(<ReactSVG path={file.name} />, document.getElementById('root'));
+      });
+    }
     drop(acceptedFiles) {
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
