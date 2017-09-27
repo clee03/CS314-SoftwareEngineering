@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import Dropzone from 'react-dropzone';
 import ReactDOM from 'react-dom';
 import ReactSVG from 'react-svg';
-import Dropzone from 'react-dropzone';
 
 class Home extends React.Component {
   render() {
@@ -13,13 +13,8 @@ class Home extends React.Component {
               <b id="title">Itenerary:</b>
               <button>Open JSON File</button>
             </Dropzone>
-            
             <Dropzone className="dropzone-style" onDrop={this.displayVector.bind(this)}>
-              <b id="title">Colorado SVG:</b>
-              <button>Open SVG File</button>
-            </Dropzone>
-            <Dropzone className="dropzone-style" onDrop={this.displayVector.bind(this)}>
-              <b id="title">Itenerary SVG:</b>
+              <b id="title">Map SVG:</b>
               <button>Open SVG File</button>
             </Dropzone>
               <table className="pair-table">
@@ -28,6 +23,7 @@ class Home extends React.Component {
                   <td>End Brewery</td>
                   <td>Distance</td>
                   <td>Total Distance</td>
+
                 </tr>
                 {this.props.pairs}
                   <tbody>
@@ -38,7 +34,7 @@ class Home extends React.Component {
                   </tbody>
               </table>
               
-             
+             {this.props.pairs}
           </div>
       </div>
     }
@@ -48,15 +44,12 @@ class Home extends React.Component {
       if(this.props.pairs.length == 0) return 0;
       return this.props.pairs[this.props.pairs.length - 1].props.totalDist;
     }
-
-    //display svg method
-    displayVector(acceptedFiles) {
-        console.log("Accepting File");
-            //figure out svg code here
-        acceptedFiles.forEach(file => {
-            console.log("Filename:", file.name, "File:", file);
-            ReactDOM.render( <ReactSVG path={file.name} style={{height:800}}/>, document.getElementById('root') )
-        })
+    displayVector(acceptedFiles){
+        console.log("Accepting drop");
+      acceptedFiles.forEach(file => {
+        console.log("Filename:", file.name, "File:", file);
+            ReactDOM.render(<ReactSVG path={file.name} />, document.getElementById('root'));
+      });
     }
     drop(acceptedFiles) {
       console.log("Accepting drop");
