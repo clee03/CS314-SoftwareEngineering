@@ -33,7 +33,7 @@ public class Brewery{
       return false;
     }
     Brewery b = (Brewery)o;
-    
+
     if (get("id").equals(b.get("id"))
         && (Math.abs((double) get("latitude") - (double) b.get("latitude")) <= 0.01)
         && (Math.abs((double) get("longitude") - (double) b.get("longitude")) <= 0.01)) {
