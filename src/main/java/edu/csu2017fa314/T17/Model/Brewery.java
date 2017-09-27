@@ -6,8 +6,8 @@ public class Brewery{
 
   public Brewery(){
     set( "id", "None" );
-    set( "latitude", 0 );
-    set( "longitude", 0 );
+    set( "latitude", 0.0 );
+    set( "longitude", 0.0 );
   }
   public Brewery( String id, String name, String city,
                   double lat, double lon, double elv ){

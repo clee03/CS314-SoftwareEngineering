@@ -1,17 +1,59 @@
 [
   {
     "distance": 602,
-    "start": "a1",
-    "end": "b1"
+    "start": {
+      "elevation": 5000.0,
+      "city": "alpha city",
+      "latitude": 50.06639,
+      "name": "alpha",
+      "id": "a1",
+      "longitude": -5.714722
+    },
+    "end": {
+      "elevation": 5000.0,
+      "city": "beta city",
+      "latitude": 58.64389,
+      "name": "beta",
+      "id": "b1",
+      "longitude": -3.07
+    }
   },
   {
     "distance": 595,
-    "start": "b1",
-    "end": "c1"
+    "start": {
+      "elevation": 5000.0,
+      "city": "beta city",
+      "latitude": 58.64389,
+      "name": "beta",
+      "id": "b1",
+      "longitude": -3.07
+    },
+    "end": {
+      "elevation": 5000.0,
+      "city": "charile city",
+      "latitude": 50.16639,
+      "name": "charlie",
+      "id": "c1",
+      "longitude": -5.714721
+    }
   },
   {
     "distance": 0,
-    "start": "c1",
-    "end": "d1"
+    "start": {
+      "elevation": 5000.0,
+      "city": "charile city",
+      "latitude": 50.16639,
+      "name": "charlie",
+      "id": "c1",
+      "longitude": -5.714721
+    },
+    "end": {
+      "elevation": 5000.0,
+      "city": "delta city",
+      "latitude": 50.16649,
+      "name": "delta",
+      "id": "d1",
+      "longitude": -5.714725
+    }
   }
 ]

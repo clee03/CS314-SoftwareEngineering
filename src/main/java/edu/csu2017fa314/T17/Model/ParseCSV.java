@@ -28,7 +28,7 @@ public class ParseCSV {
    *  @param line       the line to be parsed ( comma seperated )
    */
   private void addHeader(String line){
-    header = new ArrayList<> (Arrays.asList(line.split(",")));
+    header = new ArrayList<> (Arrays.asList(line.replace(" ","").split(",")));
   }
 
   /**
@@ -92,6 +92,8 @@ public class ParseCSV {
         return Double.parseDouble(parts[0]);
     }
   }
+
+
 
   public ArrayList<String> getHeader (){
     return header;

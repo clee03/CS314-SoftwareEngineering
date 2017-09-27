@@ -51,12 +51,14 @@ public class ShorterTrip {
     int min = Integer.MAX_VALUE;
     int location = 0;
     for (int j = 0; j < mileageTable[startNode].length; j++) {
-      if ((min > mileageTable[startNode][j]) && (validNodes.contains(j)) && (mileageTable[startNode][j] >0)) {
+      if ((min > mileageTable[startNode][j]) && (validNodes.contains(j)) && (mileageTable[startNode][j] >= 0)) {
         min = mileageTable[startNode][j];
         location = j;
       }
     }
-    validNodes.remove(validNodes.indexOf(location));
+    if (validNodes.indexOf(location) > -1) {
+      validNodes.remove(validNodes.indexOf(location));
+    }
     return location;
   }
 

@@ -4,13 +4,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class TestTripCo {
    private TripCo t;
 
    @Before
-   public void setUp() throws Exception
-   {
+   public void setUp() throws Exception {
       t = new TripCo();
    }
 }

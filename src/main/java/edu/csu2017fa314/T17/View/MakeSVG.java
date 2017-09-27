@@ -2,8 +2,7 @@ package edu.csu2017fa314.T17.View;
 
 import edu.csu2017fa314.T17.Model.Brewery;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MakeSVG {
@@ -45,6 +44,27 @@ public class MakeSVG {
     }
   }
 
+  private String loadColoradoBackground() throws IOException {
+    String backgroundFileName = "data/colorado_map.svg";
+    String line = null;
+    String backgroundData = null;
+
+    try (BufferedReader br = new BufferedReader(new FileReader(backgroundFileName))){
+      int skipFirstThree = 0;
+      while((line=br.readLine()) != null){
+        if (skipFirstThree < 3){
+          skipFirstThree++;
+          continue;
+        }
+        backgroundData += line;
+      }
+      backgroundData = backgroundData.substring(0, backgroundData.length() - 6);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return backgroundData;
+  }
+
   /**
    * Constructs a '.svg' file that contains the connection between breweries
    * @param brews     The locations to place on the map
@@ -59,11 +79,24 @@ public class MakeSVG {
       String.format("height='%f'", height),
       "xmlns='http://www.w3.org/2000/svg'",
       ">").replace('\'', '\"'));
+
+    // add colorado map background to svg
+    String background = "";
+    try {
+      background = (loadColoradoBackground());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    map.append(background);
+
+    // add lines to svg
     if (lines) {
       for (Brewery brew : brews) {
         map.append(String.format("  %s\n", createCircle(brew)));
       }
     }
+
+    // add dots to svg
     if (dots) {
       int i = 0;
       int j = i + 1;
@@ -89,7 +122,7 @@ public class MakeSVG {
    */
   private String createCircle (Brewery brew) {
     return String.format(
-        "<ellipse ry='7' rx='7' cy='%d' cx='%d' stroke-width='5' fill='#FF0000' stroke='#000000'/>",
+        "<ellipse ry='3' rx='3' cy='%d' cx='%d' stroke-width='2' fill='#0000FF' stroke='#000000'/>",
         Math.round(degreesToCartY(brew)),
         Math.round(degreesToCartX(brew))
       ).replace('\'', '\"');
@@ -103,7 +136,7 @@ public class MakeSVG {
    */
   private String createLine (Brewery brew1, Brewery brew2) {
     return String.format(
-        "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#000000' fill='none'/>",
+        "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#0000FF' fill='none'/>",
         Math.round(degreesToCartY(brew1)), Math.round(degreesToCartX(brew1)),
         Math.round(degreesToCartY(brew2)), Math.round(degreesToCartX(brew2))
     ).replace('\'','\"');

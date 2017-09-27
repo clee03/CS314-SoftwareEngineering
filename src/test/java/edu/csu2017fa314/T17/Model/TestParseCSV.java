@@ -10,8 +10,8 @@ public class TestParseCSV{
   private ParseCSV parseObj;
 
   @Before
-  public void setUp() throws Exception{
-    parseObj = new ParseCSV( "data/test.csv" );
+  public void setUp() throws Exception {
+    parseObj = new ParseCSV("data/test.csv");
   }
   @Test
   public void testHeaders(){
@@ -57,4 +57,5 @@ public class TestParseCSV{
     assertEquals( brews.get(1), b1 );
     assertEquals( brews.get(2), b2 );
   }
+
 }

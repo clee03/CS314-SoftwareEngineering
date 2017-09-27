@@ -13,7 +13,7 @@ public class TripCo {
       System.out.println("sorry this feature isn't implemented yet." +
           "please use only a single file for now");
     }
-    ArrayList<Brewery> brewList;
+
     ParseCSV parse = null;
     try {
       parse = new ParseCSV(args[0]);
@@ -21,7 +21,19 @@ public class TripCo {
       System.out.println("Error parsing the .csv file! Please input better data");
       e.printStackTrace();
     }
-    brewList = parse.getBrewerys();
+
+    // create svg file
+    ArrayList<Brewery> brewList = parse.getBrewerys();
+    ShorterTrip st = new ShorterTrip(brewList);
+    brewList = st.computePath();
+    int totalDistance = st.pathDistanceBrews(brewList);
+    System.out.println("Total Distance: " + totalDistance);
+    MakeSVG svgObj = new MakeSVG(1066.6073,783.0824);
+    svgObj.saveMap(brewList, args[0],
+        true, true);
+    System.out.println("Svg file successfully created");
+
+    // create Json file
     WriteJSON jWrite = new WriteJSON();
     jWrite.formatJSON(brewList, args[0]);
     System.out.println("Json file successfully created!");
