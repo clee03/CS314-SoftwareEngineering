@@ -15,7 +15,7 @@ export default class App extends React.Component {
   render() {
     let pairs = this.state.allPairs;
     let ps = pairs.map((pp) => {
-      return <Pair {...pp}/>;
+        return <Pair {...pp}/>;
       });
     return (
       <div className="app-container">
@@ -33,10 +33,8 @@ export default class App extends React.Component {
     let pairs = [];
     let totalDist = 0;
     for (let i = 0; i < Object.values(file).length; i++) {
-      let start = file[i].start.name + " \n " + file[i].start.id; //get start from file i
- //     let startextra = file[i].start.id;
-      let end = file[i].end.name + " \n " + file[i].end.id; //get end from file i
-//    let endextra = file[i].end.id;
+      let start = file[i].start.id; //get start from file i
+      let end = file[i].end.id; //get end from file i
       let dist = file[i].distance;
       totalDist += dist;
       let p = { //create object with start, end, and dist variable
@@ -48,7 +46,6 @@ export default class App extends React.Component {
       pairs.push(p); //add object to pairs array
       console.log("Pushing pair: ", p); //log to console
     }
-
     //Here we will update the state of app.
     // Anything component (i.e. pairs) referencing it will be re-rendered
     this.setState({

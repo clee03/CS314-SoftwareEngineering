@@ -5,10 +5,10 @@ import ReactSVG from 'react-svg';
 
 class Home extends React.Component {
   render() {
-    let total = this.getTotalDistance(); //update the total here
-      return <div className="home-container">
-        <div className="inner">
-          <div id="header">t17 - TBD</div>
+    let total = this.getTotalDistance();
+      return <span className="home-container">
+        <span className="inner">
+          <span id="header">t17 - TBD</span>
             <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
               <b id="title">Itenerary:</b>
               <button>Open JSON File</button>
@@ -23,7 +23,6 @@ class Home extends React.Component {
                   <td>End Brewery</td>
                   <td>Distance</td>
                   <td>Total Distance</td>
-
                 </tr>
                 {this.props.pairs}
                   <tbody>
@@ -33,10 +32,9 @@ class Home extends React.Component {
                     </tr>
                   </tbody>
               </table>
-              
-             {this.props.pairs}
-          </div>
-      </div>
+        </span>
+        <span id='root'/>
+      </span>
     }
 
     // grab the total distance stored in the last element if pairs isn't empty /
@@ -45,10 +43,12 @@ class Home extends React.Component {
       return this.props.pairs[this.props.pairs.length - 1].props.totalDist;
     }
     displayVector(acceptedFiles){
-        console.log("Accepting drop");
+      console.log("Accepting drop");
       acceptedFiles.forEach(file => {
         console.log("Filename:", file.name, "File:", file);
-            ReactDOM.render(<ReactSVG path={file.name} />, document.getElementById('root'));
+        ReactDOM.render(<ReactSVG id='map'
+          style={{"border-style":"solid", "margin-top":"100px", "margin-left":"1%"}}
+          path={file.name} />, document.getElementById('root'));
       });
     }
     drop(acceptedFiles) {
