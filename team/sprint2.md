@@ -37,30 +37,28 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
  | 9/18 | | Chris: #61,#62,#76 |
  | 9/25 | Toast: (temp) #72, #73 | Toast: #92, or #88 | Toast: Midterm on 9/26 | Toast: medium
- | 9/22 | | Tom : #85| | Tom: High|
- | 9/26 | Toast: add tests| Toast #92  <br/> Tom #85| | Toast High <br/> Tom: High
+ | 9/22 | | Tom : #85 <br/> Jenn: #70, #72, #73| | Tom: High <br/> Jenn: High|
+ | 9/26 | Toast: add tests <br/> Jenn: #72, #73, #70| Toast #92  <br/> Tom #85| | Toast High <br/> Tom: High <br/> Jenn: High
  | 9/27 | Toast: #92<br/>Chris: #77, #78, #79 <br/> Tom #85| Team: V2.0| Chris: Formatting issues| Chris: High <br/> Tom: High
-
+ | 9/28 | Jenn & Tom: Release V.2.0| | | Jenn: Medium <br/> Tom: Medium 
 
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog
-* *#8:  comments*
-* *#9*
-* *#10:  comments*
-* *#12*
-* *#11*
+* *#69*
+* *#70*
+* *#71*
 
-Completed *99* tasks / issues associated with these user stories.
+Completed *12* tasks / issues associated with these user stories.
 
 #### Incomplete user stories / epics in Sprint Backlog
-* *#14*: *Explanation...*
+* *#68*: *The technology was too complex for a single sprint, more time is necessary to learn the systems involved inorder to complete this epic.*
 
 #### What went well
-* *something*
+* **
 
 #### Problems encountered and resolutions
-* *something*
+* **
 
 ## Retrospective
 
