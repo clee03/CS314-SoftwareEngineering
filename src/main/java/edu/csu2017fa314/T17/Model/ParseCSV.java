@@ -37,7 +37,7 @@ public class ParseCSV {
    */
   private void addLine(String line) {
     Brewery tmpBrew = new Brewery();
-    String[] splitLine = line.split(",");
+    String[] splitLine = line.split(",", -1);
     ArrayList<String> values = new ArrayList<>();
     for (String s: splitLine) {
       values.add(s.trim());
@@ -58,7 +58,12 @@ public class ParseCSV {
           tmpBrew.set(h, Double.parseDouble(values.get(i)));
           break;
         default:
-          tmpBrew.set(h,values.get(i));
+          if (i < values.size())
+            tmpBrew.set(h,values.get(i));
+          else{
+            tmpBrew.set(h, "");
+          }
+          break;
       }
     }
 
