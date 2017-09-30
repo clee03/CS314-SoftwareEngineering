@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
-import ReactDOM from 'react-dom';
-import ReactSVG from 'react-svg';
 
 class Home extends React.Component {
   render() {
@@ -33,7 +31,7 @@ class Home extends React.Component {
                   </tbody>
               </table>
         </span>
-        <span id='root'/>
+        <img id='map'/>
       </span>
     }
 
@@ -46,9 +44,12 @@ class Home extends React.Component {
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
         console.log("Filename:", file.name, "File:", file);
-        ReactDOM.render(<ReactSVG id='map'
-          style={{"border-style":"solid", "margin-top":"100px", "margin-left":"1%"}}
-          path={file.name} />, document.getElementById('root'));
+
+        const fr = new FileReader();
+        fr.onload = function(e) {
+            document.getElementById('map').src = e.target.result;
+        };
+        fr.readAsDataURL(file);
       });
     }
     drop(acceptedFiles) {
