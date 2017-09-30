@@ -84,13 +84,11 @@ public class MakeSVG {
       ">").replace('\'', '\"'));
 
     // add colorado map background to svg
-    String background = "";
     try {
-      background = (loadColoradoBackground());
+      map.append(loadColoradoBackground());
     } catch (IOException e) {
       e.printStackTrace();
     }
-    map.append(background);
 
     // add lines to svg
     if (lines) {
