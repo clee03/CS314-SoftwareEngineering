@@ -5,20 +5,27 @@ import java.util.ArrayList;
 
 public class TripCo {
   public static void main (String[] args) {
-    System.out.println("Welcome to TripCo");
+    // arg0: csv file path
+    System.out.println("Welcome to TripCo!");
     if (args.length == 0){
       System.out.println("Proper usage of this program is through " +
-          "the commandline followed by a .csv file");
+          "the commandline followed by a .csv file.");
     }else if( args.length > 1){
       System.out.println("sorry this feature isn't implemented yet." +
-          "please use only a single file for now");
+          "Please use only a single file for now.");
     }
+
+    // get csv trip name: /data/brews.svg -> brews
+    String CSV = args[0];
+    CSV = CSV.replaceAll(".*/", "");
+    CSV = CSV.replaceAll(".csv", "");
 
     ParseCSV parse = null;
     try {
       parse = new ParseCSV(args[0]);
     } catch (Exception e) {
-      System.out.println("Error parsing the .csv file! Please input better data");
+      System.out.println("Error parsing the .csv file \'" + CSV +
+              ".csv\'! Please input better data");
       e.printStackTrace();
     }
 
@@ -27,15 +34,15 @@ public class TripCo {
     ShorterTrip st = new ShorterTrip(brewList);
     brewList = st.computePath();
     int totalDistance = st.pathDistanceBrews(brewList);
-    System.out.println("Total Distance: " + totalDistance);
+    System.out.println("Total Distance " + CSV + "]: " + totalDistance);
     MakeSVG svgObj = new MakeSVG(1066.6073,783.0824);
     svgObj.saveMap(brewList, args[0],
         true, true);
-    System.out.println("Svg file successfully created");
+    System.out.println("SVG file \'data/" + CSV + ".svg\' successfully created!");
 
     // create Json file
     WriteJSON jWrite = new WriteJSON();
     jWrite.formatJSON(brewList, args[0]);
-    System.out.println("Json file successfully created!");
+    System.out.println("JSON file \'data/" + CSV + ".json\' successfully created!");
   }
 }
