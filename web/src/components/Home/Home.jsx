@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 
+const half = {
+  width: "50%"
+};
+
 class Home extends React.Component {
   render() {
-    let total = this.getTotalDistance();
       return <span className="home-container">
-        <span className="inner">
+        <span style={half} className="inner">
           <span id="header">t17 - TBD</span>
             <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
               <b id="title">Itenerary:</b>
@@ -15,24 +18,31 @@ class Home extends React.Component {
               <b id="title">Map SVG:</b>
               <button>Open SVG File</button>
             </Dropzone>
-              <table className="pair-table">
-                <tr>
-                  <td>Start Brewery</td>
-                  <td>End Brewery</td>
-                  <td>Distance</td>
-                  <td>Total Distance</td>
-                </tr>
-                {this.props.pairs}
-                  <tbody>
-                    <tr>
-                      <td colSpan="3">Trip Total:</td>
-                      <td>{total}</td>
-                    </tr>
-                  </tbody>
-              </table>
+            {this.renderTable()}
         </span>
-        <img id='map'/>
+        <img style={half} id='map'/>
       </span>
+    }
+
+    renderTable() {
+      let total = this.getTotalDistance();
+      return (
+        <table className="pair-table">
+          <tr>
+            <td>Start Brewery</td>
+            <td>End Brewery</td>
+            <td>Distance</td>
+            <td>Total Distance</td>
+          </tr>
+          {this.props.pairs}
+          <tbody>
+            <tr>
+              <td colSpan="3">Trip Total:</td>
+              <td>{total}</td>
+            </tr>
+          </tbody>
+        </table>
+      );
     }
 
     // grab the total distance stored in the last element if pairs isn't empty /
