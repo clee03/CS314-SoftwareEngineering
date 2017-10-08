@@ -1,56 +1,41 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
-
-const half = {
-  width: "50%"
-};
+import Itinerary from '../Itinerary.jsx';
+import SVGMap from '../SVGMap.jsx';
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      datafile: [],
+      imgfile: []
+    };
+  }
+
   render() {
       return <span className="home-container">
-        <span style={half} className="inner">
+        <span className="inner">
           <span id="header">t17 - TBD</span>
-            <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
+            <Dropzone className="dropzone-style" onDrop={this.dataDrop.bind(this)}>
               <b id="title">Itenerary:</b>
               <button>Open JSON File</button>
             </Dropzone>
-            <Dropzone className="dropzone-style" onDrop={this.displayVector.bind(this)}>
+            <Dropzone className="dropzone-style" onDrop={this.imgDrop.bind(this)}>
               <b id="title">Map SVG:</b>
               <button>Open SVG File</button>
             </Dropzone>
-            {this.renderTable()}
+            <Itinerary
+              file= {this.state.datafile}
+            />
+            <SVGMap
+              file= {this.state.imgfile}
+            />
         </span>
-        <img style={half} id='map'/>
       </span>
     }
 
-    renderTable() {
-      let total = this.getTotalDistance();
-      return (
-        <table className="pair-table">
-          <tr>
-            <td>Start Brewery</td>
-            <td>End Brewery</td>
-            <td>Distance</td>
-            <td>Total Distance</td>
-          </tr>
-          {this.props.pairs}
-          <tbody>
-            <tr>
-              <td colSpan="3">Trip Total:</td>
-              <td>{total}</td>
-            </tr>
-          </tbody>
-        </table>
-      );
-    }
-
     // grab the total distance stored in the last element if pairs isn't empty /
-    getTotalDistance(){
-      if(this.props.pairs.length == 0) return 0;
-      return this.props.pairs[this.props.pairs.length - 1].props.totalDist;
-    }
-    displayVector(acceptedFiles){
+    imgDrop(acceptedFiles){
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
         console.log("Filename:", file.name, "File:", file);
@@ -62,16 +47,32 @@ class Home extends React.Component {
         fr.readAsDataURL(file);
       });
     }
-    drop(acceptedFiles) {
+
+    captureHeaders (jsonObj) {
+      console.log("Capturing headers: ");
+      const headers = Object.keys(jsonObj[0]['start']);
+      let options = [];
+      for (var i in headers ) {
+        options.push( { 'label': headers[i], 'value': headers[i] } );
+      }
+      this.state.options = options;
+
+      console.log( options );
+      console.log("Done");
+    }
+
+    dataDrop(acceptedFiles) {
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
         console.log("Filename:", file.name, "File:", file);
         console.log(JSON.stringify(file));
+        this.setState({datafile: file});
+
         let fr = new FileReader();
         fr.onload = (function () {
           return function (e) {
             let JsonObj = JSON.parse(e.target.result);
-            console.log(JsonObj);
+            this.captureHeaders(JsonObj);
             this.props.browseFile(JsonObj);
           };
         })(file).bind(this);
@@ -79,5 +80,6 @@ class Home extends React.Component {
       });
     }
 }
+
 
 export default Home
