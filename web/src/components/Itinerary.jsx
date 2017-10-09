@@ -3,14 +3,12 @@ import SelectBox from './SelectBox.jsx';
 import DestinationTable from './DestinationTable.jsx';
 
 class Itinerary extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       options: [],
       value: []
     };
-    this.loadFile(this.props.file);
     this.onValueChange = this.onValueChange.bind(this);
   }
 
@@ -18,21 +16,29 @@ class Itinerary extends React.Component {
     this.setState({'value': value});
   }
 
-  async loadFile(file){
-    console.log("Got file: ", file);
+  loadHeaders() {
+    let data = this.props.datafile;
+    if(data.length == 0){
+      console.log("Nothing to collect");
+      return;
+    }
+    return Object.keys(data[0].start);
   }
 
   render() {
+    let options = this.loadHeaders();
     return (
       <span>
       <SelectBox
-        options= {this.state.options}
+        style= {this.props.style}
+        options= {options}
         value= {this.state.value}
         onValueChange= {this.onValueChange}
       />
       <DestinationTable
-        info= {this.state.info}
-        value= {this.state.value}
+        style= {this.props.style}
+        info= {this.props.datafile}
+        infoHeader= {this.state.value}
       />
       </span>
     );

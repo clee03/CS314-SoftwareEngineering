@@ -8,14 +8,15 @@ class Home extends React.Component {
     super(props);
     this.state = {
       datafile: [],
-      imgfile: []
+      imgsrc: []
     };
   }
 
   render() {
-      return <span className="home-container">
-        <span className="inner">
-          <span id="header">t17 - TBD</span>
+      return (
+        <span className="home-container">
+          <span>
+            <span id="header">t17 - TBD</span>
             <Dropzone className="dropzone-style" onDrop={this.dataDrop.bind(this)}>
               <b id="title">Itenerary:</b>
               <button>Open JSON File</button>
@@ -24,14 +25,34 @@ class Home extends React.Component {
               <b id="title">Map SVG:</b>
               <button>Open SVG File</button>
             </Dropzone>
-            <Itinerary
-              file= {this.state.datafile}
-            />
-            <SVGMap
-              file= {this.state.imgfile}
-            />
+          </span>
+          <span>
+          <Itinerary
+            key= {this.state.datafile}
+            style= {{width:'50%'}}
+            datafile= {this.state.datafile}
+          />
+          <SVGMap
+            style= {{width:'50%'}}
+            imgsrc= {this.state.imgsrc}
+          />
+          </span>
         </span>
-      </span>
+      );
+    }
+
+    loadImg(file){
+      console.log("Loading SVG.");
+      console.log(file);
+
+      const fr = new FileReader();
+      fr.onload = (function() {
+        return function(e) {
+          this.setState({imgsrc: e.target.result});
+        };
+      })(file).bind(this);
+
+      fr.readAsDataURL(file);
     }
 
     // grab the total distance stored in the last element if pairs isn't empty /
@@ -39,12 +60,7 @@ class Home extends React.Component {
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
         console.log("Filename:", file.name, "File:", file);
-
-        const fr = new FileReader();
-        fr.onload = function(e) {
-            document.getElementById('map').src = e.target.result;
-        };
-        fr.readAsDataURL(file);
+        this.loadImg(file);
       });
     }
 
@@ -65,15 +81,12 @@ class Home extends React.Component {
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
         console.log("Filename:", file.name, "File:", file);
-        console.log(JSON.stringify(file));
-        this.setState({datafile: file});
 
         let fr = new FileReader();
         fr.onload = (function () {
           return function (e) {
             let JsonObj = JSON.parse(e.target.result);
-            this.captureHeaders(JsonObj);
-            this.props.browseFile(JsonObj);
+            this.setState({datafile: JsonObj});
           };
         })(file).bind(this);
         fr.readAsText(file);
