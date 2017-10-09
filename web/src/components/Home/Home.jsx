@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import Itinerary from '../Itinerary.jsx';
 import SVGMap from '../SVGMap.jsx';
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +29,6 @@ class Home extends React.Component {
           </span>
           <span>
           <Itinerary
-            key= {this.state.datafile}
             style= {{width:'50%'}}
             datafile= {this.state.datafile}
           />

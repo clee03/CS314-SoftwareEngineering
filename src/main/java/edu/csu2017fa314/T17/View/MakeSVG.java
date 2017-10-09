@@ -45,9 +45,9 @@ public class MakeSVG {
   }
 
   private String loadColoradoBackground() throws IOException {
+    StringBuilder backgroundSVG = new StringBuilder("");
     String backgroundFileName = "data/colorado_map.svg";
     String line = null;
-    String backgroundData = null;
 
     try (BufferedReader br = new BufferedReader(new FileReader(backgroundFileName))){
       int skipFirstThree = 0;
@@ -56,13 +56,16 @@ public class MakeSVG {
           skipFirstThree++;
           continue;
         }
-        backgroundData += line;
+        backgroundSVG.append(line);
+        backgroundSVG.append("\n");
       }
-      backgroundData = backgroundData.substring(0, backgroundData.length() - 6);
+      if (backgroundSVG.length() > 0) {
+        backgroundSVG.setLength(backgroundSVG.length() - 7);
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return backgroundData;
+    return backgroundSVG.toString();
   }
 
   /**
@@ -81,13 +84,11 @@ public class MakeSVG {
       ">").replace('\'', '\"'));
 
     // add colorado map background to svg
-    String background = "";
     try {
-      background = (loadColoradoBackground());
+      map.append(loadColoradoBackground());
     } catch (IOException e) {
       e.printStackTrace();
     }
-    map.append(background);
 
     // add lines to svg
     if (lines) {
