@@ -64,19 +64,6 @@ class Home extends React.Component {
       });
     }
 
-    captureHeaders (jsonObj) {
-      console.log("Capturing headers: ");
-      const headers = Object.keys(jsonObj[0]['start']);
-      let options = [];
-      for (var i in headers ) {
-        options.push( { 'label': headers[i], 'value': headers[i] } );
-      }
-      this.state.options = options;
-
-      console.log( options );
-      console.log("Done");
-    }
-
     dataDrop(acceptedFiles) {
       console.log("Accepting drop");
       acceptedFiles.forEach(file => {
