@@ -55,4 +55,58 @@ public class TestShorterTrip {
      st = new ShorterTrip(brews4);
      assertEquals(st.pathDistanceBrews(st.computePath()), 76);
    }
+
+   @Test
+   public void testTwoOptSwap(){
+     ShorterTrip st = new ShorterTrip();
+     ArrayList<Integer> test = new ArrayList<>();
+     test.add(1);
+     test.add(2);
+     test.add(3);
+     test.add(4);
+     test.add(5);
+     test = st.twoOptSwap(test, 0,4);
+     ArrayList<Integer> solution = new ArrayList<>();
+     solution.add(5);
+     solution.add(4);
+     solution.add(3);
+     solution.add(2);
+     solution.add(1);
+     assertEquals(test, solution);
+   }
+
+   @Test
+   public void testTwoOpt(){
+     Brewery a = new Brewery("1", "a", "Happy Town",
+         40.0, 105.0, 4988);
+     Brewery b = new Brewery("2", "b", "Happy Town",
+         39.0, 105.0, 4988);
+     Brewery c = new Brewery("3", "c", "Happy Town",
+         40.0, 104.0, 4988);
+     Brewery d = new Brewery("4", "d", "Happy Town",
+         39.0, 104.0, 4988);
+     //this is the data list to initialize the milage table needed for two opt
+     ArrayList<Brewery> brews = new ArrayList<>();
+     brews.add(a);
+     brews.add(b);
+     brews.add(c);
+     brews.add(d);
+     //path creates an crossing point
+     ArrayList<Integer> path = new ArrayList<>();
+     path.add(2);
+     path.add(1);
+     path.add(0);
+     path.add(3);
+     //solution goes c,a,b,d //i have a graph this makes sense
+     ArrayList<Integer> solution = new ArrayList<>();
+     solution.add(2);
+     solution.add(0);
+     solution.add(1);
+     solution.add(3);
+
+     ShorterTrip st = new ShorterTrip(brews);
+     path = st.twoOpt(path);
+     assertEquals(path, solution);
+
+   }
 }

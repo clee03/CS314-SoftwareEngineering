@@ -3,13 +3,24 @@ package edu.csu2017fa314.T17.Model;
 import java.util.ArrayList;
 
 public class ShorterTrip {
-  int[][] mileageTable;
-  ArrayList<Brewery> dests;
+  protected int[][] mileageTable;
+  protected ArrayList<Brewery> dests;
+  protected type trip;
 
-  public ShorterTrip(ArrayList<Brewery> destList) {
+  public enum type{NearestNeighbor, TwoOpt}
+
+  public ShorterTrip(){
+  }
+
+  public ShorterTrip(ArrayList<Brewery> destList, type trip) {
     this.dests = destList;
     this.mileageTable = new int[dests.size()][dests.size()];
     mileageTable = populateMileageTable();
+    this.trip = trip;
+  }
+
+  public ShorterTrip(ArrayList<Brewery> destList) {
+    this(destList, type.NearestNeighbor);
   }
 
   public ArrayList<Brewery> computePath() {
@@ -44,6 +55,9 @@ public class ShorterTrip {
       path.add(startNode);
     }
     path.add(superStart);
+    if(this.trip == type.TwoOpt){
+      twoOpt(path);
+    }
     return path;
   }
 
@@ -87,5 +101,37 @@ public class ShorterTrip {
       ret += dist.greatCircleDistance(path.get(i), path.get(i+1));
     }
     return ret;
+  }
+  public ArrayList<Integer> twoOptSwap(ArrayList<Integer> path, int  i1, int k) { // swap in place
+    int temp;
+    while(i1 < k) {
+      temp = path.get(i1);
+      path.set(i1, path.get(k));
+      path.set(k, temp);
+      i1++; k--;
+    }
+    return path;
+  }
+  public ArrayList<Integer> twoOpt(ArrayList<Integer> path) {
+    boolean improvement = true;
+    int delta;
+    int n = mileageTable.length;
+    //System.out.println(path);
+    while (improvement) {
+      //System.out.println("here");
+      improvement = false;
+      for (int i = 0; i <= n - 3; i++) { // check n>4
+        for (int k = i + 2; k < n - 1; k++) {// This has to be < not <= or we get an out of bounds error because we test k+1
+          delta = -mileageTable[path.get(i)][path.get(i+1)] - mileageTable[path.get(k)][path.get(k+1)]
+              + mileageTable[path.get(i)][path.get(k)] + mileageTable[path.get(i+1)][path.get(k+1)];
+          if (delta < 0) { //improvement?
+            path = twoOptSwap(path, i+1, k);
+            //System.out.println("swapping " + i + ", " + k);
+            improvement = true;
+          }
+        }
+      }
+    }
+    return path;
   }
 }
