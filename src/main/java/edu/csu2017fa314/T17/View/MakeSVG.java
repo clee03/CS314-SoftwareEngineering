@@ -5,6 +5,8 @@ import edu.csu2017fa314.T17.Model.Brewery;
 import java.io.*;
 import java.util.ArrayList;
 
+import static edu.csu2017fa314.T17.View.View.fileExtender;
+
 public class MakeSVG {
   private double width;
   private double height;
@@ -35,7 +37,7 @@ public class MakeSVG {
   public void saveMap(ArrayList<Brewery> brews, String filename,
                       boolean lines, boolean dots){
     try {
-      PrintWriter out = new PrintWriter(filename.substring(0, filename.length() - 3) + "svg");
+      PrintWriter out = new PrintWriter(fileExtender(filename, "svg"));
       out.print(buildColoradoMap(brews, lines, dots));
       out.close();
     }

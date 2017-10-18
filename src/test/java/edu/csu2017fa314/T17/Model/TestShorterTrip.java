@@ -59,20 +59,22 @@ public class TestShorterTrip {
    @Test
    public void testTwoOptSwap(){
      ShorterTrip st = new ShorterTrip();
-     ArrayList<Integer> test = new ArrayList<>();
-     test.add(1);
-     test.add(2);
-     test.add(3);
-     test.add(4);
-     test.add(5);
+     int[] test = new int[5];
+     test[0] = 1;
+     test[1] = 2;
+     test[2] = 3;
+     test[3] = 4;
+     test[4] = 5;
      test = st.twoOptSwap(test, 0,4);
-     ArrayList<Integer> solution = new ArrayList<>();
-     solution.add(5);
-     solution.add(4);
-     solution.add(3);
-     solution.add(2);
-     solution.add(1);
-     assertEquals(test, solution);
+     int[] solution = new int[5];
+     solution[0] = 5;
+     solution[1] = 4;
+     solution[2] = 3;
+     solution[3] = 2;
+     solution[4] = 1;
+     for(int i = 0; i < solution.length; i++){
+       assertEquals(test[i], solution[i]);
+     }
    }
 
    @Test
@@ -92,21 +94,24 @@ public class TestShorterTrip {
      brews.add(c);
      brews.add(d);
      //path creates an crossing point
-     ArrayList<Integer> path = new ArrayList<>();
-     path.add(2);
-     path.add(1);
-     path.add(0);
-     path.add(3);
-     //solution goes c,a,b,d //i have a graph this makes sense
-     ArrayList<Integer> solution = new ArrayList<>();
-     solution.add(2);
-     solution.add(0);
-     solution.add(1);
-     solution.add(3);
-
+     int[] path = new int[5];
+     path[0] = 2;
+     path[1] = 1;
+     path[2] = 0;
+     path[3] = 3;
+     path[4] = 2;
+     //solution goes c,a,b,d //i have a graph; this makes sense
+     int[] solution = new int[5];
+     solution[0] = 2;
+     solution[1] = 0;
+     solution[2] = 1;
+     solution[3] = 3;
+     solution[4] = 2;
      ShorterTrip st = new ShorterTrip(brews);
      path = st.twoOpt(path);
-     assertEquals(path, solution);
 
+     for(int i = 0; i < solution.length; i++){
+       assertEquals(path[i], solution[i]);
+     }
    }
 }

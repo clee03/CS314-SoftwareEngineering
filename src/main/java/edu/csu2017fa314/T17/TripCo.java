@@ -31,7 +31,7 @@ public class TripCo {
 
     // create svg file
     ArrayList<Brewery> brewList = parse.getBrewerys();
-    ShorterTrip st = new ShorterTrip(brewList);
+    ShorterTrip st = new ShorterTrip(brewList, ShorterTrip.type.TwoOpt);
     brewList = st.computePath();
     int totalDistance = st.pathDistanceBrews(brewList);
     System.out.println("Total Distance " + CSV + "]: " + totalDistance);

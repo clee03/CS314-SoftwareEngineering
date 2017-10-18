@@ -6,6 +6,7 @@ public class ShorterTrip {
   protected int[][] mileageTable;
   protected ArrayList<Brewery> dests;
   protected type trip;
+  protected int[] distances;
 
   public enum type{NearestNeighbor, TwoOpt}
 
@@ -17,6 +18,7 @@ public class ShorterTrip {
     this.mileageTable = new int[dests.size()][dests.size()];
     mileageTable = populateMileageTable();
     this.trip = trip;
+    this.distances = new int[dests.size()];
   }
 
   public ShorterTrip(ArrayList<Brewery> destList) {
@@ -24,37 +26,53 @@ public class ShorterTrip {
   }
 
   public ArrayList<Brewery> computePath() {
-    ArrayList<Brewery> pathList = new ArrayList<>();
-    int min = Integer.MAX_VALUE;
+    ArrayList<Brewery> pathList = new ArrayList<>(); //return list
+    int min = Integer.MAX_VALUE; //initial value for minimum distance
     int startNode = 0;
-    for (int j = 0; j < dests.size(); j++) {
-      int k = pathDistance(this.pathFromAlpha(j));
-      if (min > k) {
-        min = k;
-        startNode = j;
+    Thread threads[] = new Thread[dests.size()];
+    //generate and start all threads
+    for(int i = 0; i < threads.length; i++){
+      threads[i] = new Thread(new PST(this, i));
+      threads[i].start();
+    }
+    //wait for threads to finish
+    for(int i = 0; i < threads.length; i++) {
+      try {
+        threads[i].join();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
     }
-    ArrayList<Integer> pathFromA = pathFromAlpha(startNode);
-    for (int i = 0; i < pathFromA.size(); i++) {
-      pathList.add(dests.get(pathFromA.get(i)));
+    //find the shortest trip
+    for(int i = 0; i < threads.length; i++){
+      if (min > distances[i]) {
+        min = distances[i];
+        startNode = i;
+      }
+    }
+    //rebuild the shortest trip
+    int[] pathFromA = pathFromAlpha(startNode);
+    for (int i = 0; i < pathFromA.length; i++) {
+      pathList.add(dests.get(pathFromA[i]));
     }
     return pathList;
   }
 
-  public ArrayList<Integer> pathFromAlpha(int startNode) {
-    ArrayList<Integer> validNodes = new ArrayList<>();
-    ArrayList<Integer> path = new ArrayList<>();
+  public int[] pathFromAlpha(int startNode) { //nearest neighbor
+    ArrayList<Integer> validNodes = new ArrayList<>(dests.size());
+    int path[] = new int[dests.size()+1];
+    int pathIndex = 0;
     int superStart = startNode;
     for (int i = 0; i < dests.size(); i++) {
       validNodes.add(i);
     }
-    validNodes.remove(validNodes.indexOf(superStart));
-    path.add(superStart);
+    validNodes.remove(validNodes.indexOf(superStart)); //swap index with a location
+    path[pathIndex++] = superStart; // can be an array
     while (!validNodes.isEmpty()) {
       startNode = minIndex(startNode, validNodes);
-      path.add(startNode);
+      path[pathIndex++] = startNode; //store at index i
     }
-    path.add(superStart);
+    path[pathIndex++] = superStart;
     if(this.trip == type.TwoOpt){
       twoOpt(path);
     }
@@ -86,10 +104,10 @@ public class ShorterTrip {
     return mileageTable;
   }
 
-  public int pathDistance(ArrayList<Integer> path) {
+  public int pathDistance(int[] path) {
     int ret = 0;
-    for (int i = 0; i < path.size()-1; i++) {
-      ret += mileageTable[path.get(i)][path.get(i + 1)];
+    for (int i = 0; i < path.length-1; i++) {
+      ret += mileageTable[path[i]][path[i+1]];
     }
     return ret;
   }
@@ -102,36 +120,47 @@ public class ShorterTrip {
     }
     return ret;
   }
-  public ArrayList<Integer> twoOptSwap(ArrayList<Integer> path, int  i1, int k) { // swap in place
+  public int[] twoOptSwap(int[] path, int  i, int k) { // swap in place
     int temp;
-    while(i1 < k) {
-      temp = path.get(i1);
-      path.set(i1, path.get(k));
-      path.set(k, temp);
-      i1++; k--;
+    while(i < k) {
+      temp = path[i];
+      path[i]= path[k];
+      path[k] = temp;
+      i++; k--;
     }
     return path;
   }
-  public ArrayList<Integer> twoOpt(ArrayList<Integer> path) {
+  public int[] twoOpt(int[] path) {
     boolean improvement = true;
     int delta;
-    int n = mileageTable.length;
-    //System.out.println(path);
+    int n = path.length;
     while (improvement) {
-      //System.out.println("here");
       improvement = false;
       for (int i = 0; i <= n - 3; i++) { // check n>4
         for (int k = i + 2; k < n - 1; k++) {// This has to be < not <= or we get an out of bounds error because we test k+1
-          delta = -mileageTable[path.get(i)][path.get(i+1)] - mileageTable[path.get(k)][path.get(k+1)]
-              + mileageTable[path.get(i)][path.get(k)] + mileageTable[path.get(i+1)][path.get(k+1)];
+          delta = -mileageTable[path[i]][path[i+1]] - mileageTable[path[k]][path[k+1]]
+              + mileageTable[path[i]][path[k]] + mileageTable[path[i+1]][path[k+1]];
           if (delta < 0) { //improvement?
             path = twoOptSwap(path, i+1, k);
-            //System.out.println("swapping " + i + ", " + k);
             improvement = true;
           }
         }
       }
     }
     return path;
+  }
+}
+//helper class so i make runnable methods for shorter trip
+class PST extends ShorterTrip implements Runnable{
+  private int startNode;
+  private ShorterTrip st;
+  public PST(ShorterTrip st, int startNode){
+    this.startNode = startNode;
+    this.st = st;
+  }
+
+  @Override
+  public void run() { //the method that actually runs
+    st.distances[startNode] = st.pathDistance(st.pathFromAlpha(this.startNode));
   }
 }

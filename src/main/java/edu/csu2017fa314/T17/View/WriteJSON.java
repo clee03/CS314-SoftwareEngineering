@@ -11,6 +11,8 @@ import java.util.Iterator;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
+import static edu.csu2017fa314.T17.View.View.fileExtender;
+
 public class WriteJSON {
   Gson gson;
 
@@ -24,7 +26,7 @@ public class WriteJSON {
 
     String jsonString = gson.toJson(jsonArray);
     try {
-      String name = fileName.substring(0, fileName.length() - 3) + "json"; 
+      String name = fileExtender(fileName, "json");
       //write to .json file
       FileWriter file = new FileWriter(name);
       file.write(jsonString);

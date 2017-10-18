@@ -13,4 +13,8 @@ public class View
       return totalDistance;
    }
 
+  public static String fileExtender(String fileName, String extension){
+     return fileName.split("[.]")[0] + "." + extension;
+  }
+
 }
