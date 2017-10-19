@@ -11,12 +11,10 @@ class Planner extends React.Component {
   render() {
     return (
       <div>
-        <div>Planner</div>
+        <h3>Planner</h3>
         <SearchBox
           handleSearch={this.props.handleSearch}
         />
-        <SearchResults/>
-        <SelectedDestinations/>
       </div>
     );
   }

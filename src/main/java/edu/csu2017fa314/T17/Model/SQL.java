@@ -2,6 +2,8 @@ package edu.csu2017fa314.T17.Model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 
 public class SQL {
   //hardcoded variables for query
@@ -14,13 +16,22 @@ public class SQL {
   String whereSTR = "";
   sqlType connectionType;
 
-  ResultSet retSet = null;
-  Connection conn = null;
-  Statement st = null;
+  public ResultSet retSet = null;
+  public Connection conn = null;
+  public Statement st = null;
 
   final static String myDriver = "com.mysql.jdbc.Driver";
   final static String dburl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
-  final static String localurl = "localhost";
+  final static String localurl = "jdbc:mysql://localhost";
+
+  int lport=22;
+  String rhost="cheyenne.cs.colostate.edu";
+  String host="cheyenne.cs.colostate.edu";
+  int rport=3306;
+  String sshuser="shawtm";
+  String sshpassword="DannyTheDog!996";
+  Session session= null;
+
 
   public ArrayList<Brewery> destList;
   int numRetSet = 0;
@@ -28,38 +39,50 @@ public class SQL {
 
   //constructor to query DB using a search word
   public SQL(String searchWord, sqlType type) {
+    //query string
     this.whereSTR = " WHERE id like '%" + searchWord + "%' or name like '%" + searchWord + "%'";
-    //connection and statement for getResultSetFromDB
+
+    // local or remote url
     this.connectionType = type;
+
+    //connection and statement for getResultSetFromDB
     this.conn = getDBConn();
     this.st = getStatement(this.conn);
+
     //returns a ResultSet for the query
     this.retSet = getResultSetFromDB(this.conn, this.st, this.columnsSTR, this.tableSTR, this.whereSTR);
+
     //returns an ArrayList<Brewery> with data from ResultSet
     this.destList = retSetToArrayList(this.retSet);
+
     //create a new connection and statement to get total row count of table from query
     this.conn = getDBConn();
     this.st = getStatement(this.conn);
     this.numRetSet = recordsCount(this.conn, this.st, this.tableSTR, this.whereSTR);
-
   }
 
   //method to connect to database
   public Connection getDBConn() {
     Connection conn = null;
-    try {
+    try{
+       java.util.Properties config = new java.util.Properties();
+      config.put("StrictHostKeyChecking", "no");
+      JSch jsch = new JSch();
+      session=jsch.getSession(sshuser, host, 22);
+      session.setPassword(sshpassword);
+      session.setConfig(config);
+      session.connect();
       Class.forName(myDriver);
-    } catch (ClassNotFoundException e) {
-      System.out.println(e.getMessage());
-    }
-    try {
       if (connectionType == sqlType.remote)
         conn = DriverManager.getConnection(this.dburl, this.user, this.password);
       if (connectionType == sqlType.local)
         conn = DriverManager.getConnection(this.localurl, this.user, this.password);
-    } catch (SQLException e) {
-      System.err.printf("Exception in getDBconn: ");
-      System.out.println(e.getMessage());
+    }catch(Exception e){
+      e.printStackTrace();
+    } finally{
+      if(session !=null && session.isConnected()){
+        session.disconnect();
+      }
     }
     return conn;
   }

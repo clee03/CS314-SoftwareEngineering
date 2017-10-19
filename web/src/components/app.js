@@ -25,9 +25,6 @@ export default class App extends React.Component {
   }
 
   async fetch(type, data) {
-    let info = {
-      'data': info
-    }
     try {
       let server = 'http://localhost:4567'+
                    '/testing';
@@ -35,7 +32,7 @@ export default class App extends React.Component {
       let request = await fetch( server,
         {
           method: 'POST',
-          body: JSON.stringify(info)
+          body: JSON.stringify(data)
         }
       );
       let response = await request.json();
@@ -59,8 +56,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app-container">
+        <h1 id="header">T17 - TBD</h1>
         <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
-          <TabList>
+          <TabList style={{marginBottom:'40px'}}>
             <Tab>Itinerary</Tab>
             <Tab>Search</Tab>
           </TabList>

@@ -11,20 +11,15 @@ class Home extends React.Component {
   render() {
     console.log(this.props.dataIter);
       return (
-        <span className="home-container">
-          <span>
-            <span id="header">t17 - TBD</span>
-          </span>
-          <span>
-          <Itinerary
-            style= {{width:'50%'}}
-            dataIter= {this.props.dataIter}
-          />
-          <span style={{display:'inline',width:'50%'}}>
-            <span dangerouslySetInnerHTML={{__html: this.props.dataSvg}}/>
-          </span>
-          </span>
-        </span>
+        <div className="home-container">
+          <div>
+            <Itinerary
+              style= {{width:'50%',marginBottom:'40px'}}
+              dataIter= {this.props.dataIter}
+            />
+          </div>
+          <div dangerouslySetInnerHTML={{__html: this.props.dataSvg}}/>
+        </div>
       );
     }
 }

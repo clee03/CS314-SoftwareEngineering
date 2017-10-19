@@ -50,7 +50,7 @@ public class MakeSVG {
     String line = null;
 
     try (BufferedReader br = new BufferedReader(new FileReader(backgroundFileName))){
-      int skipFirstThree = 0;
+      int skipFirstThree = 3;
       while((line=br.readLine()) != null){
         if (skipFirstThree < 3){
           skipFirstThree++;
@@ -75,13 +75,7 @@ public class MakeSVG {
    * @param dots      Turns on and off dots
    */
   public String buildColoradoMap (ArrayList<Brewery> brews, boolean lines, boolean dots){
-    StringBuilder map = new StringBuilder(String.format("%s %s %s %s\n\t%s %s\n",
-      "<svg",
-      "version='1.0'",
-      String.format("width='%f'", width),
-      String.format("height='%f'", height),
-      "xmlns='http://www.w3.org/2000/svg'",
-      ">").replace('\'', '\"'));
+    StringBuilder map = new StringBuilder();
 
     // add colorado map background to svg
     try {

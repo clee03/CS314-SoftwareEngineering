@@ -3,8 +3,9 @@
 <svg
    xmlns="http://www.w3.org/2000/svg"
    version="1.0"
-   width="1066.6073"
-   height="783.0824"
+   viewport="0,0,.2,.2"
+   width="100%"
+   height="auto"
    id="svg2338">
   <defs
      id="defs2340" />

@@ -15,9 +15,10 @@ class SelectBox extends React.Component {
     let options = this.props.options;
     let formattedOptions = [];
     for (let i in options) {
-      formattedOptions.push(
-        { value: options[i], label: options[i] }
-      );
+      if(options[i] != 'name')
+        formattedOptions.push(
+          { value: options[i], label: options[i] }
+        );
     }
     return formattedOptions;
   }
@@ -32,6 +33,7 @@ class SelectBox extends React.Component {
         value={this.props.value}
         options={this.formatOptions()}
         onChange={this.handleChange}
+        placeholder='Select additional options to view...'
       />
       </span>
     )

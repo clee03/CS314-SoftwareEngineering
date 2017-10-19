@@ -13,20 +13,20 @@ public class TestSQL {
   public void testSQL(){
     /*
     String searchWord = "denver";
-    ArrayList<Brewery> retBrewsList= new ArrayList<>();
 
     sql = new SQL(searchWord, SQL.sqlType.remote);
-    ResultSet rs = sql.retSet;
+
     Connection con = sql.conn;
     Statement st = sql.st;
+    ResultSet rs = sql.retSet;
+
     int totalNumRows = sql.numRetSet;
     assertEquals(6, totalNumRows);
-    retBrewsList = sql.destList;
+    ArrayList<Brewery> retBrewsList = retBrewsList = sql.destList;
 
     for(Brewery b : retBrewsList){
       System.out.println(b + ", ");
     }
-
     sql.closeDBConnections(con, st, rs);
     */
   }

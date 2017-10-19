@@ -6,15 +6,15 @@ class Pair extends React.Component {
   }
 
   formatInfo(info) {
-    if(this.props.infoHeader.length == 0){
-      return;
-    }
     let infoHeader = this.props.infoHeader;
     let formattedInfo = [];
+    formattedInfo.push(
+            <span><b>Name:</b> {info['name']}<br/></span>
+          )
     for (let i in infoHeader){
       let header = infoHeader[i].value;
       formattedInfo.push(
-        <span><b>{header}</b>: {info[header]}<br/></span>
+        <span><b>{header}:</b> {info[header]}<br/></span>
       )
     }
     return formattedInfo;
@@ -28,6 +28,9 @@ class Pair extends React.Component {
 
     return (
       <tr>
+        <td>
+          {this.props.count}
+        </td>
         <td>
           {start}
         </td>

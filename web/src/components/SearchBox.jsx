@@ -21,6 +21,7 @@ class SearchBox extends React.Component {
           id='searchText'
           style={{width:'300px'}}
           type="text"
+          placeholder='Enter a search term...'
         />
         <button type="button" onClick={this.handleSearch}>
           Search

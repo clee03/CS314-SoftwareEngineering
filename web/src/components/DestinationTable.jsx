@@ -18,6 +18,7 @@ class DestinationTable extends React.Component{
           info= {info[i]}
           infoHeader= {this.props.infoHeader}
           running= {total}
+          count={i}
         />
       );
     }
@@ -26,14 +27,15 @@ class DestinationTable extends React.Component{
       <table style={this.props.style} className="pair-table">
         <tbody>
           <tr>
-            <td>Start Brewery</td>
-            <td>End Brewery</td>
+            <td>#</td>
+            <td>Start Location</td>
+            <td>End Location</td>
             <td>Distance</td>
             <td>Total Distance</td>
           </tr>
           {legs}
           <tr>
-            <td colSpan='3'>Trip Total:</td>
+            <td colSpan='4'>Trip Total:</td>
             <td>{total}</td>
           </tr>
         </tbody>

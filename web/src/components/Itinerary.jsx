@@ -17,7 +17,6 @@ class Itinerary extends React.Component {
   }
 
   loadHeaders() {
-    console.log(this.props);
     let data = this.props.dataIter;
     if(data.length == 0){
       console.log("Nothing to collect");
@@ -28,19 +27,20 @@ class Itinerary extends React.Component {
 
   render() {
     let options = this.loadHeaders();
+
     return (
       <span>
-      <SelectBox
-        style= {this.props.style}
-        options= {options}
-        value= {this.state.value}
-        onValueChange= {this.onValueChange}
-      />
-      <DestinationTable
-        style= {this.props.style}
-        info= {this.props.dataIter}
-        infoHeader= {this.state.value}
-      />
+        <SelectBox
+         style= {this.props.style}
+         options= {options}
+         value= {this.state.value}
+         onValueChange= {this.onValueChange}
+        />
+        <DestinationTable
+          style= {this.props.style}
+          info= {this.props.dataIter}
+          infoHeader= {this.state.value}
+        />
       </span>
     );
   }
