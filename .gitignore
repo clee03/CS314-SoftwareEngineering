@@ -6,6 +6,8 @@
 # IntelliJ generated files #
 .idea/
 *.iml
+*.ipr
+*.iws
 
 # Maven generated files #
 **/target/
@@ -80,3 +82,8 @@ bower.json
 .byebug_history
 /public/packs
 /node_modules
+data/CO14ers.json
+data/CO14ers.svg
+data/brews.svg
+data/ski.json
+data/ski.svg

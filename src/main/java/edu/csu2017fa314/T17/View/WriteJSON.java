@@ -20,6 +20,10 @@ public class WriteJSON {
     gson = new GsonBuilder().setPrettyPrinting().create();
   }
 
+  public String webJSON(ArrayList<Brewery> brews, String svg){
+    return gson.toJson(buildJSONObject(brews, svg));
+  }
+
   //Method that takes Brewery ArrayList and formats data then writes to a JSON file
   public void formatJSON(ArrayList<Brewery> brews, String fileName) {
     JSONArray jsonArray = buildJSONArray(brews);
@@ -34,6 +38,13 @@ public class WriteJSON {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  private JSONObject buildJSONObject (ArrayList<Brewery> brews, String svg){
+    JSONObject jobj = new JSONObject();
+    jobj.put("brews", buildJSONArray(brews));
+    jobj.put("svg", svg);
+    return jobj;
   }
 
   private JSONArray buildJSONArray (ArrayList<Brewery> brews) {

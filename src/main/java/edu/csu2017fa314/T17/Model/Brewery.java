@@ -18,6 +18,12 @@ public class Brewery{
     set( "longitude", lon );
     set( "elevation", elv );
   }
+  public Brewery( String id, String name, double lat, double lon ){
+    set( "id", id );
+    set( "name", name );
+    set( "latitude", lat );
+    set( "longitude", lon );
+  }
 
   @Override
   public String toString(){

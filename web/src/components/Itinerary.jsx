@@ -17,7 +17,8 @@ class Itinerary extends React.Component {
   }
 
   loadHeaders() {
-    let data = this.props.datafile;
+    console.log(this.props);
+    let data = this.props.dataIter;
     if(data.length == 0){
       console.log("Nothing to collect");
       return;
@@ -37,7 +38,7 @@ class Itinerary extends React.Component {
       />
       <DestinationTable
         style= {this.props.style}
-        info= {this.props.datafile}
+        info= {this.props.dataIter}
         infoHeader= {this.state.value}
       />
       </span>

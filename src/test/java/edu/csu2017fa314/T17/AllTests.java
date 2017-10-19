@@ -1,6 +1,7 @@
 package edu.csu2017fa314.T17;
 import edu.csu2017fa314.T17.Model.*;
 import edu.csu2017fa314.T17.View.*;
+import edu.csu2017fa314.T17.Server.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import junit.framework.JUnit4TestAdapter;
@@ -8,19 +9,35 @@ import junit.framework.JUnit4TestAdapter;
 // This section declares all of the test classes in your program.
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  TestBrewery.class,
-  TestParseCSV.class,
-  TestDistance.class,
-  TestTripCo.class,
-  TestModel.class,
-  TestView.class
+    // Model
+    TestBrewery.class,
+    TestDistance.class,
+    TestModel.class,
+    TestParseCSV.class,
+    TestShorterTrip.class,
+    // TripCoServer
+      // Database
+      // Server
+      /*TestLocation.class,
+      TestServer.class,
+      TestServerRequest.class,
+      TestServerResponse.class,
+      TestQueryBuilder.class,
+      TestTripCo.class,
+      */
+    // View
+    TestMakeSVG.class,
+    TestView.class,
+    TestWriteJSON.class,
+    // TripCo
+    //TestTripCo.class
 })
 
 public class AllTests{
-  //This can be empty if you are using an IDE that includes support for JUnit
-  //such as Eclipse.  However, if you are using Java on the command line or
-  //with a simpler IDE like JGrasp or jCreator, the following main() and suite()
-  //might be helpful.
+   //This can be empty if you are using an IDE that includes support for JUnit
+   //such as Eclipse.  However, if you are using Java on the command line or
+   //with a simpler IDE like JGrasp or jCreator, the following main() and suite()
+   //might be helpful.
 
    // Execution begins at main().  In this test class, we will execute
    // a text test runner that will tell you if any of your tests fail.
@@ -33,3 +50,5 @@ public class AllTests{
       return new JUnit4TestAdapter(AllTests.class);
    }
 }
+
+

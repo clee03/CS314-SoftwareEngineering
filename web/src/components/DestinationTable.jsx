@@ -14,7 +14,7 @@ class DestinationTable extends React.Component{
       total += info[i].distance;
       legs.push(
         <Pair
-          key= {info[i].start.id}
+          uniqueId= {info[i].start.id}
           info= {info[i]}
           infoHeader= {this.props.infoHeader}
           running= {total}
@@ -32,8 +32,10 @@ class DestinationTable extends React.Component{
             <td>Total Distance</td>
           </tr>
           {legs}
-          <td colSpan='3'>Trip Total:</td>
-          <td>{total}</td>
+          <tr>
+            <td colSpan='3'>Trip Total:</td>
+            <td>{total}</td>
+          </tr>
         </tbody>
       </table>
     );

@@ -2,3 +2,30 @@ sudo: required
 language: java
 jdk:
   - oraclejdk8
+services:
+  - mysql
+test:
+  adapter: mysql2
+  database: myapp_test
+  username: travis
+  encoding: utf8
+addons:
+  apt:
+    packages:
+      - mysql-server-5.6
+      - mysql-client-core-5.6
+      - mysql-client-5.6
+before_script:
+  - mysql -u root -e 'CREATE DATABASE IF NOT EXISTS testDB;'
+  - mysql -u root -e "GRANT ALL PRIVILEGES ON testDB.* TO 'travis';"
+  - mysql -u root -e "USE testDB;"
+  - mysql -u root -e "CREATE TABLE  airports(id varchar(1000), name varchar(1000),
+                                            latitude varchar(1000), longitude varchar(1000));
+  - mysql -u root -e "INSERT TO airports (id,name,latitude,longitude) VALUES (KFNL,Fort Collins Loveland Municipal Airport,40.4518013,-105.011001587);
+  - mysql -u root -e "INSERT TO airports (id,name,latitude,longitude) VALUES (KDEN,Denver International Airport,39.861698150635,-104.672996521);
+  - mysql -u root -e "INSERT TO airports (id,name,latitude,longitude) VALUES (CO35,Denver Health Heliport,39.727500915527344,-104.99099731445312);
+  - mysql -u root -e "INSERT TO airports (id,name,latitude,longitude) VALUES (KA50,Colorado Springs East Airport,38.8744010925293,-104.41000366210938);
+  - mysql -u root -e "INSERT TO airports (id,name,latitude,longitude) VALUES (KCOS,City of Colorado Springs Municipal Airport,38.805801391602,-104.70099639893);
+  - mysql -u root -e "INSERT TO airports (id,name,latitude,longitude) VALUES (X-KDEN,Denver Stapleton International Airport,39.774200439453125,-104.87899780273438);
+
+
