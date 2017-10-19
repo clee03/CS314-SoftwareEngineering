@@ -29,36 +29,39 @@
 
 ## Plan 
 
-User stories (epics) in the Sprint Backlog: *#68, #123, #125. Optional: #126, #127*.  
+User stories (epics) in the Sprint Backlog: #68, #123, #125. Optional: #126, #127.  
 
-Total planned tasks / issues in the Sprint Backlog: *NEED TO ADD HOW MANY ISSUES* 
+Total planned tasks / issues in the Sprint Backlog: 15 
 
 ## Daily Scrums
 
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
-10/4 | | | Have not had a real team meeting yet to talkabout distribution of tasks, having meeting 10/6| High
-10/6 | | | | 
+10/4 | | | Have not had a real team meeting yet to talk about distribution of tasks, having meeting 10/6| High
+10/6 | Distributed tasks and talked about sprint goals | Estimates for tasks | Learning new technology and upcoming test/assignments in other classes | High 
+10/9 | #124 | | Tests and assignments due this week in other classes causing us to get a late start on sprint | Medium 
+10/11 |  | #133, #125, #121, #120, #119| Jenns upcoming trip | Medium 
+10/18 | #136, #135, #137 | #147, #146, #145, #143, #131 | Thursday due date | Medium 
  
 
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* #124
+* #125
 
 Completed *number of issues completed* issues associated with these user stories.
+* 14
 
 #### Incomplete user stories / epics in Sprint Backlog 
-* *user story*: *Explanation...*
-*
+* #123: Had touble learning the technology 
 
 #### What went well
-* *something*
+* We worked together as a team and helped teammates having issues 
 *
 
 #### Problems encountered and resolutions
-* *something*
+* Creating and filling the data base for the Travis build
 *
 
 ## Retrospective
