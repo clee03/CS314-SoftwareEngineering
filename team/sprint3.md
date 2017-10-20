@@ -68,7 +68,7 @@ Completed *number of issues completed* issues associated with these user stories
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | We Agreed to work more collabratively | We decided that pull requests and changes should not be left open for more than a day | We agreed to make better use of slack and zenhub for better communication 
+What we did well | our team was able to work highly effectively together to acomplish our tasks | We were able to discuss tasks and assist eachother when we needed help | we used zenhub very effectively to track eachother's progress and keep and eye on where everone was at
+What we need to work on | working as a team earlier | Starting sooner | using coverage to help make code more efficient
+What we will change next time | We are going to hold our meetings as soon as the sprint has been explained | we will begin work a week earlier  | we are going to include more documentation in our next sprint
