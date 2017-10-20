@@ -10,7 +10,7 @@ class Pair extends React.Component {
     let formattedInfo = [];
     formattedInfo.push(
             <span><b>Name:</b> {info['name']}<br/></span>
-          )
+         )
     for (let i in infoHeader){
       let header = infoHeader[i].value;
       formattedInfo.push(

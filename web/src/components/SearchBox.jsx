@@ -19,7 +19,7 @@ class SearchBox extends React.Component {
       <div>
         <input
           id='searchText'
-          style={{width:'300px'}}
+          style={{width:'300px', marginLeft:'30px'}}
           type="text"
           placeholder='Enter a search term...'
         />

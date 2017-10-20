@@ -14,7 +14,7 @@ class Home extends React.Component {
         <div className="home-container">
           <div>
             <Itinerary
-              style= {{width:'50%',marginBottom:'40px'}}
+              style= {{width:'50%',marginLeft:'30px', marginBottom:'30px'}}
               dataIter= {this.props.dataIter}
             />
           </div>

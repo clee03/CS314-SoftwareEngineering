@@ -11,7 +11,7 @@ class Planner extends React.Component {
   render() {
     return (
       <div>
-        <h3>Planner</h3>
+        <h3 style={{marginLeft: '30px'}}>Planner</h3>
         <SearchBox
           handleSearch={this.props.handleSearch}
         />

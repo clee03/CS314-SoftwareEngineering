@@ -18,7 +18,7 @@ class DestinationTable extends React.Component{
           info= {info[i]}
           infoHeader= {this.props.infoHeader}
           running= {total}
-          count={i}
+          count={i+1}
         />
       );
     }
