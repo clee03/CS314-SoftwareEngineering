@@ -40,13 +40,8 @@ public class Server {
     String searched = rec.body().replace("\"", "");
     System.out.println("Searching: " + searched);
 
-    SQL sql = new SQL(searched, SQL.sqlType.remote);
-    Connection con = sql.conn;
-    Statement st = sql.st;
-    ResultSet rs = sql.retSet;
-    ArrayList<Brewery> brewList = sql.destList;
-
-    sql.closeDBConnections(con, st, rs);
+    SQL sql = new SQL();
+    ArrayList<Brewery> brewList = sql.searchByWord(searched);
 
     if (brewList.size() != 0) {
       // create svg file

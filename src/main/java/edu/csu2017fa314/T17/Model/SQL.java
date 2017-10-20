@@ -7,152 +7,117 @@ import com.jcraft.jsch.Session;
 
 public class SQL {
   //hardcoded variables for query
-  String user = "jdorcey";
-  String password = "829427264";
-  String columnsSTR = "SELECT id,name,latitude,longitude ";
-  String tableSTR = "FROM airports";
+  String user = "cwesterm";
+  String password = "830152296";
   String countSTR = "SELECT COUNT(1)";
-  //variable query will use
-  String whereSTR = "";
-  sqlType connectionType;
 
-  public ResultSet retSet = null;
-  public Connection conn = null;
-  public Statement st = null;
+  int lport = 33000;
+  int rport = 3306;
+  final String myDriver = "com.mysql.jdbc.Driver";
+  final String dburl;
 
-  final static String myDriver = "com.mysql.jdbc.Driver";
-  final static String dburl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
-  final static String localurl = "jdbc:mysql://localhost";
+  String rhost = "faure.cs.colostate.edu";
+  String host = "faure.cs.colostate.edu";
+  String sshuser = "shawtm";
+  String sshpassword = "DannyTheDog!996";
 
-  int lport=22;
-  String rhost="cheyenne.cs.colostate.edu";
-  String host="cheyenne.cs.colostate.edu";
-  int rport=3306;
-  String sshuser="shawtm";
-  String sshpassword="DannyTheDog!996";
-  Session session= null;
+  Connection conn = null;
+  Session session = null;
 
+  public SQL() {
+    dburl = "jdbc:mysql://localhost:" + lport + "/cs314";
 
-  public ArrayList<Brewery> destList;
-  int numRetSet = 0;
-  public enum sqlType {local, remote};
-
-  //constructor to query DB using a search word
-  public SQL(String searchWord, sqlType type) {
-    //query string
-    this.whereSTR = " WHERE id like '%" + searchWord + "%' or name like '%" + searchWord + "%'";
-
-    // local or remote url
-    this.connectionType = type;
-
-    //connection and statement for getResultSetFromDB
-    this.conn = getDBConn();
-    this.st = getStatement(this.conn);
-
-    //returns a ResultSet for the query
-    this.retSet = getResultSetFromDB(this.conn, this.st, this.columnsSTR, this.tableSTR, this.whereSTR);
-
-    //returns an ArrayList<Brewery> with data from ResultSet
-    this.destList = retSetToArrayList(this.retSet);
-
-    //create a new connection and statement to get total row count of table from query
-    this.conn = getDBConn();
-    this.st = getStatement(this.conn);
-    this.numRetSet = recordsCount(this.conn, this.st, this.tableSTR, this.whereSTR);
   }
 
-  //method to connect to database
-  public Connection getDBConn() {
-    Connection conn = null;
-    try{
-       java.util.Properties config = new java.util.Properties();
-      config.put("StrictHostKeyChecking", "no");
-      JSch jsch = new JSch();
-      session=jsch.getSession(sshuser, host, 22);
+  public ArrayList<Brewery> searchByWord(String searchWord) {
+    openNetwork();
+    String dbQuery = "SELECT id,name,latitude,longitude " +
+                     "FROM airports " +
+                     "WHERE id like '%" + searchWord + "%' or name like '%" + searchWord + "%'";
+
+    ResultSet rs = getRSFromDB( getStatement(), dbQuery );
+    ArrayList<Brewery> data = rsToArrayList(rs);
+    closeNetwork();
+    return data;
+  }
+
+  private void openNetwork () {
+    openTunnel();
+    openDBConn();
+  }
+  private void closeNetwork () {
+    closeDBConn();
+    closeTunnel();
+  }
+
+  private void openTunnel () {
+    JSch jsch = new JSch();
+
+    java.util.Properties config = new java.util.Properties();
+    config.put("StrictHostKeyChecking", "no");
+
+    System.out.println("Connecting to Cheyenne...");
+    try {
+      this.session = jsch.getSession(sshuser, host, 22);
       session.setPassword(sshpassword);
       session.setConfig(config);
       session.connect();
-      Class.forName(myDriver);
-      if (connectionType == sqlType.remote)
-        conn = DriverManager.getConnection(this.dburl, this.user, this.password);
-      if (connectionType == sqlType.local)
-        conn = DriverManager.getConnection(this.localurl, this.user, this.password);
-    }catch(Exception e){
-      e.printStackTrace();
-    } finally{
-      if(session !=null && session.isConnected()){
-        session.disconnect();
-      }
+      session.setPortForwardingL(lport, rhost, rport);
     }
-    return conn;
+    catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
-  //method to create statement
-  public Statement getStatement(Connection dbConn) {
-    Statement statement = null;
+  private void closeTunnel () {
+    session.disconnect();
+  }
+
+  private void openDBConn () {
+    try{
+      System.out.println("Beginning connection with " + dburl);
+      Class.forName(myDriver);
+      conn = DriverManager.getConnection(this.dburl, this.user, this.password);
+      System.out.println("Finished connecting to Cheyenne.");
+    }
+    catch(Exception e){
+      e.printStackTrace();
+    }
+  }
+
+  private void closeDBConn () {
     try {
-      statement = dbConn.createStatement();
+      conn.close();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+
+
+
+  //method to create statement
+  private Statement getStatement() {
+    Statement statement;
+    try {
+      statement = conn.createStatement();
+      return statement;
     } catch (SQLException e) {
       System.err.printf("Exception with statement in getStatement: ");
       System.out.println(e.getMessage());
     }
-    return statement;
-  }
-
-  //method to create result set from query
-  public ResultSet getResultSetFromDB(Connection conn, Statement st, String columns, String tab, String where) {
-    ResultSet rs = null;
-    try {
-      Connection dbConn = conn;
-      Statement statement = st;
-      try {// submit the full query
-        rs = statement.executeQuery(columns + tab + where);
-      } catch (SQLException e) {
-        System.err.printf("Exception with rs getResultSetFromDB: ");
-        System.out.println(e.getMessage());
-      }
-      } catch (Exception e) {
-        System.err.printf("Exception in getResultSetFromBD: ");
-        System.err.println(e.getMessage());
-      }
-    return rs;
-  }
-
-  //method to get total row count in table for results that match query
-  public int recordsCount(Connection conn, Statement st, String tab, String where) {
-    int numResults = 0;
-    try {
-      Connection dbConn = conn;
-      Statement statement = st;
-      try {
-        ResultSet rs = statement.executeQuery(this.countSTR + tab + where);
-        try {
-          rs.next();
-          numResults = rs.getInt(1);
-        } catch (SQLException e) {
-          System.err.printf("Exception with rs.next in recordsCount: ");
-          System.out.println(e.getMessage());
-        }
-      } catch (Exception e) {
-        System.err.printf("Exception with rs in recordsCount: ");
-        System.err.println(e.getMessage());
-      }
-    } catch (Exception e) {
-        System.err.printf("Exception in recordCount: ");
-        System.err.println(e.getMessage());
-      }
-    return numResults;
+    return null;
   }
 
   //method to put ResultSet into an Arraylist<Brewery>
-  public ArrayList<Brewery> retSetToArrayList(ResultSet rs){
+  private ArrayList<Brewery> rsToArrayList(ResultSet rs){
     ArrayList<Brewery> dests = new ArrayList<>();
     try {
       while (rs.next()) {
         dests.add(new Brewery(rs.getString("id"),
-                rs.getString("name"),
-                rs.getDouble("latitude"),
-                rs.getDouble("longitude")));
+            rs.getString("name"),
+            rs.getDouble("latitude"),
+            rs.getDouble("longitude")));
       }
     } catch (SQLException se) {
       //Handle errors for JDBC
@@ -160,17 +125,23 @@ public class SQL {
     }
     return dests;
   }
-
-  //method to close DB Connection, Statement, and ResultSet
-  public void closeDBConnections(Connection conn, Statement st, ResultSet rs) {
+  //method to create result set from query
+  private ResultSet getRSFromDB(Statement statement, String query){
+    ResultSet rs;
     try {
-      rs.close();
-      st.close();
-      conn.close();
-      System.out.println("Successfully Closed Connection, Statement, and Result Set.");
-    } catch (SQLException e) {
-      System.err.printf("Exception in closeDBConnections: ");
-      System.out.println(e.getMessage());
+      try {// submit the full query
+        rs = statement.executeQuery(query);
+        return rs;
+      }
+      catch (SQLException e) {
+        System.err.printf("Exception with rs getResultSetFromDB: ");
+        System.out.println(e.getMessage());
+      }
     }
+    catch (Exception e) {
+      System.err.printf("Exception in getResultSetFromBD: ");
+      System.err.println(e.getMessage());
+    }
+    return null;
   }
 }

@@ -26,7 +26,7 @@ export default class App extends React.Component {
 
   async fetch(type, data) {
     try {
-      let server = 'http://localhost:4567'+
+      let server = 'http://24.9.124.126:4567'+
                    '/testing';
       console.log(server);
       let request = await fetch( server,

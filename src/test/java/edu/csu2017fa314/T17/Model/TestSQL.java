@@ -11,23 +11,17 @@ public class TestSQL {
 
   @Test
   public void testSQL(){
-    /*
+
     String searchWord = "denver";
+    sql = new SQL();
 
-    sql = new SQL(searchWord, SQL.sqlType.remote);
+    ArrayList<Brewery> retBrewsList = sql.searchByWord(searchWord);
 
-    Connection con = sql.conn;
-    Statement st = sql.st;
-    ResultSet rs = sql.retSet;
-
-    int totalNumRows = sql.numRetSet;
+    int totalNumRows = retBrewsList.size();
     assertEquals(6, totalNumRows);
-    ArrayList<Brewery> retBrewsList = retBrewsList = sql.destList;
 
     for(Brewery b : retBrewsList){
       System.out.println(b + ", ");
     }
-    sql.closeDBConnections(con, st, rs);
-    */
   }
 }

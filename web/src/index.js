@@ -4,6 +4,7 @@ import App from './components/app'
 import './components/app.scss'
 import { AppContainer } from 'react-hot-loader'
 
+const app = require('./components/app.js');
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
