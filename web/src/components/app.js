@@ -26,9 +26,14 @@ export default class App extends React.Component {
 
   async fetch(type, data) {
     try {
-      let server = 'http://24.9.124.126:4567'+
-                   '/testing';
-      console.log(server);
+      let server;
+      if(process.env.NODE_ENV==='production')
+        server = 'http://24.9.124.126:4567';
+      else
+        server = 'http://localhost:4567';
+      server += '/testing';
+
+      console.log('Sending to ' + server);
       let request = await fetch( server,
         {
           method: 'POST',

@@ -13,8 +13,6 @@ class SearchBox extends React.Component {
   }
 
   render() {
-    console.log(this.handleSearch);
-    console.log(this.props.handleSearch);
     return (
       <div>
         <input
