@@ -37,8 +37,8 @@ Total story points in the Sprint Backlog: 16
 
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
-Oct 25 | Scheduled Team Meeting for Sprint Planning | Start working on sprint 4 | *None* | *High*
- | | | | 
+10/25 | Scheduled Team Meeting for Sprint Planning | Start working on sprint 4 | *None* | *High*
+10/26 | Created tasks to complete which are associated with Epics and did planning poker to decide on estimates for the tasks | *None* | *High* | 
  
 
 ## Review
