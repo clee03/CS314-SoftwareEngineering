@@ -7,7 +7,7 @@ class SelectedDestinations extends React.Component {
 
   render() {
     return (
-      <div>SelectedDestinations:</div>
+
     );
   }
 }

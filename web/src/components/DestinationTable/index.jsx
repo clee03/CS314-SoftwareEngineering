@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Pair from './Pair/Pair.jsx';
+import Pair from '../Pair/index.jsx';
+
+import './index.scss';
 
 class DestinationTable extends React.Component{
   constructor(props) {
@@ -24,7 +26,7 @@ class DestinationTable extends React.Component{
     }
 
     return (
-      <table style={this.props.style} className="pair-table">
+      <table className="pair-table">
         <tbody>
           <tr>
             <td>#</td>

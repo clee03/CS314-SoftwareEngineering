@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tabs, Tab, TabList, TabPanel} from 'react-tabs';
-import Home from './Home/Home.jsx';
-import Planner from './Planner.jsx';
+import Home from './Home/index.jsx';
+import Planner from './Planner/index.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -61,11 +61,11 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <h1 id="header">T17 - TBD</h1>
+        <h1 id="header">T17 - TBD - Trip Coordinator</h1>
         <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
-          <TabList style={{marginBottom:'40px'}}>
+          <TabList>
             <Tab>Itinerary</Tab>
-            <Tab>Search</Tab>
+            <Tab>Planner</Tab>
           </TabList>
 
           <TabPanel>

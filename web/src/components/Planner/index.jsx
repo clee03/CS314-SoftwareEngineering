@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import SearchBox from './SearchBox.jsx';
-import SearchResults from './SearchResults.jsx';
-import SelectedDestinations from './SelectedDestinations.jsx';
+import SearchBox from '../SearchBox/index.jsx';
+import SearchResults from '../SearchResults/index.jsx';
+import SelectedDestinations from '../SelectedDestinations/index.jsx';
+
+import './index.scss';
 
 class Planner extends React.Component {
   constructor(props) {
@@ -10,11 +12,11 @@ class Planner extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3 style={{marginLeft: '30px'}}>Planner</h3>
+      <div className='top'>
         <SearchBox
           handleSearch={this.props.handleSearch}
         />
+        <SearchResults/>
       </div>
     );
   }

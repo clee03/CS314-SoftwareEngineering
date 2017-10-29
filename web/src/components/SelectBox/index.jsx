@@ -25,17 +25,16 @@ class SelectBox extends React.Component {
 
   render() {
     return (
-      <span>
-      <Select
-        multi
-        style={this.props.style}
-        name='select-box'
-        value={this.props.value}
-        options={this.formatOptions()}
-        onChange={this.handleChange}
-        placeholder='Select additional options to view...'
-      />
-      </span>
+      <div>
+        <Select
+          multi
+          name='select-box'
+          value={this.props.value}
+          options={this.formatOptions()}
+          onChange={this.handleChange}
+          placeholder='Select additional options to view...'
+        />
+      </div>
     )
   }
 }
