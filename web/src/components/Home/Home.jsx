@@ -13,12 +13,12 @@ class Home extends React.Component {
       return (
         <div className="home-container">
           <div>
+            <div dangerouslySetInnerHTML={{__html: this.props.dataSvg}}/>
             <Itinerary
-              style= {{width:'50%',marginLeft:'30px', marginBottom:'30px'}}
+              style= {{width:'50%',marginLeft:'30px', marginTop:'30px'}}
               dataIter= {this.props.dataIter}
             />
           </div>
-          <div dangerouslySetInnerHTML={{__html: this.props.dataSvg}}/>
         </div>
       );
     }
