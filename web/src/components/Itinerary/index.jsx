@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import SelectBox from './SelectBox.jsx';
-import DestinationTable from './DestinationTable.jsx';
+import SelectBox from '../SelectBox/index.jsx';
+import DestinationTable from '../DestinationTable/index.jsx';
+
+import './index.scss';
 
 class Itinerary extends React.Component {
   constructor(props) {
@@ -29,19 +31,19 @@ class Itinerary extends React.Component {
     let options = this.loadHeaders();
 
     return (
-      <span>
-        <SelectBox
-         style= {this.props.style}
-         options= {options}
-         value= {this.state.value}
-         onValueChange= {this.onValueChange}
-        />
+      <div id='itinerary'>
+        <div id='sb'>
+          <SelectBox
+            options= {options}
+            value= {this.state.value}
+            onValueChange= {this.onValueChange}
+          />
+        </div>
         <DestinationTable
-          style= {this.props.style}
           info= {this.props.dataIter}
           infoHeader= {this.state.value}
         />
-      </span>
+      </div>
     );
   }
 }

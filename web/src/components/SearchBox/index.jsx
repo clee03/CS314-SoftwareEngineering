@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import './index.scss';
+
 class SearchBox extends React.Component {
 
   constructor(props) {
@@ -17,7 +19,6 @@ class SearchBox extends React.Component {
       <div>
         <input
           id='searchText'
-          style={{width:'300px', marginLeft:'30px'}}
           type="text"
           placeholder='Enter a search term...'
         />
