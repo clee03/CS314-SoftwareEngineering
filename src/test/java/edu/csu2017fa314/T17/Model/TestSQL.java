@@ -18,7 +18,7 @@ public class TestSQL {
     ArrayList<Brewery> retBrewsList = sql.searchByWord(searchWord);
 
     int totalNumRows = retBrewsList.size();
-    assertEquals(6, totalNumRows);
+    assertEquals(7, totalNumRows);
 
     for(Brewery b : retBrewsList){
       System.out.println(b + ", ");
