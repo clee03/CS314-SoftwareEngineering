@@ -25,6 +25,7 @@ class SearchBox extends React.Component {
         <button type="button" onClick={this.handleSearch}>
           Search
         </button>
+        <button type='button' id='add_all-btn' onClick={this.props.handleAddAll}>Select All</button>
       </div>
     );
   }

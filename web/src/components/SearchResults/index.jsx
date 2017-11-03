@@ -7,27 +7,40 @@ import './index.scss';
 class SearchResults extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: [
-        { code: 'a', name: 'a' },
-        { code: 'b', name: 'b' }
-      ]
+  }
+
+  handleClick(state, rowInfo, column, instance) {
+    return {
+      onClick: e => {
+          if(rowInfo !== undefined &&
+            column.id === "add" ){
+            console.log("Clicked add on ", rowInfo.original);
+            instance.props.handleAddClick(rowInfo.original);
+            }
+        }
     };
   }
 
   render() {
     return (
-      <div id='search_results'>
-        <ReactTable
-          data={this.state.data}
-          columns={
-            [
+      <div>
+        <div id='search_results'>
+          <ReactTable
+            data={this.props.data}
+            columns={[
+              { Header: 'Add', accessor: 'add', sortable: false,
+                width: 65, resizeable: false,  className: 'add-column' },
               { Header: 'Code', accessor: 'code', width: 100 },
               { Header: 'Name', accessor: 'name' }
-            ]
-          }
-          defaultPageSize={5}
-        />
+            ]}
+            noDataText= 'No matches...'
+            getTdProps={this.handleClick}
+            showPageSizeOptions={false}
+            defaultPageSize={10}
+            className="-striped"
+            handleAddClick={this.props.handleAddClick}
+          />
+        </div>
       </div>
     );
   }

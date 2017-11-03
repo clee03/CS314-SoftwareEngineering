@@ -1,0 +1,29 @@
+#selected_dests {
+  clear: both;
+  float: left;
+  width: 500px;
+}
+
+#options {
+  margin-left: 50px;
+  float: left;
+}
+
+#plan-btn {
+  width: 80px;
+}
+#reset-btn {
+  margin-left: 10px;
+  width: 80px;
+}
+
+.ReactTable .-pagination {height:50px}
+
+.remove-column {
+  background: #ff0000;
+  border: outset;
+}
+
+.opt-radio {
+  width: 30px;
+}

@@ -1,4 +1,18 @@
 #search_results {
-  width: 50%;
-  height: 10px;
+  clear: both;
+  float: left;
+  width: 500px;
+}
+
+#search_buttons {
+  margin-left: 50px;
+  float: left;
+}
+
+
+.ReactTable .-pagination {height:50px}
+
+.add-column {
+  background: #66ff33;
+  border: outset;
 }
