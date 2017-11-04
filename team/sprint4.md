@@ -38,7 +38,11 @@ Total story points in the Sprint Backlog: 16
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
 10/25 | Scheduled Team Meeting for Sprint Planning | Start working on sprint 4 | *None* | *High*
-10/26 | Created tasks to complete which are associated with Epics and did planning poker to decide on estimates for the tasks | *None* | *High* | 
+10/26 | Created tasks to complete which are associated with Epics and did planning poker to decide on estimates for the tasks | 314 Exam | *High* | 
+10/30 | Talked about what code we wanted to use for code inspection | Individual code inspections | *None* | *High*
+11/1 | Went over each code inspection and discussed what we wanted changed | | *None* | *High*
+11/3 | Talked about SQL class and using a Brewery constructor that takes a hash map, 3 Opt, and completion date | Most Epics in backlog should be done | *None* | *High*
+
  
 
 ## Review
