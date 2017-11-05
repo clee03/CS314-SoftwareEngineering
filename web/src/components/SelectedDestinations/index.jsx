@@ -33,7 +33,7 @@ class SelectedDestinations extends React.Component {
               { Header: 'Code', accessor: 'code', width: 100 },
               { Header: 'Name', accessor: 'name' }
             ]}
-            noDataText= 'No locations selected...'
+            noDataText= 'Make selections via green buttons above...'
             getTdProps={this.handleClick}
             showPageSizeOptions={false}
             defaultPageSize={10}

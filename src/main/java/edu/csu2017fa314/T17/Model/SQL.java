@@ -31,7 +31,7 @@ public class SQL {
 
   public ArrayList<Brewery> searchByWord(String searchWord) {
     openNetwork();
-    String dbQuery = "SELECT id,name,latitude,longitude " +
+    String dbQuery = "SELECT * " +
                      "FROM airports " +
                      "WHERE id like '%" + searchWord + "%' or name like '%" + searchWord + "%'";
 

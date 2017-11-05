@@ -26,18 +26,23 @@ class SearchResults extends React.Component {
       <div>
         <div id='search_results'>
           <ReactTable
-            data={this.props.data}
+          style={{
+            height: "515px" // This will force the table body to overflow and scroll, since there is not enough room
+          }}            data={this.props.data}
+            pages={this.props.pages}
             columns={[
-              { Header: 'Add', accessor: 'add', sortable: false,
+              { Header: 'Add', accessor: 'add', sortable: false, filterable: false,
                 width: 65, resizeable: false,  className: 'add-column' },
               { Header: 'Code', accessor: 'code', width: 100 },
               { Header: 'Name', accessor: 'name' }
             ]}
             noDataText= 'No matches...'
             getTdProps={this.handleClick}
-            showPageSizeOptions={false}
+            showPageSizeOptions={true}
+            onFetchData={this.props.fetchData} // Request new data when things change
+            filterable
             defaultPageSize={10}
-            className="-striped"
+            className="-striped -highlight"
             handleAddClick={this.props.handleAddClick}
           />
         </div>
