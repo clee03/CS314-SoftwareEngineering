@@ -49,8 +49,8 @@ public class Server {
       brewList = trip.computePath();
       System.out.println("Total distance: " + trip.pathDistanceBrews(brewList));
     }
-    MakeSVG svgObj = new MakeSVG(1066.6073,783.0824);
-    String SVG = svgObj.buildColoradoMap(brewList,true, true);
+    MakeSVG svgObj = new MakeSVG();
+    String SVG = svgObj.buildMap(brewList,true, true);
 
     ServerResponse response = new ServerResponse(SVG, brewList);
 
