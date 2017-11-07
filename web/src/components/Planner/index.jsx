@@ -64,8 +64,8 @@ class Planner extends React.Component {
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
-
   }
+
   // from react-table.js.org
   // allows you to filter data
   fetchData(state, instance) {
@@ -88,12 +88,13 @@ class Planner extends React.Component {
     });
   }
 
-  async fetchSearch() {
-    console.log('Searching...');
+  async fetchSearch(s) {
+    console.log('Sending search request:');
+    console.log(s);
   }
 
-  handleSearch() {
-    this.fetchSearch();
+  handleSearch(data) {
+    this.fetchSearch(data);
     let response =
       [
         { code: 'a', name: 'a' },
@@ -106,7 +107,21 @@ class Planner extends React.Component {
     this.setState({ data: response});
   }
   handlePlan() {
-    console.log('Planning.');
+    if(this.state.selected.length===0) return;
+    let units =
+      document.querySelector('input[name="units"]:checked').value;
+    let optz =
+      document.querySelector('input[name="optz"]:checked').value;
+    let codes = this.state.selected.map(x => x.code);
+    let data = {
+      units: units,
+      optz: optz,
+      codes: codes
+    };
+
+    console.log('Sending plan request:');
+    console.log(data);
+
   }
   handleAddAll() {
     console.log("Adding all elements.");
@@ -167,7 +182,7 @@ class Planner extends React.Component {
         </div>
         <div id='right'>
           <PlanOptions
-            handlePlan={this.props.handlePlan}
+            handlePlan={this.handlePlan}
             handleReset={this.handleReset}
             handleSave={this.handleSave}
             handleLoad={this.handleLoad}
