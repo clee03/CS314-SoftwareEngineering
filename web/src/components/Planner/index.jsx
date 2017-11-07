@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import SearchBox from '../SearchBox/index.jsx';
 import SearchResults from '../SearchResults/index.jsx';
 import SelectedDestinations from '../SelectedDestinations/index.jsx';
+import PlanOptions from '../PlanOptions/index.jsx';
 
 import './index.scss';
 
@@ -48,14 +49,6 @@ class Planner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        { code: 'a', name: 'a' },
-        { code: 'b', name: 'b' },
-        { code: 'c', name: 'a' },
-        { code: 'd', name: 'a' },
-        { code: 'e', name: 'a' },
-        { code: 'f', name: 'a' },
-      ],
       pages: null,
       loading: false,
       selected: [
@@ -65,10 +58,13 @@ class Planner extends React.Component {
       filtered: [
       ]
     };
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handlePlan = this.handlePlan.bind(this);
     this.handleAddAll = this.handleAddAll.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
+
   }
   // from react-table.js.org
   // allows you to filter data
@@ -90,6 +86,27 @@ class Planner extends React.Component {
         loading: false
       });
     });
+  }
+
+  async fetchSearch() {
+    console.log('Searching...');
+  }
+
+  handleSearch() {
+    this.fetchSearch();
+    let response =
+      [
+        { code: 'a', name: 'a' },
+        { code: 'b', name: 'b' },
+        { code: 'c', name: 'a' },
+        { code: 'd', name: 'a' },
+        { code: 'e', name: 'a' },
+        { code: 'f', name: 'a' },
+      ];
+    this.setState({ data: response});
+  }
+  handlePlan() {
+    console.log('Planning.');
   }
   handleAddAll() {
     console.log("Adding all elements.");
@@ -124,22 +141,38 @@ class Planner extends React.Component {
   handleReset() {
     this.setState({'selected': []});
   }
+  handleSave() {
+    console.log("Save.");
+  }
+  handleLoad() {
+    console.log("Load.");
+  }
+
   render() {
     return (
-      <div className='top'>
-        <SearchBox
-          handleSearch={this.props.handleSearch}
-          handleAddAll={this.handleAddAll}
-        />
-        <SearchResults
-          data={this.state.data}
-          handleAddClick={this.handleAddClick}
-        />
-        <SelectedDestinations
-          selected={this.state.selected}
-          handleRemoveClick={this.handleRemoveClick}
-          handleReset={this.handleReset}
-        />
+      <div className='Planner'>
+        <div id='left'>
+          <SearchBox
+            handleSearch={this.handleSearch}
+            handleAddAll={this.handleAddAll}
+          />
+          <SearchResults
+            data={this.state.data}
+            handleAddClick={this.handleAddClick}
+          />
+          <SelectedDestinations
+            selected={this.state.selected}
+            handleRemoveClick={this.handleRemoveClick}
+          />
+        </div>
+        <div id='right'>
+          <PlanOptions
+            handlePlan={this.props.handlePlan}
+            handleReset={this.handleReset}
+            handleSave={this.handleSave}
+            handleLoad={this.handleLoad}
+          />
+        </div>
       </div>
     );
   }

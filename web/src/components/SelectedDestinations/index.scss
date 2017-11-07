@@ -1,10 +1,15 @@
-#search_results {
-  width: 500px;
-}
+.SelectedDestinations {
+  #selected_dests {
+    clear: both;
+    float: left;
+    width: 650px;
+  }
 
-.ReactTable .-pagination {height:50px}
+  .ReactTable .-pagination {height:50px}
 
-.remove-column {
-  background: #ff0000;
-  border: outset;
+  .remove-column {
+    background: #ff0000;
+    border: outset;
+  }
+
 }

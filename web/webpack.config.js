@@ -17,7 +17,12 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'SERVER_URL': JSON.stringify('http://localhost:4567')
+      }
+    })
   ],
 
   module: {

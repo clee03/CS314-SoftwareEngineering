@@ -11,10 +11,10 @@ export default class App extends React.Component {
       dataIter: [],
       dataSvg: []
     };
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handlePlan = this.handlePlan.bind(this);
   }
 
-  handleSearch(data) {
+  handlePlan(data) {
     console.log('Sending Handshake.');
     this.fetch('search', data);
     this.setState(
@@ -26,7 +26,7 @@ export default class App extends React.Component {
 
   async fetch(type, data) {
     try {
-      let server;
+      let server = process.e;
       if(process.env.NODE_ENV==='production')
         server = 'http://24.9.124.126:4567';
       else
@@ -76,7 +76,7 @@ export default class App extends React.Component {
           </TabPanel>
           <TabPanel>
             <Planner
-              handleSearch={this.handleSearch}
+              handlePlan={this.handlePlan}
             />
           </TabPanel>
         </Tabs>
