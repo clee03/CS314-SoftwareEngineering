@@ -5,6 +5,11 @@ import './index.scss';
 class PlanOptions extends React.Component {
   constructor(props) {
     super(props);
+    this.handlePlan = this.handlePlan.bind(this);
+  }
+
+  handlePlan() {
+    this.props.handlePlan('denver');
   }
 
   render() {
@@ -25,7 +30,7 @@ class PlanOptions extends React.Component {
         <br/>
 
         <button type='button' className= 'opt-btn'
-          onClick={this.props.handlePlan}>Plan</button>
+          onClick={this.handlePlan}>Plan</button>
         <button type='button' className= 'opt-btn'
           onClick={this.props.handleReset}>Reset</button>
         <br/>
