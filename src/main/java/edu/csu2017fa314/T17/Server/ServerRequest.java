@@ -7,11 +7,11 @@ package edu.csu2017fa314.T17.Server;
 
 public class ServerRequest {
   private String query = "";
-  private String id = "";
+  private String code = "";
 
-  public ServerRequest(String query, String id) {
+  public ServerRequest(String query, String code) {
     this.query = query;
-    this.id = id;
+    this.code = code;
   }
 
   public String getQuery() {
@@ -22,12 +22,12 @@ public class ServerRequest {
     this.query = query;
   }
 
-  public String getId() {
-    return id;
+  public String getCode() {
+    return code;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setCode(String code) {
+    this.code = code;
   }
 
   public Object toGson(){
@@ -39,7 +39,7 @@ public class ServerRequest {
   public String toString() {
     return "Request{" +
         "query='" + query + '\'' +
-        ", id='" + id + '\'' +
+        ", code='" + code + '\'' +
         '}';
   }
 }

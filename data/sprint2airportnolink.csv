@@ -1,4 +1,4 @@
-id,type,name,latitude,longitude,elevation_ft
+code,type,name,latitude,longitude,elevation_ft
 8CO8,small_airport,Koenig Airport,40.10829926,-102.7279968,4150
 K2V6,small_airport,Yuma Municipal Airport,40.10419846,-102.7129974,4136
 CD05,small_airport,Jackson Airfield,40.19440079,-102.697998,4075

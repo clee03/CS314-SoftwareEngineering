@@ -1,4 +1,4 @@
-ID, Name,City,Latitude,Longitude,ElevationFt
+Code, Name,City,Latitude,Longitude,ElevationFt
 acwatson,Equinox Brewing,Fort Collins,40°35'17" N, 105°4'26" W,4988
 cwesterm,Avery Brewing Company,Boulder,40°03'45.2" N, 105°12'17.1" W,5188
 abee,Two22 Brew,Centennial,39°38'07" N, 104°45'32" W,5872

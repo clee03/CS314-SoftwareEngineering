@@ -1,28 +1,35 @@
 package edu.csu2017fa314.T17.Model;
+
 import java.util.HashMap;
 
 public class Brewery{
   private HashMap info = new HashMap();
 
   public Brewery(){
-    set( "id", "None" );
+    set( "code", "None" );
     set( "latitude", 0.0 );
     set( "longitude", 0.0 );
   }
-  public Brewery( String id, String name, String city,
+
+  public Brewery( String code, String name, String city,
                   double lat, double lon, double elv ){
-    set( "id", id );
+    set( "code", code );
     set( "name", name );
     set( "city", city );
     set( "latitude", lat );
     set( "longitude", lon );
     set( "elevation", elv );
   }
-  public Brewery( String id, String name, double lat, double lon ){
-    set( "id", id );
+
+  public Brewery( String code, String name, double lat, double lon ){
+    set( "code", code );
     set( "name", name );
     set( "latitude", lat );
     set( "longitude", lon );
+  }
+
+  public Brewery(HashMap locHashMap){
+    info = locHashMap;
   }
 
   @Override
@@ -40,7 +47,7 @@ public class Brewery{
     }
     Brewery b = (Brewery)o;
 
-    if (get("id").equals(b.get("id"))
+    if (get("code").equals(b.get("code"))
         && (Math.abs((double) get("latitude") - (double) b.get("latitude")) <= 0.01)
         && (Math.abs((double) get("longitude") - (double) b.get("longitude")) <= 0.01)) {
       return true;
@@ -48,8 +55,8 @@ public class Brewery{
     return false;
   }
 
-  public Object get (String id) {
-    return info.get(id);
+  public Object get (String code) {
+    return info.get(code);
   }
   public HashMap getAll () {
     return info;

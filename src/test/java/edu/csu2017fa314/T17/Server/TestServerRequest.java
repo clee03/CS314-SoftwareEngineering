@@ -14,7 +14,7 @@ public class TestServerRequest {
 
   @Test
   public void testToString(){
-    assertEquals("Request{query='brewery', id='idkirk'}",
+    assertEquals("Request{query='brewery', code='idkirk'}",
         serverRequest.toString());
   }
 
@@ -32,15 +32,15 @@ public class TestServerRequest {
   }
 
   @Test
-  public void testGetId(){
-    String id = serverRequest.getId();
-    assertEquals("idkirk", id);
+  public void testGetCode(){
+    String code = serverRequest.getCode();
+    assertEquals("idkirk", code);
   }
 
   @Test
-  public void testSetId(){
-    serverRequest.setId("cwestern");
-    String id = serverRequest.getId();
-    assertEquals("cwestern", id);
+  public void testSetCode(){
+    serverRequest.setCode("cwestern");
+    String code = serverRequest.getCode();
+    assertEquals("cwestern", code);
   }
 }
