@@ -42,6 +42,8 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 10/30 | Talked about what code we wanted to use for code inspection | Individual code inspections | *None* | *High*
 11/1 | Went over each code inspection and discussed what we wanted changed | | *None* | *High*
 11/3 | Talked about SQL class and using a Brewery constructor that takes a hash map, 3 Opt, and completion date | Most Epics in backlog should be done | *None* | *High*
+11/6 | Talked about 3opt | 3opt | *none* | *High*
+11/8 | #170, #164, #174 | Complete backlog | Save and Load | *High*
 
  
 
