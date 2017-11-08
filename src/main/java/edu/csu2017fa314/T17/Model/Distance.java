@@ -2,12 +2,14 @@ package edu.csu2017fa314.T17.Model;
 
 public class Distance {
   private double radius;
+  public enum unit {Miles, Kilometers};
 
   public Distance(){
-    this(false);
+    this(unit.Kilometers);
   }
-  public Distance (boolean toggle) {
-    if (toggle) {
+
+  public Distance (unit type) {
+    if (type == unit.Kilometers) {
       radius = 6371.0088; // if toggle is true then use Kilometers
     }
     else {

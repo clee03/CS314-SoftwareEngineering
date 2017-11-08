@@ -11,7 +11,7 @@ public class TestDistance {
 
   @Before
   public void setUp() throws Exception {
-    d = new Distance(true);
+    d = new Distance(Distance.unit.Kilometers);
   }
 
 

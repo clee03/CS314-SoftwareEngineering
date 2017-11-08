@@ -7,13 +7,24 @@ public class ShorterTrip {
   protected ArrayList<Brewery> dests;
   protected type trip;
   protected int[] distances;
+  protected Distance distance;
 
-  public enum type{NearestNeighbor, TwoOpt}
+  public enum type{NoOpt, NearestNeighbor, TwoOpt, ThreeOpt}
 
   public ShorterTrip(){
   }
 
   public ShorterTrip(ArrayList<Brewery> destList, type trip) {
+    /*this.dests = destList;
+    this.mileageTable = new int[dests.size()][dests.size()];
+    mileageTable = populateMileageTable();
+    this.trip = trip;
+    this.distances = new int[dests.size()];*/
+    this(destList, trip, Distance.unit.Kilometers);
+  }
+
+  public ShorterTrip(ArrayList<Brewery> destList, type trip, Distance.unit type) {
+    this.distance = new Distance(type);
     this.dests = destList;
     this.mileageTable = new int[dests.size()][dests.size()];
     mileageTable = populateMileageTable();
@@ -26,6 +37,9 @@ public class ShorterTrip {
   }
 
   public ArrayList<Brewery> computePath() {
+    if(trip == type.NoOpt){ //handles no opt trip
+      return dests;
+    }
     ArrayList<Brewery> pathList = new ArrayList<>(); //return list
     int min = Integer.MAX_VALUE; //initial value for minimum distance
     int startNode = 0;
@@ -73,8 +87,11 @@ public class ShorterTrip {
       path[pathIndex++] = startNode; //store at index i
     }
     path[pathIndex++] = superStart;
-    if(this.trip == type.TwoOpt){
+    if(this.trip == type.TwoOpt){ //handles two opt
       twoOpt(path);
+    }
+    if(this.trip == type.ThreeOpt){ //handles three opt
+      threeOpt(path); //handle this later
     }
     return path;
   }
@@ -95,10 +112,9 @@ public class ShorterTrip {
   }
 
   public int[][] populateMileageTable() {
-    Distance dist = new Distance();
     for (int i = 0; i < mileageTable.length; i++) {
       for (int j = 0; j < mileageTable[i].length; j++) {
-        mileageTable[i][j] = dist.greatCircleDistance(dests.get(i), dests.get(j));
+        mileageTable[i][j] = distance.greatCircleDistance(dests.get(i), dests.get(j));
       }
     }
     return mileageTable;
@@ -113,10 +129,9 @@ public class ShorterTrip {
   }
 
   public int pathDistanceBrews(ArrayList<Brewery> path) {
-    Distance dist = new Distance();
     int ret = 0;
     for (int i = 0; i < path.size()-1; i++) {
-      ret += dist.greatCircleDistance(path.get(i), path.get(i+1));
+      ret += distance.greatCircleDistance(path.get(i), path.get(i+1));
     }
     return ret;
   }
@@ -124,7 +139,7 @@ public class ShorterTrip {
     int temp;
     while(i < k) {
       temp = path[i];
-      path[i]= path[k];
+      path[i] = path[k];
       path[k] = temp;
       i++; k--;
     }
@@ -143,6 +158,81 @@ public class ShorterTrip {
           if (delta < 0) { //improvement?
             path = twoOptSwap(path, i+1, k);
             improvement = true;
+          }
+        }
+      }
+    }
+    return path;
+  }
+  public int[] threeOptSwap(int[] path, int i, int j, int k){
+    int temp;
+    while(j < k) {
+      temp = path[i];
+      path[i] = path[j];
+      path[j] = temp;
+      i++; j++;
+    }
+    return path;
+  }
+
+  public int[] threeOpt(int[] path) {
+    boolean improvement = true;
+    int [] delta = new int[7];
+    int n = path.length;
+    int index;
+    while (improvement) {
+      improvement = false;
+      for (int i = 0; i <= n - 5; i++) { // check n>4
+        for (int j = i + 2; j < n - 3; j++) {// This has to be < not <= or we get an out of bounds error because we test k+1
+          for (int k = j + 2; k < n - 1; k++) {
+            //compute cases
+            delta[0] = -mileageTable[path[i]][path[i + 1]] - mileageTable[path[j]][path[j + 1]]
+                + mileageTable[path[i]][path[j]] + mileageTable[path[i + 1]][path[j + 1]];
+            delta[1] = -mileageTable[path[j]][path[j + 1]] - mileageTable[path[k]][path[k + 1]]
+                + mileageTable[path[j]][path[k]] + mileageTable[path[j + 1]][path[k + 1]];
+            delta[2] = -mileageTable[path[i]][path[i + 1]] - mileageTable[path[k]][path[k + 1]]
+                + mileageTable[path[i]][path[k]] + mileageTable[path[i + 1]][path[k + 1]];
+            delta[3] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
+                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[j]]
+                + mileageTable[path[i + 1]][path[k]] + mileageTable[path[j + 1]][path[k + 1]];
+            delta[4] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
+                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[k]]
+                + mileageTable[path[j + 1]][path[i+1]] + mileageTable[path[j]][path[k + 1]];
+            delta[5] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
+                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[j+1]]
+                + mileageTable[path[k]][path[j]] + mileageTable[path[i + 1]][path[k + 1]];
+            delta[6] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
+                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[j + 1]]
+                + mileageTable[path[k]][path[i + 1]] + mileageTable[path[j]][path[k + 1]];
+            //get max index
+            index = 0;
+            for(int p = 0; p < delta.length; p++){
+              if ((delta[p] < delta[index]) && (delta[p] < 0)){
+                index = p;
+              }
+            }
+            if (delta[index] < 0) {//improvement?
+              if (index == 0) { //case 1 from slides
+                path = twoOptSwap(path, i + 1, j);
+              }else if (index == 1) { //case 2 from slides
+                path = twoOptSwap(path, j + 1, k);
+              }else if (index == 2) { //case 3 from slides
+                path = twoOptSwap(path, i + 1, k);
+              }else if (index == 3) { //case 4 from slides
+                path = twoOptSwap(path, i + 1, j);
+                path = twoOptSwap(path, j + 1, k);
+              }else if (index == 4) { //case 5 from slides //TODO here down
+                path = twoOptSwap(path, j + 1, k);
+                threeOptSwap(path, i, j, k);
+              }else if (index == 5) { //case 6 from slides
+                path = twoOptSwap(path, i + 1, j);
+                threeOptSwap(path, i, j, k);
+              }else if (index == 6) { //case 7 from slides
+                path = twoOptSwap(path, i + 1, k);
+                threeOptSwap(path, i, j, k);
+              }
+              improvement = true;
+            }
           }
         }
       }
