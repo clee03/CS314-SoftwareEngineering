@@ -22,7 +22,7 @@ class SelectedDestinations extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='SelectedDestinations'>
         <div id='selected_dests'>
           <h4>Selected Destinations:</h4>
           <ReactTable
@@ -39,17 +39,6 @@ class SelectedDestinations extends React.Component {
             defaultPageSize={10}
             handleRemoveClick={this.props.handleRemoveClick}
           />
-      </div>
-      <div id='options'>
-        <form>
-          <input className='opt-radio' type='radio' name='opt' value='none'/>None
-          <input className='opt-radio' type='radio' name='opt' value='nn'/>Nearest Neighbor
-          <br/>
-          <input className='opt-radio' type='radio' name='opt' value='2opt'/>2-Opt
-          <input className='opt-radio' type='radio' name='opt' value='3opt'/>3-Opt
-        </form>
-        <button type='button' id='plan-btn'>Plan</button>
-        <button type='button' id='reset-btn' onClick={this.props.handleReset}>Reset</button>
       </div>
     </div>
     );

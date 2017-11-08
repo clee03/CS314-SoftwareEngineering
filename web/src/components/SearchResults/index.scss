@@ -1,17 +1,19 @@
-#search_results {
-  clear: both;
-  float: left;
-  width: 650px;
-}
+.SearchResults {
+  #search_results {
+    clear: both;
+    float: left;
+    width: 650px;
+  }
 
-#search_buttons {
-  margin-left: 50px;
-  float: left;
-}
+  #search_buttons {
+    margin-left: 50px;
+    float: left;
+  }
 
-.ReactTable .-pagination {height:50px}
+  .ReactTable .-pagination {height:50px}
 
-.add-column {
-  background: #66ff33;
-  border: outset;
+  .add-column {
+    background: #66ff33;
+    border: outset;
+  }
 }

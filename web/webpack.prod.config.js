@@ -25,7 +25,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        'SERVER_URL': JSON.stringify('http://tbd.serverhttp.com:8080')
       }
     })
   ],
@@ -39,6 +39,8 @@ module.exports = {
       { test: /\.scss?$/,
         loader: 'style-loader!css-loader!sass-loader',
         include: path.join(__dirname, 'src') },
+      { test: /\.css$/,
+        loader: 'style-loader!css-loader'},
       { test: /\.png$/,
         loader: 'file-loader' },
       { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,

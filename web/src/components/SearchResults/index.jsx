@@ -23,7 +23,7 @@ class SearchResults extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='SearchResults'>
         <div id='search_results'>
           <ReactTable
           style={{
