@@ -156,10 +156,7 @@ public class MakeSVG {
     y2 = (int)Math.round(degreesToCartY(brew2));
 
     String line;
-    System.out.println("Brew Start: " + brew1.get("name"));
-    System.out.println("Should wrap: " + shouldWrap(x1, x2));
     if (shouldWrap(x1, x2) == 1) {
-      System.out.println("Drawing wrap");
       line = String.format(
           "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#0000FF' fill='none'/>" +
           "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#0000FF' fill='none'/>",
@@ -168,7 +165,6 @@ public class MakeSVG {
       ).replace('\'', '\"');
     }
     else if (shouldWrap(x1, x2) == 2) {
-      System.out.println("Drawing wrap");
       line = String.format(
           "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#0000FF' fill='none'/>" +
               "<line y1='%d' x1='%d' y2='%d' x2='%d' stroke-width='1' stroke='#0000FF' fill='none'/>",

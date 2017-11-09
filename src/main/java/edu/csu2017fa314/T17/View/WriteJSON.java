@@ -20,13 +20,13 @@ public class WriteJSON {
     gson = new GsonBuilder().setPrettyPrinting().create();
   }
 
-  public String webJSON(ArrayList<Brewery> brews, String svg){
-    return gson.toJson(buildJSONObject(brews, svg));
+  public String webJSON(ArrayList<Brewery> brews, String svg, Distance.unit units){
+    return gson.toJson(buildJSONObject(brews, svg, units));
   }
 
   //Method that takes Brewery ArrayList and formats data then writes to a JSON file
   public void formatJSON(ArrayList<Brewery> brews, String fileName) {
-    JSONArray jsonArray = buildJSONArray(brews);
+    JSONArray jsonArray = buildJSONArray(brews, Distance.unit.Miles);
 
     String jsonString = gson.toJson(jsonArray);
     try {
@@ -40,16 +40,16 @@ public class WriteJSON {
     }
   }
 
-  private JSONObject buildJSONObject (ArrayList<Brewery> brews, String svg){
+  private JSONObject buildJSONObject (ArrayList<Brewery> brews, String svg, Distance.unit units){
     JSONObject jobj = new JSONObject();
-    jobj.put("brews", buildJSONArray(brews));
+    jobj.put("brews", buildJSONArray(brews, units));
     jobj.put("svg", svg);
     return jobj;
   }
 
-  private JSONArray buildJSONArray (ArrayList<Brewery> brews) {
+  private JSONArray buildJSONArray (ArrayList<Brewery> brews, Distance.unit units) {
     JSONArray jsonArray = new JSONArray();
-    Distance dist = new Distance();
+    Distance dist = new Distance(units);
 
     for(int i = 0; i < brews.size()-1;  i++){
       //j gets the next brewery in brews

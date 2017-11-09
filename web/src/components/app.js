@@ -14,9 +14,9 @@ export default class App extends React.Component {
     this.handlePlan = this.handlePlan.bind(this);
   }
 
-  handlePlan(data) {
+  handlePlan(payload) {
     console.log('Sending Handshake.');
-    this.fetch('search', data);
+    this.fetch(payload);
     this.setState(
       {
         tabIndex:0
@@ -24,33 +24,25 @@ export default class App extends React.Component {
     );
   }
 
-  async fetch(type, data) {
+  async fetch(payload) {
     try {
-      let server = process.e;
-      if(process.env.NODE_ENV==='production')
-        server = 'http://24.9.124.126:4567';
-      else
-        server = 'http://localhost:4567';
-      server += '/testing';
-
+      let server = process.env.SERVER_URL + '/plan';
       console.log('Sending to ' + server);
+      console.log(payload);
+
       let request = await fetch( server,
         {
           method: 'POST',
-          body: JSON.stringify(data)
+          body: JSON.stringify(payload)
         }
       );
       let response = await request.json();
       response = JSON.parse(response);
 
-      this.setState(
-        {
+      this.setState({
           dataIter: response.brews,
           dataSvg: response.svg
-        }
-      )
-
-      //console.log('Response: ' + response);
+        });
     }
     catch(e) {
       console.error("Error communicating with server:");

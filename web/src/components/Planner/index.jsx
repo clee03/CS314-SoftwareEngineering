@@ -64,6 +64,7 @@ class Planner extends React.Component {
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
   }
 
   // from react-table.js.org
@@ -88,23 +89,55 @@ class Planner extends React.Component {
     });
   }
 
-  async fetchSearch(s) {
-    console.log('Sending search request:');
-    console.log(s);
+  async fetchSearch(payload) {
+    let server = process.env.SERVER_URL + '/search';
+    console.log('Sending search request to ' + server + ':');
+    console.log(payload);
+
+    try {
+      let request = await fetch(server,
+        {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        }
+      );
+      let response = await request.json();
+      let keys = Object.keys(response)
+      let data = [];
+      for(let x in keys)
+        data.push({'code': keys[x], 'name': response[keys[x]]});
+      this.setState({data: data});
+    }
+    catch(e) {
+      console.error(e);
+    }
+  }
+  async fetchLoad(payload) {
+    let server = process.env.SERVER_URL + '/load';
+    console.log('Sending load request to ' + server);
+    console.log(payload);
+
+    try {
+      let request = await fetch(server,
+        {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        }
+      );
+      let response = await request.json();
+      let keys = Object.keys(response)
+      let data = [];
+      for(let x in keys)
+        data.push({'code': keys[x], 'name': response[keys[x]]});
+      this.setState({selected: data});
+    }
+    catch(e) {
+      console.error(e);
+    }
   }
 
   handleSearch(data) {
-    this.fetchSearch(data);
-    let response =
-      [
-        { code: 'a', name: 'a' },
-        { code: 'b', name: 'b' },
-        { code: 'c', name: 'a' },
-        { code: 'd', name: 'a' },
-        { code: 'e', name: 'a' },
-        { code: 'f', name: 'a' },
-      ];
-    this.setState({ data: response});
+    console.log(this.fetchSearch(data));
   }
   handlePlan() {
     if(this.state.selected.length===0) return;
@@ -118,10 +151,7 @@ class Planner extends React.Component {
       optz: optz,
       codes: codes
     };
-
-    console.log('Sending plan request:');
-    console.log(data);
-
+    this.props.handlePlan(data);
   }
   handleAddAll() {
     console.log("Adding all elements.");
@@ -159,8 +189,21 @@ class Planner extends React.Component {
   handleSave() {
     console.log("Save.");
   }
-  handleLoad() {
-    console.log("Load.");
+  handleLoad(acceptedFiles) {
+    console.log("Accepting drop");
+    acceptedFiles.forEach(file => {
+      console.log("Filename:", file.name, "File:", file);
+      console.log(JSON.stringify(file));
+      let fr = new FileReader();
+      fr.onload = (function () {
+          return function (e) {
+              let JsonObj = JSON.parse(e.target.result);
+              this.fetchLoad(JsonObj.destinations);
+          };
+      })(file).bind(this);
+
+      fr.readAsText(file);
+    });
   }
 
   render() {

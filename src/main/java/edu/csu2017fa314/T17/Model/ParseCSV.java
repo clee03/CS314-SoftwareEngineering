@@ -75,7 +75,7 @@ public class ParseCSV {
    *  @param degrees    the string that will be parsed
    *  @return double    a decimal value representing the string passed as a parameter
    */
-  public double degToDecimal (String degrees) {
+  static public double degToDecimal (String degrees) {
     degrees = degrees.replace(" ", "");
     String[] parts = degrees.split("[°'\"]");
 

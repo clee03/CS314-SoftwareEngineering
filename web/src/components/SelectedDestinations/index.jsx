@@ -43,6 +43,7 @@ class SelectedDestinations extends React.Component {
     </div>
     );
   }
+
 }
 
 export default SelectedDestinations

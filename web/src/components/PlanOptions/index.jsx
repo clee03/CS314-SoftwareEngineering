@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Dropzone from 'react-dropzone'
 
 import './index.scss';
 
@@ -31,8 +32,9 @@ class PlanOptions extends React.Component {
         <br/>
         <button type='button' className='opt-btn'
           onClick={this.props.handleSave}>Save</button>
-        <button type='button' className='opt-btn'
-          onClick={this.props.handleLoad}>Load</button>
+        <Dropzone className="dropzone-style" style={{display:'inline-block'}} onDrop={this.props.handleLoad}>
+          <button type='button' className='opt-btn'>Load</button>
+        </Dropzone>
       </div>
     );
   }

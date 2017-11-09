@@ -145,6 +145,29 @@ public class SQL {
   /**
    * Method that queries airports table using selected IDs
    * @param codesArray       an Array of IDs used to query database
+   * @return data            an ArrayList containing codes and names from airports
+   */
+  public HashMap<String, String> getNamesWithID(String[] codesArray) {
+    openNetwork();
+    String codesString = "";
+    for (int i = 0; i < codesArray.length; i++) {
+      if (i == 0) {
+        codesString = codesString + "'" + codesArray[i] + "'";
+      } else {
+        codesString = codesString + ",'" + codesArray[i] + "'";
+      }
+    }
+
+    String dbQuery = "SELECT code, name FROM airports WHERE code IN (" + codesString + ")";
+    ResultSet rs = getRSFromDB( getStatement(), dbQuery );
+    HashMap<String, String> data = rsToHashMap(rs);
+    closeNetwork();
+    return data;
+  }
+
+  /**
+   * Method that queries airports table using selected IDs
+   * @param codesArray       an Array of IDs used to query database
    * @return data            an ArrayList containing all columns in airports for each Brewery in query results
    */
   public ArrayList<Brewery> getAllDataWithID(String[] codesArray) {
@@ -158,7 +181,7 @@ public class SQL {
       }
     }
 
-    String dbQuery = "SELECT * FROM airports WHERE code IN (" + codesString + ") limit 100";
+    String dbQuery = "SELECT * FROM airports WHERE code IN (" + codesString + ")";
     ResultSet rs = getRSFromDB( getStatement(), dbQuery );
     ArrayList<Brewery> data = rsToArrayListAllData(rs);
     closeNetwork();
@@ -218,10 +241,16 @@ public class SQL {
     try {
       ResultSetMetaData rsmd = rs.getMetaData();
       int colCount = rsmd.getColumnCount();
+      String name, info;
       while (rs.next()) {
         HashMap destInfo = new HashMap();
         for (int i = 1; i < colCount; i++) {
-          destInfo.put(rsmd.getColumnName(i), rs.getString(i));
+          name = rsmd.getColumnName(i);
+          info = rs.getString(i);
+          if(rsmd.getColumnName(i).equals("latitude") || rsmd.getColumnName(i).equals("longitude"))
+            destInfo.put(name, ParseCSV.degToDecimal(info));
+          else
+            destInfo.put(name, info);
         }
         Brewery dest = new Brewery(destInfo);
         queryDests.add(dest);
