@@ -11,9 +11,18 @@ public class ShorterTrip {
 
   public enum type{NoOpt, NearestNeighbor, TwoOpt, ThreeOpt}
 
+  /**
+   *  default constructor
+   */
   public ShorterTrip(){
   }
 
+  /**
+   *  a constructor for shorterTrip that assumes kilometers for distance
+   *  @param destList   the base list of elements to be reordered
+   *  @param trip       the type of optimization to be performed
+   *  @return double    a decimal value representing the string passed as a parameter
+   */
   public ShorterTrip(ArrayList<Brewery> destList, type trip) {
     /*this.dests = destList;
     this.mileageTable = new int[dests.size()][dests.size()];
@@ -22,7 +31,13 @@ public class ShorterTrip {
     this.distances = new int[dests.size()];*/
     this(destList, trip, Distance.unit.Kilometers);
   }
-
+  /**
+   *  the main constructor for shorterTrip
+   *  @param destList   the base list of elements to be reordered
+   *  @param trip       the type of optimization to be performed
+   *  @param type       the units that distance should be calculated with
+   *  @return double    a decimal value representing the string passed as a parameter
+   */
   public ShorterTrip(ArrayList<Brewery> destList, type trip, Distance.unit type) {
     this.distance = new Distance(type);
     this.dests = destList;
@@ -31,13 +46,18 @@ public class ShorterTrip {
     this.trip = trip;
     this.distances = new int[dests.size()];
   }
-
+  /**
+   *  a constructor for shorterTrip assuming nearest neighbor optimi
+   *  @param destList   the base list of elements to be reordered
+   *  @return double    a decimal value representing the string passed as a parameter
+   */
   public ShorterTrip(ArrayList<Brewery> destList) {
     this(destList, type.NearestNeighbor);
   }
 
   public ArrayList<Brewery> computePath() {
     if(trip == type.NoOpt){ //handles no opt trip
+      dests.add(dests.get(0));
       return dests;
     }
     ArrayList<Brewery> pathList = new ArrayList<>(); //return list
@@ -93,6 +113,12 @@ public class ShorterTrip {
     if(this.trip == type.ThreeOpt){ //handles three opt
       threeOpt(path); //handle this later
     }
+    /*
+    System.out.print("StartNode = " + superStart + ", length = " + path.length+ " path =:");
+    for(int ind : path)
+      System.out.print("" + ind + " , ");
+    System.out.println("");
+    */
     return path;
   }
 
@@ -176,15 +202,21 @@ public class ShorterTrip {
   }
 
   public int[] threeOpt(int[] path) {
+    //System.out.println("in Three opt startNode = " + path[0]);
     boolean improvement = true;
     int [] delta = new int[7];
     int n = path.length;
     int index;
+    if (n < 6){
+      return path;
+    }
     while (improvement) {
       improvement = false;
-      for (int i = 0; i <= n - 5; i++) { // check n>4
+      // try all less than equals
+      for (int i = 1; i < n - 5; i++) { // check n>4
         for (int j = i + 2; j < n - 3; j++) {// This has to be < not <= or we get an out of bounds error because we test k+1
           for (int k = j + 2; k < n - 1; k++) {
+
             //compute cases
             delta[0] = -mileageTable[path[i]][path[i + 1]] - mileageTable[path[j]][path[j + 1]]
                 + mileageTable[path[i]][path[j]] + mileageTable[path[i + 1]][path[j + 1]];
@@ -211,6 +243,7 @@ public class ShorterTrip {
                 index = p;
               }
             }
+            //System.out.println("delta = " + delta[index]);
             if (delta[index] < 0) {//improvement?
               if (index == 0) { //case 1 from slides
                 path = twoOptSwap(path, i + 1, j);
