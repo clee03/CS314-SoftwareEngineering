@@ -51,12 +51,10 @@ class Planner extends React.Component {
     this.state = {
       pages: null,
       loading: false,
-      selected: [
-      ],
-      sorted: [
-      ],
-      filtered: [
-      ]
+      data: [],
+      selected: [],
+      sorted: [],
+      filtered: []
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handlePlan = this.handlePlan.bind(this);
@@ -65,6 +63,7 @@ class Planner extends React.Component {
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   // from react-table.js.org
@@ -135,6 +134,29 @@ class Planner extends React.Component {
       console.error(e);
     }
   }
+  async fileDownload() {
+    let dests = this.state.selected.map(x => x.code);
+    let fileInfo = {
+      title: 'selection',
+      destinations: dests
+    };
+
+    let pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' +
+      encodeURIComponent(JSON.stringify(fileInfo)));
+    pom.setAttribute('download', "SavedTrip.json");
+
+    if (document.createEvent) {
+        let event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+    }
+    else {
+      pom.click();
+    }
+
+    pom.parentNode.removeChild(pom);
+  }
 
   handleSearch(data) {
     console.log(this.fetchSearch(data));
@@ -154,6 +176,8 @@ class Planner extends React.Component {
     this.props.handlePlan(data);
   }
   handleAddAll() {
+    if(this.state.data.length === 0)
+      return;
     console.log("Adding all elements.");
     let selected = this.state.selected.concat(this.state.data);
     console.log(selected);
@@ -187,7 +211,8 @@ class Planner extends React.Component {
     this.setState({'selected': []});
   }
   handleSave() {
-    console.log("Save.");
+    if(this.state.selected.length !== 0)
+      this.fileDownload();
   }
   handleLoad(acceptedFiles) {
     console.log("Accepting drop");
