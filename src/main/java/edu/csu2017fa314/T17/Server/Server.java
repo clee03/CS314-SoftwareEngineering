@@ -105,7 +105,7 @@ public class Server {
       units = Distance.unit.Miles;
     }
     // set optimization
-    ShorterTrip.type opt = ShorterTrip.type.ThreeOpt;
+    ShorterTrip.type opt = ShorterTrip.type.NoOpt;
     if (brewList.size() != 0) {
       switch(optz) {
         case "none":

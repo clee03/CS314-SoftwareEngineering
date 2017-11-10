@@ -25,7 +25,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'SERVER_URL': JSON.stringify('http://tbd.serverhttp.com:8080')
+        'SERVER_URL': JSON.stringify('http://tbd.servehttp.com:4567')
       }
     })
   ],
