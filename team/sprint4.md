@@ -50,28 +50,30 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* #172: User has control over planning their trip
+* #123: Web server now delivers content to the user
+* #177: User can now select opt levels
+* #170: User can now plan trips and see them on a worldwide map
+* #140: User can plan their entire trip from searches
+* #139: User can select destinations
+* #127: User can save and load trips
 
-Completed *number of issues completed* issues associated with these user stories.
-
-#### Incomplete user stories / epics in Sprint Backlog 
-* *user story*: *Explanation...*
-*
+backlog 
+* All backloged user stories are done.
 
 #### What went well
-* *something*
-*
+* We started earlier and got more done with less stress.
+* Collaboration was on point.
 
 #### Problems encountered and resolutions
-* *something*
-*
+* Constructor wasn't scaling, rewrote constructor to allow more data.
+* Tables had wierd styling caused by changes in Chrome63, reverted to older ways of styling
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
+What we will change this time | Have clear definitions of interaction between methods/components | Start early enough to debug critcal issues | Make better ordering of React component files
+What we did well | Communicated how pieces should go together before starting | Started earlier | Code climate
+What we need to work on |  | Documenting sprint progress in sprint.md |
 What we will change next time |  |  | 
