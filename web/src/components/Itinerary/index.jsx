@@ -29,9 +29,16 @@ class Itinerary extends React.Component {
 
   render() {
     let options = this.loadHeaders();
-
+    let noIter = <div/>;
+    if(this.props.dataIter.length == 0){
+      noIter = <div>
+                No destinations selected.<br/>
+                Please select destinations using the Planner tab.
+               </div>;
+    }
     return (
       <div id='itinerary'>
+        {noIter}
         <div id='sb'>
           <SelectBox
             options= {options}

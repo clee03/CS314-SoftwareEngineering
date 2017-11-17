@@ -7,7 +7,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tabIndex: 0,
+      tabIndex: 1,
       dataIter: [],
       dataSvg: []
     };

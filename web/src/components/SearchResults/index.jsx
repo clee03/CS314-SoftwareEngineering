@@ -36,7 +36,7 @@ class SearchResults extends React.Component {
               { Header: 'Code', accessor: 'code', width: 100 },
               { Header: 'Name', accessor: 'name' }
             ]}
-            noDataText= 'No matches...'
+            noDataText= 'Please refine your search above...'
             getTdProps={this.handleClick}
             showPageSizeOptions={true}
             onFetchData={this.props.fetchData} // Request new data when things change
