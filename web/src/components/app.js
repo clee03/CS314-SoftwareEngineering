@@ -54,7 +54,7 @@ export default class App extends React.Component {
     return (
       <div className="app-container">
         <h1 id="header">T17 - TBD - Trip Coordinator</h1>
-        <Tabs selectedIndex={this.state.tabIndex} forceRenderTabPanel={true}
+        <Tabs selectedIndex={this.state.tabIndex} forceRenderTabPanel={false}
           onSelect={tabIndex => this.setState({ tabIndex })}>
           <TabList>
             <Tab>Itinerary</Tab>
