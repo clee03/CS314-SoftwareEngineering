@@ -1,7 +1,6 @@
 package edu.csu2017fa314.T17;
 import edu.csu2017fa314.T17.Model.*;
 import edu.csu2017fa314.T17.View.*;
-import edu.csu2017fa314.T17.Server.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import junit.framework.JUnit4TestAdapter;
@@ -10,27 +9,12 @@ import junit.framework.JUnit4TestAdapter;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     // Model
-    TestBrewery.class,
+    TestLocation.class,
     TestDistance.class,
-    TestModel.class,
-    TestParseCSV.class,
     TestShorterTrip.class,
     // TripCoServer
-      // Database
-      // Server
-      /*TestLocation.class,
-      TestServer.class,
-      TestServerRequest.class,
-      TestServerResponse.class,
-      TestQueryBuilder.class,
-      TestTripCo.class,
-      */
     // View
-    TestMakeSVG.class,
-    TestView.class,
     TestWriteJSON.class,
-    // TripCo
-    //TestTripCo.class
 })
 
 public class AllTests{

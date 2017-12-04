@@ -4,15 +4,23 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestBrewery{
-  private Brewery b1;
-  private Brewery b2;
+import java.util.HashMap;
+
+public class TestLocation {
+  private Location b1;
+  private Location b2;
 
   @Before
   public void setUp() throws Exception{
-    b1 = new Brewery( "b99", "TestBrew", "TestCity",
-                     99.99, 99.99, 5000 );
-    b2 = new Brewery();
+    HashMap hm1 = new HashMap();
+    hm1.put("code", "b99");
+    hm1.put("name", "TestBrew");
+    hm1.put("city", "TestCity");
+    hm1.put("latitude", 99.99);
+    hm1.put("longitude", 99.99);
+    hm1.put("elevation", 5000);
+    b1 = new Location(hm1);
+    b2 = new Location();
   }
   @Test
   public void testAccessors(){
@@ -27,6 +35,6 @@ public class TestBrewery{
     assertEquals( b1.get("city"), "TestCity" );
     assertEquals( (double) b1.get("latitude"), 99.99, .01 );
     assertEquals( (double) b1.get("longitude"), 99.99, .01 );
-    assertEquals( (double) b1.get("elevation"), 5000, .01 );
+    assertEquals( b1.get("elevation"), 5000 );
   }
 }

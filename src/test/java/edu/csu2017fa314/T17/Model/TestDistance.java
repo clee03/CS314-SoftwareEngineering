@@ -7,13 +7,19 @@ package edu.csu2017fa314.T17.Model;
 
 public class TestDistance {
   private Distance d;
-
+  private Location alpha;
+  private Location beta;
 
   @Before
   public void setUp() throws Exception {
     d = new Distance(Distance.unit.Kilometers);
+    alpha = new Location();
+    alpha.set("latitude", 50.06639);
+    alpha.set("longitude", -5.714722);
+    beta = new Location();
+    beta.set("latitude", 58.64389);
+    beta.set("longitude", -3.07);
   }
-
 
   @Test
   public void testRadians() {
@@ -22,10 +28,6 @@ public class TestDistance {
 
   @Test
   public void testDistance() {
-    Brewery alpha = new Brewery("a1", "alpha", "alpha city",
-        50.06639, -5.714722, 5000);
-    Brewery beta = new Brewery("b1", "beta", "beta city",
-        58.64389, -3.07, 5000);
     assertEquals(d.greatCircleDistance(alpha, beta), 968, 1);
   }
 }

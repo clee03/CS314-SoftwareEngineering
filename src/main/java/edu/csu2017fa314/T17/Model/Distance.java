@@ -21,7 +21,7 @@ public class Distance {
     return (degrees * (Math.PI / 180.0));
   }
 
-  public int greatCircleDistance(Brewery alpha, Brewery beta) {
+  public int greatCircleDistance(Location alpha, Location beta) {
     double theta1 = convertToRadians((double) alpha.get("latitude"));
     double theta2 = convertToRadians((double) beta.get("latitude"));
     double delta = convertToRadians((double) alpha.get("longitude")) -

@@ -3,7 +3,6 @@ package edu.csu2017fa314.T17.Server;
 import com.google.gson.*;
 
 import edu.csu2017fa314.T17.Model.*;
-import edu.csu2017fa314.T17.View.MakeSVG;
 
 import edu.csu2017fa314.T17.View.WriteJSON;
 import spark.Request;
@@ -24,7 +23,6 @@ public class Server {
   }
 
   public void serve() {
-    //port(112233);
     Gson g = new Gson();
     post("/search", this::search, g::toJson);
     post("/load", this::load, g::toJson);
@@ -52,7 +50,7 @@ public class Server {
     JsonArray codez = new JsonParser().parse(rec.body()).getAsJsonArray();
 
     // codes: codes
-    ArrayList<String> codes = new ArrayList<String>();
+    ArrayList<String> codes = new ArrayList<>();
     Iterator<JsonElement> it = codez.iterator();
     while(it.hasNext()){
       codes.add(it.next().getAsJsonPrimitive().getAsString());
@@ -83,7 +81,7 @@ public class Server {
     String unit = object.getAsJsonPrimitive("units").getAsString();
     System.out.println("units: " + unit);
     // codes: codes
-    ArrayList<String> codes = new ArrayList<String>();
+    ArrayList<String> codes = new ArrayList<>();
     Iterator<JsonElement> it = object.getAsJsonArray("codes").iterator();
     while(it.hasNext()){
       codes.add(it.next().getAsJsonPrimitive().getAsString());
@@ -94,7 +92,7 @@ public class Server {
 
     // set brewList
     SQL sql = new SQL();
-    ArrayList<Brewery> brewList = sql.getAllDataWithID(codesA);
+    ArrayList<Location> brewList = sql.getAllDataWithID(codesA);
 
     // set units
     Distance.unit units;
@@ -125,14 +123,10 @@ public class Server {
     brewList = trip.computePath();
     System.out.println("Total distance: " + trip.pathDistanceBrews(brewList));
 
-    // create SVG Todo: only pass lines and dots
-    MakeSVG svgObj = new MakeSVG();
-    String SVG = svgObj.buildMap(brewList,true, true);
-
     // pass brewList and SVG back to web
     System.out.println("Sending Itinerary and SVG back to server");
     WriteJSON wj = new WriteJSON();
-    return wj.webJSON(brewList, SVG, units);
+    return wj.webJSON(brewList, units);
   }
 
   private void setHeaders(Response res) {

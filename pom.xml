@@ -28,7 +28,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>edu.csu2017fa314.T17.TripCoServer.TripCo</mainClass>
+              <mainClass>edu.csu2017fa314.T17.Server.TripCo</mainClass>
             </manifest>
           </archive>
         </configuration>

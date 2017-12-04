@@ -1,8 +1,6 @@
 package edu.csu2017fa314.T17.View;
 
 import edu.csu2017fa314.T17.Model.*;
-import java.io.FileWriter;
-import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
@@ -11,43 +9,24 @@ import java.util.Iterator;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
-import static edu.csu2017fa314.T17.View.View.fileExtender;
-
 public class WriteJSON {
-  Gson gson;
+  private Gson gson;
 
   public WriteJSON() {
     gson = new GsonBuilder().setPrettyPrinting().create();
   }
 
-  public String webJSON(ArrayList<Brewery> brews, String svg, Distance.unit units){
-    return gson.toJson(buildJSONObject(brews, svg, units));
+  public String webJSON(ArrayList<Location> brews, Distance.unit units){
+    return gson.toJson(buildJSONObject(brews, units));
   }
 
-  //Method that takes Brewery ArrayList and formats data then writes to a JSON file
-  public void formatJSON(ArrayList<Brewery> brews, String fileName) {
-    JSONArray jsonArray = buildJSONArray(brews, Distance.unit.Miles);
-
-    String jsonString = gson.toJson(jsonArray);
-    try {
-      String name = fileExtender(fileName, "json");
-      //write to .json file
-      FileWriter file = new FileWriter(name);
-      file.write(jsonString);
-      file.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private JSONObject buildJSONObject (ArrayList<Brewery> brews, String svg, Distance.unit units){
+  private JSONObject buildJSONObject (ArrayList<Location> brews, Distance.unit units){
     JSONObject jobj = new JSONObject();
     jobj.put("brews", buildJSONArray(brews, units));
-    jobj.put("svg", svg);
     return jobj;
   }
 
-  private JSONArray buildJSONArray (ArrayList<Brewery> brews, Distance.unit units) {
+  private JSONArray buildJSONArray (ArrayList<Location> brews, Distance.unit units) {
     JSONArray jsonArray = new JSONArray();
     Distance dist = new Distance(units);
 

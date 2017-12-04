@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ShorterTrip {
   protected int[][] mileageTable;
-  protected ArrayList<Brewery> dests;
+  protected ArrayList<Location> dests;
   protected type trip;
   protected int[] distances;
   protected Distance distance;
@@ -23,7 +23,7 @@ public class ShorterTrip {
    *  @param trip       the type of optimization to be performed
    *  @return double    a decimal value representing the string passed as a parameter
    */
-  public ShorterTrip(ArrayList<Brewery> destList, type trip) {
+  public ShorterTrip(ArrayList<Location> destList, type trip) {
     /*this.dests = destList;
     this.mileageTable = new int[dests.size()][dests.size()];
     mileageTable = populateMileageTable();
@@ -38,7 +38,7 @@ public class ShorterTrip {
    *  @param type       the units that distance should be calculated with
    *  @return double    a decimal value representing the string passed as a parameter
    */
-  public ShorterTrip(ArrayList<Brewery> destList, type trip, Distance.unit type) {
+  public ShorterTrip(ArrayList<Location> destList, type trip, Distance.unit type) {
     this.distance = new Distance(type);
     this.dests = destList;
     this.mileageTable = new int[dests.size()][dests.size()];
@@ -51,16 +51,16 @@ public class ShorterTrip {
    *  @param destList   the base list of elements to be reordered
    *  @return double    a decimal value representing the string passed as a parameter
    */
-  public ShorterTrip(ArrayList<Brewery> destList) {
+  public ShorterTrip(ArrayList<Location> destList) {
     this(destList, type.NearestNeighbor);
   }
 
-  public ArrayList<Brewery> computePath() {
+  public ArrayList<Location> computePath() {
     if(trip == type.NoOpt){ //handles no opt trip
       dests.add(dests.get(0));
       return dests;
     }
-    ArrayList<Brewery> pathList = new ArrayList<>(); //return list
+    ArrayList<Location> pathList = new ArrayList<>(); //return list
     int min = Integer.MAX_VALUE; //initial value for minimum distance
     int startNode = 0;
     Thread threads[] = new Thread[dests.size()];
@@ -154,7 +154,7 @@ public class ShorterTrip {
     return ret;
   }
 
-  public int pathDistanceBrews(ArrayList<Brewery> path) {
+  public int pathDistanceBrews(ArrayList<Location> path) {
     int ret = 0;
     for (int i = 0; i < path.size()-1; i++) {
       ret += distance.greatCircleDistance(path.get(i), path.get(i+1));

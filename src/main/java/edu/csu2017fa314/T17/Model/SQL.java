@@ -6,24 +6,25 @@ import java.util.HashMap;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
+import static edu.csu2017fa314.T17.Helpers.MathHelpers.degToDecimal;
+
 public class SQL {
   //hardcoded variables for query
-  String user = "cwesterm";
-  String password = "830152296";
-  String countSTR = "SELECT COUNT(*)";
+  private String user = "cwesterm";
+  private String password = "830152296";
 
-  int lport = 33000;
-  int rport = 3306;
-  final String myDriver = "com.mysql.jdbc.Driver";
-  final String dburl;
+  private int lport = 33000;
+  private int rport = 3306;
+  private final String myDriver = "com.mysql.jdbc.Driver";
+  private final String dburl;
 
-  String rhost = "faure.cs.colostate.edu";
-  String host = "faure.cs.colostate.edu";
-  String sshuser = "shawtm";
-  String sshpassword = "DannyTheDog!996";
+  private String rhost = "faure.cs.colostate.edu";
+  private String host = "faure.cs.colostate.edu";
+  private String sshuser = "shawtm";
+  private String sshpassword = "DannyTheDog!996";
 
-  Connection conn = null;
-  Session session = null;
+  private Connection conn = null;
+  private Session session = null;
 
   public SQL() {
     dburl = "jdbc:mysql://localhost:" + lport + "/cs314";
@@ -101,27 +102,9 @@ public class SQL {
   }
 
   /**
-   * Method that queries airports table using a search word
-   * @param searchWord       String used to query database
-   * @return data            an ArrayList containing the code, name,
-   *                         latitude, and longitude of each Brewery in query results
-   */
-  public ArrayList<Brewery> searchByWord(String searchWord) {
-    openNetwork();
-    String dbQuery = "SELECT code,name,latitude,longitude " +
-        "FROM airports " +
-        "WHERE code like '%" + searchWord + "%' or name like '%" + searchWord + "%'";
-
-    ResultSet rs = getRSFromDB( getStatement(), dbQuery );
-    ArrayList<Brewery> data = rsToArrayList(rs);
-    closeNetwork();
-    return data;
-  }
-
-  /**
    * Method that queries all database tables using a search word
    * @param searchWord       String used to query database
-   * @return data            a Hash Map containing the code and name of each Brewery in query results
+   * @return data            a Hash Map containing the code and name of each Location in query results
    */
   public HashMap<String, String> searchAllTablesByWord(String searchWord) {
     openNetwork();
@@ -168,9 +151,9 @@ public class SQL {
   /**
    * Method that queries airports table using selected IDs
    * @param codesArray       an Array of IDs used to query database
-   * @return data            an ArrayList containing all columns in airports for each Brewery in query results
+   * @return data            an ArrayList containing all columns in airports for each Location in query results
    */
-  public ArrayList<Brewery> getAllDataWithID(String[] codesArray) {
+  public ArrayList<Location> getAllDataWithID(String[] codesArray) {
     openNetwork();
     String codesString = "";
     for (int i = 0; i < codesArray.length; i++) {
@@ -183,30 +166,9 @@ public class SQL {
 
     String dbQuery = "SELECT * FROM airports WHERE code IN (" + codesString + ")";
     ResultSet rs = getRSFromDB( getStatement(), dbQuery );
-    ArrayList<Brewery> data = rsToArrayListAllData(rs);
+    ArrayList<Location> data = rsToArrayListAllData(rs);
     closeNetwork();
     return data;
-  }
-
-  /**
-   * Method that puts the Result Set into a usable ArrayList
-   * @param rs             Result Set from query
-   * @return dests         an ArrayList containing the code, name,
-   *                       latitude, and longitude of each Brewery in Result Set
-   */
-  private ArrayList<Brewery> rsToArrayList(ResultSet rs){
-    ArrayList<Brewery> dests = new ArrayList<>();
-    try {
-      while (rs.next()) {
-        dests.add(new Brewery(rs.getString("code"),
-            rs.getString("name"),
-            rs.getDouble("latitude"),
-            rs.getDouble("longitude")));
-      }
-    } catch (Exception e){
-      e.printStackTrace();
-    }
-    return dests;
   }
 
   /**
@@ -231,13 +193,13 @@ public class SQL {
   }
 
   /**
-   * Method that puts the Result Set into an ArrayList of Brewery
+   * Method that puts the Result Set into an ArrayList of Location
    * @param rs             Result Set from query
-   * @return queryDests    an ArrayList of Brewery containing all columns
-   *                       in airports for each Brewery in Result Set
+   * @return queryDests    an ArrayList of Location containing all columns
+   *                       in airports for each Location in Result Set
    */
-  private ArrayList<Brewery> rsToArrayListAllData(ResultSet rs){
-    ArrayList<Brewery> queryDests = new ArrayList<>();
+  private ArrayList<Location> rsToArrayListAllData(ResultSet rs){
+    ArrayList<Location> queryDests = new ArrayList<>();
     try {
       ResultSetMetaData rsmd = rs.getMetaData();
       int colCount = rsmd.getColumnCount();
@@ -248,11 +210,11 @@ public class SQL {
           name = rsmd.getColumnName(i);
           info = rs.getString(i);
           if(rsmd.getColumnName(i).equals("latitude") || rsmd.getColumnName(i).equals("longitude"))
-            destInfo.put(name, ParseCSV.degToDecimal(info));
+            destInfo.put(name, degToDecimal(info));
           else
             destInfo.put(name, info);
         }
-        Brewery dest = new Brewery(destInfo);
+        Location dest = new Location(destInfo);
         queryDests.add(dest);
       }
     } catch (Exception e) {
