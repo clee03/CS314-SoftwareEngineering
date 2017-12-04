@@ -54,8 +54,9 @@ Epics planned for this release.
 
 Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Duplication | Technical Debt Ratio
 :--- | :--- | :--- | :--- | ---: | ---: | ---: | ---:
-11/27 | #224 | #213 | None | ___ | 31 | 24 | ___
-11/29 | #213 | #230 | None | ___ | 31 | 24 | ___
+11/27 | #224 | #213 | None | ___ | 31 | 24 | 18.6%
+11/29 | #213 | #230 | None | ___ | 31 | 24 | 18.1%
+12/04 | #212  | #234, #186, #198  | None | ___ | 31 | 24 | 18.1%
  
 
 ## Review
