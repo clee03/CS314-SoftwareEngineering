@@ -17,9 +17,10 @@ import org.json.simple.JSONObject;
 import static spark.Spark.post;
 
 public class Server {
-  public static void main(String[] args) {
-    Server s = new Server();
-    s.serve();
+  private SQL sql;
+
+  public Server(String uname, String pass){
+    sql = new SQL();  // Need to add SQL constructor to take u/p
   }
 
   public void serve() {
@@ -32,14 +33,18 @@ public class Server {
     // Set the return headers
     setHeaders(res);
     System.out.println("Loading file from the server.");
+
+    JsonObject data = new JsonParser().parse(rec.body()).getAsJsonObject();
+    String searchTerm = data.getAsJsonPrimitive("t").getAsString();
+    int searchLimit = data.getAsJsonPrimitive("l").getAsInt();
+
     // get the search string
-    String searched = rec.body().replace("\"", "");
-    System.out.println("Searching: " + searched);
+    System.out.println("Searching for [" + searchTerm + "] and returning " + searchLimit + " results.");
     // pass string to SQL
     SQL sql = new SQL();
-    HashMap<String, String> data = sql.searchAllTablesByWord(searched);
+    HashMap<String, String> results = sql.searchAllTablesByWord(searchTerm);
     // return result-set
-    return new JSONObject(data);
+    return new JSONObject(results);
   }
 
   private Object load(Request rec, Response res) {

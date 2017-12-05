@@ -10,13 +10,16 @@ class SearchBox extends React.Component {
   }
 
   handleSearch() {
-    let data = document.getElementById('searchText').value;
+    let data = {
+      t: document.getElementById('searchText').value,
+      l: document.getElementById('select-limit').value
+    };
     this.props.handleSearch(data);
   }
 
   render() {
     return (
-      <div>
+      <div className='SearchBox'>
         <input
           id='searchText'
           type="text"
@@ -25,6 +28,15 @@ class SearchBox extends React.Component {
         <button type="button" onClick={this.handleSearch}>
           Search
         </button>
+        <div className='limit'>
+          Limit
+          <select defaultValue='100' id='select-limit'>
+            <option value='50'>50</option>
+            <option value='100'>100</option>
+            <option value='250'>250</option>
+            <option value='500'>500</option>
+          </select>
+        </div>
         <button type='button' id='add_all-btn' onClick={this.props.handleAddAll}>Select All</button>
       </div>
     );
