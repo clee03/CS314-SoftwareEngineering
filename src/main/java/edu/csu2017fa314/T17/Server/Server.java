@@ -19,8 +19,8 @@ import static spark.Spark.post;
 public class Server {
   private SQL sql;
 
-  public Server(String uname, String pass){
-    sql = new SQL();  // Need to add SQL constructor to take u/p
+  public Server(String username, String password){
+    sql = new SQL(username, password);
   }
 
   public void serve() {
@@ -29,6 +29,7 @@ public class Server {
     post("/load", this::load, g::toJson);
     post("/plan", this::plan, g::toJson);
   }
+
   private Object search(Request rec, Response res) {
     // Set the return headers
     setHeaders(res);
@@ -41,8 +42,7 @@ public class Server {
     // get the search string
     System.out.println("Searching for [" + searchTerm + "] and returning " + searchLimit + " results.");
     // pass string to SQL
-    SQL sql = new SQL();
-    HashMap<String, String> results = sql.searchAllTablesByWord(searchTerm);
+    HashMap<String, String> results = sql.searchAllTablesByWord(searchTerm, searchLimit);
     // return result-set
     return new JSONObject(results);
   }
@@ -65,7 +65,6 @@ public class Server {
     codesA = codes.toArray(codesA);
 
     // set brewList
-    SQL sql = new SQL();
     HashMap<String, String> data = sql.getNamesWithID(codesA);
 
     // return result-set
@@ -96,7 +95,6 @@ public class Server {
     codesA = codes.toArray(codesA);
 
     // set brewList
-    SQL sql = new SQL();
     ArrayList<Location> brewList = sql.getAllDataWithID(codesA);
 
     // set units

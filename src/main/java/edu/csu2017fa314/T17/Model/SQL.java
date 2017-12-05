@@ -20,13 +20,15 @@ public class SQL {
 
   private String rhost = "faure.cs.colostate.edu";
   private String host = "faure.cs.colostate.edu";
-  private String sshuser = "shawtm";
-  private String sshpassword = "DannyTheDog!996";
+  private String sshuser;
+  private String sshpassword;
 
   private Connection conn = null;
   private Session session = null;
 
-  public SQL() {
+  public SQL(String username, String password) {
+    sshuser = username;
+    sshpassword = password;
     dburl = "jdbc:mysql://localhost:" + lport + "/cs314";
   }
 
@@ -106,7 +108,7 @@ public class SQL {
    * @param searchWord       String used to query database
    * @return data            a Hash Map containing the code and name of each Location in query results
    */
-  public HashMap<String, String> searchAllTablesByWord(String searchWord) {
+  public HashMap<String, String> searchAllTablesByWord(String searchWord, int limit) {
     openNetwork();
     String dbQuery = "SELECT airports.code, airports.name " +
         "FROM continents " +
@@ -117,7 +119,7 @@ public class SQL {
         "OR municipality LIKE '%" + searchWord + "%' " +
         "OR regions.name LIKE '%" + searchWord + "%' " +
         "OR countries.name LIKE '%" + searchWord + "%' " +
-        "OR continents.name LIKE '%" + searchWord + "%' limit 100";
+        "OR continents.name LIKE '%" + searchWord + "%' limit " + limit;
 
     ResultSet rs = getRSFromDB( getStatement(), dbQuery );
     HashMap<String, String> data = rsToHashMap(rs);
