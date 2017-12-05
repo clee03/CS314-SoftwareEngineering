@@ -57,6 +57,7 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 11/27 | #224 | #213 | None | ___ | 31 | 24 | 18.6%
 11/29 | #213 | #230 | None | ___ | 31 | 24 | 18.1%
 12/04 | #212  | #234, #186, #198  | None | ___ | 31 | 24 | 18.1%
+12/05 | #233, #234  | #222, #221, #208  | None | ___ | 18 | 17 | 14.1%
  
 
 ## Review
