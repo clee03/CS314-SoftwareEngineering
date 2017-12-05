@@ -30,16 +30,16 @@
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  *value*   | *value* 
-Story Points |  *value*  | *value* 
+Tasks |  12   | *value* 
+Story Points |  19  | *value* 
 
 
 Statistic | Start | End
 --- | ---: | ---:
-Overall Test Coverage | *value* | *value* 
-Smells | *value* | *value* 
-Duplication | *value* | *value* 
-Technical Debt Ratio | *value* | *value* 
+Overall Test Coverage | 75% classes, 55% lines covered | *value* 
+Smells | 31 | *value* 
+Duplication | 24 | *value* 
+Technical Debt Ratio | 18.7 | *value* 
 
 ## Plan
 
@@ -54,18 +54,19 @@ Epics planned for this release.
 
 Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Duplication | Technical Debt Ratio
 :--- | :--- | :--- | :--- | ---: | ---: | ---: | ---:
-11/27 | #224 | #213 | None | ___ | 31 | 24 | 18.6%
-11/29 | #213 | #230 | None | ___ | 31 | 24 | 18.1%
-12/04 | #212  | #234, #186, #198  | None | ___ | 31 | 24 | 18.1%
-12/05 | #233, #234  | #222, #221, #208  | None | ___ | 18 | 17 | 14.1%
+11/27 | #224 | #213 | None | 55% | 31 | 24 | 18.6%
+11/29 | #213 | #230 | None | 55% | 31 | 24 | 18.1%
+12/04 | #212  | #234, #186, #198  | None | 55% | 31 | 24 | 18.1%
+12/05 | #233, #234  | #222, #221, #208  | None | 57% | 18 | 17 | 14.1%
  
 
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
-* *user story*:  *comments*
-* 
-
+* #212 - Online map with pan and zoom
+* #213 - Clean code
+*
+*
 #### Incomplete user stories / epics in Sprint Backlog 
 * *user story*: *Explanation...*
 *
