@@ -10,7 +10,7 @@ public class MathHelpers {
     degrees = degrees.replace(" ", "");
     String[] parts = degrees.split("[°'\"]");
 
-    double total = 0;
+    double total = 0.0;
     switch (parts.length) {
       case 4:
         total += (Double.parseDouble(parts[2]) / 3600 );

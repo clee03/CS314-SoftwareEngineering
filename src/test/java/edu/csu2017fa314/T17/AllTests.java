@@ -1,5 +1,8 @@
 package edu.csu2017fa314.T17;
+import edu.csu2017fa314.T17.Helpers.TestMathHelpers;
 import edu.csu2017fa314.T17.Model.*;
+import edu.csu2017fa314.T17.Server.TestServer;
+import edu.csu2017fa314.T17.Server.TestTripCo;
 import edu.csu2017fa314.T17.View.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -8,12 +11,18 @@ import junit.framework.JUnit4TestAdapter;
 // This section declares all of the test classes in your program.
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+    // Helpers
+    TestMathHelpers.class,
     // Model
-    TestLocation.class,
     TestDistance.class,
+    TestLocation.class,
     TestShorterTrip.class,
-    // TripCoServer
+      //TestSQL.class,
+    // Server
+      //TestServer.class,
+      //TestTripCo.class,
     // View
+    TestView.class,
     TestWriteJSON.class,
 })
 
