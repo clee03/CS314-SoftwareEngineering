@@ -4,14 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static edu.csu2017fa314.T17.Helpers.SQLHelpers.collectCreds;
 import static org.junit.Assert.assertEquals;
 
 public class TestSQL {
-  /*
   private SQL sql;
   @Before
   public void setUp() throws Exception{
-    sql = new SQL("", "");
+    String[] creds = collectCreds();
+    sql = new SQL(creds[0], creds[1]);
   }
 
   @Test
@@ -28,5 +30,4 @@ public class TestSQL {
     int allColumns = totalColumnsList.size();
     assertEquals(4, allColumns);
   }
-  */
 }

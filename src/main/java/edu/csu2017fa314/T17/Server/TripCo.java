@@ -1,5 +1,6 @@
 package edu.csu2017fa314.T17.Server;
 
+import static edu.csu2017fa314.T17.Helpers.SQLHelpers.collectCreds;
 import static spark.Spark.port;
 
 public class TripCo {
@@ -13,7 +14,8 @@ public class TripCo {
     }
 
     System.out.println("Starting server on port " + portNum);
-    Server s = new Server(args[0], args[1]);
+    String[] creds = collectCreds();
+    Server s = new Server(creds[0], creds[1]);
     port(portNum);
     s.serve();
   }

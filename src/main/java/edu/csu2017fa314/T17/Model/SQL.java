@@ -13,13 +13,14 @@ public class SQL {
   private String user = "cwesterm";
   private String password = "830152296";
 
-  private int lport = 33000;
+  private int lport = 35000;
   private int rport = 3306;
   private final String myDriver = "com.mysql.jdbc.Driver";
   private final String dburl;
 
-  private String rhost = "faure.cs.colostate.edu";
-  private String host = "faure.cs.colostate.edu";
+  //private String schHost = "cheyenne.cs.colostate.edu";
+  private String schHost = "faure.cs.colostate.edu";
+  private String sqlHost = "faure.cs.colostate.edu";
   private String sshuser;
   private String sshpassword;
 
@@ -29,7 +30,8 @@ public class SQL {
   public SQL(String username, String password) {
     sshuser = username;
     sshpassword = password;
-    dburl = "jdbc:mysql://localhost:" + lport + "/cs314";
+    //dburl = "jdbc:mysql://" + sqlHost + ":" + lport + "/cs314";
+    dburl = "jdbc:mysql://localhost:"+lport+"/cs314";
   }
 
   /**
@@ -58,13 +60,14 @@ public class SQL {
     java.util.Properties config = new java.util.Properties();
     config.put("StrictHostKeyChecking", "no");
 
-    System.out.println("Connecting to Cheyenne...");
+    System.out.println("Connecting to " + schHost);
     try {
-      this.session = jsch.getSession(sshuser, host, 22);
+      this.session = jsch.getSession(sshuser, schHost, 22);
       session.setPassword(sshpassword);
       session.setConfig(config);
+      session.setPortForwardingL(lport, sqlHost, rport);
       session.connect();
-      session.setPortForwardingL(lport, rhost, rport);
+      System.out.println("Connected to " + schHost);
     } catch (Exception e){
       e.printStackTrace();
     }
@@ -86,7 +89,7 @@ public class SQL {
       System.out.println("Beginning connection with " + dburl);
       Class.forName(myDriver);
       conn = DriverManager.getConnection(this.dburl, this.user, this.password);
-      System.out.println("Finished connecting to Cheyenne.");
+      System.out.println("Finished connecting to SQL.");
     } catch(Exception e){
       e.printStackTrace();
     }
