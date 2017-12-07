@@ -190,19 +190,24 @@ public class ShorterTrip {
     }
     return path;
   }
-  public int[] threeOptSwap(int[] path, int i, int j, int k){
-    int temp;
-    while(j < k) {
-      temp = path[i];
-      path[i] = path[j];
-      path[j] = temp;
-      i++; j++;
+  public static int[] threeOptSwap(int[] path, int i, int j, int k){
+    int [] temp = new int[path.length];
+    System.arraycopy( path, 0, temp, 0, path.length );
+    int index = i+1; int jtemp = j;
+    j++;
+    while (j <= k){
+      path[index] = temp[j];
+      j++; index++;
+    }
+    i++;
+    while (i <= jtemp){
+      path[index] = temp[i];
+      i++;index++;
     }
     return path;
   }
 
   public int[] threeOpt(int[] path) {
-    //System.out.println("in Three opt startNode = " + path[0]);
     boolean improvement = true;
     int [] delta = new int[7];
     int n = path.length;
@@ -212,57 +217,35 @@ public class ShorterTrip {
     }
     while (improvement) {
       improvement = false;
-      // try all less than equals
-      for (int i = 1; i < n - 5; i++) { // check n>4
-        for (int j = i + 2; j < n - 3; j++) {// This has to be < not <= or we get an out of bounds error because we test k+1
-          for (int k = j + 2; k < n - 1; k++) {
-
-            //compute cases
-            delta[0] = -mileageTable[path[i]][path[i + 1]] - mileageTable[path[j]][path[j + 1]]
-                + mileageTable[path[i]][path[j]] + mileageTable[path[i + 1]][path[j + 1]];
-            delta[1] = -mileageTable[path[j]][path[j + 1]] - mileageTable[path[k]][path[k + 1]]
-                + mileageTable[path[j]][path[k]] + mileageTable[path[j + 1]][path[k + 1]];
-            delta[2] = -mileageTable[path[i]][path[i + 1]] - mileageTable[path[k]][path[k + 1]]
-                + mileageTable[path[i]][path[k]] + mileageTable[path[i + 1]][path[k + 1]];
-            delta[3] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
-                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[j]]
-                + mileageTable[path[i + 1]][path[k]] + mileageTable[path[j + 1]][path[k + 1]];
-            delta[4] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
-                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[k]]
-                + mileageTable[path[j + 1]][path[i+1]] + mileageTable[path[j]][path[k + 1]];
-            delta[5] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
-                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[j+1]]
-                + mileageTable[path[k]][path[j]] + mileageTable[path[i + 1]][path[k + 1]];
-            delta[6] = -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
-                - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[j + 1]]
-                + mileageTable[path[k]][path[i + 1]] + mileageTable[path[j]][path[k + 1]];
-            //get max index
+      // TODO try all less than equals
+      for (int i = 1; i < n - 3; i++) { // check n>4
+        for (int j = i + 1; j < n - 2; j++) {
+          for (int k = j + 1; k < n - 1; k++) {
+            ComputeDeltas(path, delta, i, j, k);
             index = 0;
             for(int p = 0; p < delta.length; p++){
               if ((delta[p] < delta[index]) && (delta[p] < 0)){
                 index = p;
               }
             }
-            //System.out.println("delta = " + delta[index]);
             if (delta[index] < 0) {//improvement?
-              if (index == 0) { //case 1 from slides
+              if (index == 0) { //case 1 from slides //here
                 path = twoOptSwap(path, i + 1, j);
-              }else if (index == 1) { //case 2 from slides
+              }else if (index == 1) { //case 2 from slides //here
                 path = twoOptSwap(path, j + 1, k);
               }else if (index == 2) { //case 3 from slides
                 path = twoOptSwap(path, i + 1, k);
               }else if (index == 3) { //case 4 from slides
                 path = twoOptSwap(path, i + 1, j);
                 path = twoOptSwap(path, j + 1, k);
-              }else if (index == 4) { //case 5 from slides //TODO here down
+              }else if (index == 4) { //case 5 from slides //here
                 path = twoOptSwap(path, j + 1, k);
-                threeOptSwap(path, i, j, k);
+                path = threeOptSwap(path, i, j, k);
               }else if (index == 5) { //case 6 from slides
                 path = twoOptSwap(path, i + 1, j);
-                threeOptSwap(path, i, j, k);
+                path = threeOptSwap(path, i, j, k);
               }else if (index == 6) { //case 7 from slides
-                path = twoOptSwap(path, i + 1, k);
-                threeOptSwap(path, i, j, k);
+                path = threeOptSwap(path, i, j, k);
               }
               improvement = true;
             }
@@ -271,6 +254,24 @@ public class ShorterTrip {
       }
     }
     return path;
+  }
+  private int compute2optDelta(int[] path, int i, int j){
+    return -mileageTable[path[i]][path[i + 1]] - mileageTable[path[j]][path[j + 1]]
+        + mileageTable[path[i]][path[j]] + mileageTable[path[i + 1]][path[j + 1]];
+  }
+  private int compute3optDelta(int[] path, int i, int j, int k, int m, int n,int o, int p){
+    return -mileageTable[path[i]][path[i + 1]] -mileageTable[path[j]][path[j + 1]]
+        - mileageTable[path[k]][path[k + 1]] + mileageTable[path[i]][path[m]]
+        + mileageTable[path[n]][path[o]] + mileageTable[path[p]][path[k+1]];
+  }
+  private void ComputeDeltas(int[] path, int[] delta, int i, int j, int k) {
+    delta[0] = compute2optDelta(path, i, j);
+    delta[1] = compute2optDelta(path, j, k);
+    delta[2] = compute2optDelta(path, i, k);
+    delta[3] = compute3optDelta(path, i, j, k, j,i+1, k, j+1);
+    delta[4] = compute3optDelta(path, i, j, k, k,j+1, i+1, j);
+    delta[5] = compute3optDelta(path, i, j, k, j+1, k, j, i+1);
+    delta[6] = compute3optDelta(path, i, j, k,j+1, k, i+1, j);
   }
 }
 //helper class so i make runnable methods for shorter trip

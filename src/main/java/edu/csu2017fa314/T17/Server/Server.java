@@ -118,7 +118,10 @@ public class Server {
         case "2opt":
           opt = ShorterTrip.type.TwoOpt;
           break;
+        case "3opt":
         default: //3opt
+          opt = ShorterTrip.type.ThreeOpt;
+          break;
       }
     }
     // create trip
