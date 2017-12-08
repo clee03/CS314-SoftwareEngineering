@@ -30,16 +30,16 @@
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  12   | *value* 
-Story Points |  19  | *value* 
+Tasks |  18   | 15 
+Story Points |  22  | 20
 
 
 Statistic | Start | End
 --- | ---: | ---:
 Overall Test Coverage | 75% classes, 55% lines covered | *value* 
-Smells | 31 | *value* 
-Duplication | 24 | *value* 
-Technical Debt Ratio | 18.7 | *value* 
+Smells | 31 | 21 
+Duplication | 24 | 17 
+Technical Debt Ratio | 18.7% | 12.8% 
 
 ## Plan
 
@@ -65,19 +65,16 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 #### Completed user stories (epics) in Sprint Backlog 
 * #212 - Online map with pan and zoom
 * #213 - Clean code
-*
-*
+* #216 - Test coverage
+
 #### Incomplete user stories / epics in Sprint Backlog 
-* *user story*: *Explanation...*
-*
+* #126 - Select a starting location: We focused on the other epics and issues associated with those epics and did not have time to complete this one. 
 
 #### What went well
-* *something*
-*
+* The team as a whole did a good job completing issues and working together/talking through how to solve them. 
 
 #### Problems encountered and resolutions
-* *something*
-*
+* We struggled with sickness and one of the team members laptops breaking this sprint.  Three opt was also very difficult to get working but we were able to finally analyze the data and get it working. 
 
 ## Retrospective
 
