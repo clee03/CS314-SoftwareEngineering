@@ -36,7 +36,7 @@ Story Points |  22  | 20
 
 Statistic | Start | End
 --- | ---: | ---:
-Overall Test Coverage | 75% classes, 55% lines covered | *value* 
+Overall Test Coverage | 75% classes, 55% lines covered | 91% classes, 60% lines covered 
 Smells | 31 | 21 
 Duplication | 24 | 17 
 Technical Debt Ratio | 18.7% | 12.8% 
@@ -80,7 +80,7 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | spend more time working as a group instead of seperately | We will be more active on Zenhub, checking for issues to complete | We will attempt to use the burndown chart more effectively for pacing 
+What we did well | There was a lot of positive communication and good distribution of labour | We all knew where we were in the process and we all worked to help eachother | We worked efficiently on github, not leaving pull requests open for too long and paid a lot of attention to slack
+What we need to work on | We need to work on our pair programming skills to better solve complex problems | We need to add more javadocs to our methods | Groupmember needed to install stack on new phone
+What we will change next time | Working with others more frequently | Add more javadocs for our methods for easier readability | We will assist getting slack installed and pay closer attention to the needs of our group members
