@@ -7,6 +7,7 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   handleSearch() {
@@ -17,6 +18,12 @@ class SearchBox extends React.Component {
     this.props.handleSearch(data);
   }
 
+  handleEnter(e) {
+    if (e.key === 'Enter') {
+      this.handleSearch();
+    }
+  }
+
   render() {
     return (
       <div className='SearchBox'>
@@ -24,6 +31,7 @@ class SearchBox extends React.Component {
           id='searchText'
           type="text"
           placeholder='Enter a search term...'
+          onKeyDown={this.handleEnter}
         />
         <button type="button" onClick={this.handleSearch}>
           Search
