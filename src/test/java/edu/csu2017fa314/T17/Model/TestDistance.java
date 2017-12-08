@@ -1,18 +1,18 @@
 package edu.csu2017fa314.T17.Model;
 
-    import static org.junit.Assert.*;
+    import static org.junit.Assert.assertEquals;
 
     import org.junit.Before;
     import org.junit.Test;
 
 public class TestDistance {
-  private Distance d;
+  private Distance testDistance;
   private Location alpha;
   private Location beta;
 
   @Before
   public void setUp() throws Exception {
-    d = new Distance(Distance.unit.Kilometers);
+    testDistance = new Distance(Distance.unit.Kilometers);
     alpha = new Location();
     alpha.set("latitude", 50.06639);
     alpha.set("longitude", -5.714722);
@@ -22,12 +22,17 @@ public class TestDistance {
   }
 
   @Test
+  public void testDefault() throws Exception {
+    new Distance();
+  }
+  
+  @Test
   public void testRadians() {
-    assertEquals(d.convertToRadians(180.0), Math.PI, .01);
+    assertEquals(testDistance.convertToRadians(180.0), Math.PI, .01);
   }
 
   @Test
   public void testDistance() {
-    assertEquals(d.greatCircleDistance(alpha, beta), 968, 1);
+    assertEquals(testDistance.greatCircleDistance(alpha, beta), 968, 1);
   }
 }

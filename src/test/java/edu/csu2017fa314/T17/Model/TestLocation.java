@@ -10,8 +10,7 @@ public class TestLocation {
   private Location b1;
   private Location b2;
 
-  @Before
-  public void setUp() throws Exception{
+  private HashMap hashMapSetup() {
     HashMap hm1 = new HashMap();
     hm1.put("code", "b99");
     hm1.put("name", "TestBrew");
@@ -19,7 +18,13 @@ public class TestLocation {
     hm1.put("latitude", 99.99);
     hm1.put("longitude", 99.99);
     hm1.put("elevation", 5000);
-    b1 = new Location(hm1);
+
+    return hm1;
+  }
+
+  @Before
+  public void setUp() throws Exception{
+    b1 = new Location(hashMapSetup());
     b2 = new Location();
   }
   @Test
@@ -36,5 +41,11 @@ public class TestLocation {
     assertEquals( (double) b1.get("latitude"), 99.99, .01 );
     assertEquals( (double) b1.get("longitude"), 99.99, .01 );
     assertEquals( b1.get("elevation"), 5000 );
+  }
+  @Test
+  public void testToString(){
+    HashMap testingMap = hashMapSetup();
+    assertEquals(b1.getAll(), testingMap);
+    assertEquals(b1.toString(), testingMap.toString());
   }
 }

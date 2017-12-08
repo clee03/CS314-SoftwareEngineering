@@ -17,4 +17,8 @@ public class TestMathHelpers {
   public void testDegToDecimal2() {
     assertEquals(5.0, degToDecimal("5"), .01);
   }
+  @Test
+  public void testDefault() {
+    new MathHelpers();
+  }
 }

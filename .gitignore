@@ -3,6 +3,9 @@
 !.gitignore
 !/.css
 
+# Credentials File #
+data/creds.txt
+
 # IntelliJ generated files #
 .idea/
 *.iml
